@@ -24,7 +24,6 @@ Bundle 'Shougo/neocomplcache'
 "compile
 Bundle 'thinca/vim-quickrun'
 
-
 "ruby, rails
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-bundler'
@@ -32,12 +31,23 @@ Bundle 'tpope/vim-endwise'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/dbext.vim'
 Bundle 'digitaltoad/vim-jade'
+
+"" syntax
+Bundle 'othree/html5.vim.git'
+"css
+Bundle 'hail2u/vim-css3-syntax'
+
+Bundle 'skammer/vim-css-color.git'
+"less
 Bundle 'groenewege/vim-less'
+
+"scss
+Bundle 'cakebaker/scss-syntax.vim'
 
 "js, node
 Bundle 'teramako/jscomplete-vim'
 Bundle 'myhere/vim-nodejs-complete'
-"Bundle 'kchmck/vim-coffee-script' "coffee
+Bundle 'kchmck/vim-coffee-script' 
 
 filetype plugin indent on "required!
 
