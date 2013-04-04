@@ -88,6 +88,13 @@ export PATH=$PATH:/usr/local/sbin
 # 
 export GIT_EDITOR="/usr/bin/vim"
 
+## z
+#
+. /usr/local/etc/profile.d/z.sh
+function precmd () {
+  z --add "$(pwd -P)"
+}
+
 ## rvm
 #
 if [[ -s $HOME/.rvm/bin ]] ; then
