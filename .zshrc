@@ -82,7 +82,7 @@ alias be='bundle exec'
 
 ## homebrew
 #
-export PATH=$PATH:/usr/local/sbin
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 ## git
 # 
