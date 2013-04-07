@@ -40,6 +40,9 @@ NeoBundle 'Shougo/neocomplcache'
 "compile
 NeoBundle 'thinca/vim-quickrun'
 
+"indent syntax
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
 "ruby, rails
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-bundler'
@@ -107,6 +110,15 @@ set expandtab
 set ts=2 sw=2 sts=0
 set smartindent 
 set backspace=indent,eol,start "Allow backspacing over autoindent, line breaks and start of insert action
+"Indent Syntax
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkblue
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=yellow ctermbg=darkcyan
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=yellow ctermbg=4
+let g:indent_guides_color_change_percent = 30
+let g:indent_guides_guide_size = 1
 
 
 "" autocomp
