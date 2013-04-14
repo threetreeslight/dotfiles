@@ -76,7 +76,7 @@ set visualbell "Use visual bell instead of beeping when doing something wrong
 set showcmd "Show partial commands in the last line of the screen
 set showmatch
 set laststatus=2
-set nowrap
+set wrap "wrap sentence
 set hidden "Allows you to switch from an unsaved buffer without saving it first.
 
 "solarized
@@ -115,8 +115,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkblue
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=yellow ctermbg=darkcyan
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=yellow ctermbg=4
 let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 1
 
