@@ -79,6 +79,9 @@ set laststatus=2
 set wrap "wrap sentence
 set hidden "Allows you to switch from an unsaved buffer without saving it first.
 
+" Use ClipBoard
+vmap <C-c> :w !pbcopy<cr><cr>
+
 "solarized
 syntax enable
 set background=dark
