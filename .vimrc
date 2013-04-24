@@ -32,6 +32,7 @@ NeoBundle 'Shougo/vimproc'
 NeoBundle 'sakuraiyuta/commentout.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'} "for pwoerline
 
 "comple
 NeoBundle 'vim-scripts/AutoComplPop'
@@ -126,6 +127,9 @@ let g:indent_guides_guide_size = 1
 "
 "autocomp
 set wildmenu "Better command-line completion
+
+"ruby
+let g:ruby_path = ""
 
 " {{{ Autocompletion using the TAB key
 " This function determines, wether we are on the start of the line text (then tab indents) or if we want to try autocompletion

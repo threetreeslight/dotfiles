@@ -45,7 +45,7 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
- 
+
 
 ## Completion configuration
 #
@@ -85,7 +85,7 @@ alias be='bundle exec'
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 ## git
-# 
+#
 export GIT_EDITOR="/usr/bin/vim"
 
 ## z
@@ -145,3 +145,5 @@ export EC2_URL="http://ec2.us-west-1.amazonaws.com"
 #
 source ~/dotfiles/.zshrc.antigen
 
+## powerline
+# . $HOME/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
