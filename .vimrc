@@ -77,7 +77,7 @@ set visualbell "Use visual bell instead of beeping when doing something wrong
 set showcmd "Show partial commands in the last line of the screen
 set showmatch
 set laststatus=2
-set wrap "wrap sentence
+set nowrap "nowrap sentence
 set hidden "Allows you to switch from an unsaved buffer without saving it first.
 
 " Use ClipBoard
