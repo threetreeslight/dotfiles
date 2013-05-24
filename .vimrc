@@ -36,7 +36,9 @@ NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'} "for pwoerli
 
 "comple
 NeoBundle 'vim-scripts/AutoComplPop'
+NeoBundle 'm2ym/rsense'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-rsense.vim'
 
 "compile
 NeoBundle 'thinca/vim-quickrun'
