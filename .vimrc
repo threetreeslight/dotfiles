@@ -29,16 +29,17 @@ NeoBundle 'Shougo/vimproc'
 "NeoBundle 'FuzzyFinder'
 
 "utlity
-NeoBundle 'sakuraiyuta/commentout.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'sakuraiyuta/commentout.vim' "commentout alias command
+NeoBundle 'scrooloose/nerdtree' "directory tree
+NeoBundle 'altercation/vim-colors-solarized' "color schema
 NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'} "for pwoerline
 
 "comple
 NeoBundle 'vim-scripts/AutoComplPop'
-NeoBundle 'm2ym/rsense'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-rsense.vim'
+NeoBundle 'Shougo/neocomplcache' "comple
+NeoBundle 'm2ym/rsense' "ruby comple
+NeoBundle 'Shougo/neocomplcache-rsense.vim' "rsense for neocomplcache
 
 "compile
 NeoBundle 'thinca/vim-quickrun'
@@ -51,6 +52,8 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'ujihisa/unite-rake' "Unite
+NeoBundle 'basyura/unite-rails' "Unite
 NeoBundle 'vim-scripts/dbext.vim'
 NeoBundle 'digitaltoad/vim-jade'
 "html5
@@ -100,6 +103,22 @@ endif
 
 "" utlity
 "
+
+" unite.vim
+" nnoremap [unite]   <Nop>
+nmap     <Leader>f [unite]
+"function! UniteRailsSetting()
+  nnoremap <buffer><C-H><C-H><C-H>  :<C-U>Unite rails/view<CR>
+  nnoremap <buffer><C-H><C-H>       :<C-U>Unite rails/model<CR>
+  nnoremap <buffer><C-H>            :<C-U>Unite rails/controller<CR>
+
+  nnoremap <buffer><C-H>c           :<C-U>Unite rails/config<CR>
+  nnoremap <buffer><C-H>d           :<C-U>Unite rails/db<CR>
+  nnoremap <buffer><C-H>l           :<C-U>Unite rails/lib<CR>
+" endfunction
+"aug MyAutoCmd
+"  au User Rails call UniteRailsSetting()
+"aug END
 
 "shortcut
 imap <C-j> <C-[>
