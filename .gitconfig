@@ -1,13 +1,13 @@
-[include]
-  path = $HOME/.gitconfig.local
 [color]
-	ui = true
+  ui = true
 [alias]
-	co = checkout
-	st = status
-	br = branch
-	ci = commit
+  co = checkout
+  st = status
+  br = branch
+  ci = commit
 [grep]
-	lineNumber = true
+  lineNumber = true
 [core]
-	excludesfile = $HOME/.gitignore_global
+  excludesfile = ~/.gitignore_global
+[include]
+  path = .gitconfig.local
