@@ -1,0 +1,13 @@
+[include]
+  path = $HOME/.gitconfig.local
+[color]
+	ui = true
+[alias]
+	co = checkout
+	st = status
+	br = branch
+	ci = commit
+[grep]
+	lineNumber = true
+[core]
+	excludesfile = $HOME/.gitignore_global
