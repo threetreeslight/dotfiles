@@ -1,6 +1,14 @@
 # mac
 .DS_Store
+
+# windows
+thumbs.db
+
+# vim
 *.swp
+*.swo
+
+# sublime
 *.sublime-project
 *.sublime-workspacep
 
