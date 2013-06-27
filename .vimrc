@@ -91,17 +91,26 @@ else
   "git
   NeoBundle 'airblade/vim-gitgutter'
 
-  "ruby, rails
-  NeoBundle 'tpope/vim-rails'
   NeoBundleLazy 'tpope/vim-endwise', {
         \ 'autoload' : {
         \   'insert' : 1,
         \ }}
-  NeoBundle 'vim-ruby/vim-ruby'
+  "ruby, rails
+  let s:ruby_filetypes =  [ 'rb', 'rake', 'haml', 'erb' ]
+  NeoBundleLazy 'vim-ruby/vim-ruby', {
+              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] }
+              \ }
+  NeoBundleLazy 'tpope/vim-rails', {
+              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] }
+              \ }
   NeoBundleLazy 'ujihisa/unite-rake', {
-        \ 'depends' : 'Shougo/unite.vim' }
+              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] },
+              \   'depends' : 'Shougo/unite.vim'
+              \ }
   NeoBundleLazy 'basyura/unite-rails', {
-        \ 'depends' : 'Shjkougo/unite.vim' }
+              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] },
+              \   'depends' : 'Shougo/unite.vim'
+              \ }
   let s:bundle_rails = 'unite-rails unite-rake'
   function! s:bundleLoadDepends(bundle_names)
     execute 'NeoBundleSource '.a:bundle_names
