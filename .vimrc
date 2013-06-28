@@ -90,6 +90,11 @@ else
 
   "git
   NeoBundle 'airblade/vim-gitgutter'
+  NeoBundle 'tpope/vim-fugitive'
+  "vim-fugitive map map
+  nnoremap <silent> <Space>gb :Gblame<CR>
+  nnoremap <silent> <Space>gd :Gdiff<CR>
+  nnoremap <silent> <Space>gs :Gstatus<CR>
 
   NeoBundleLazy 'tpope/vim-endwise', {
         \ 'autoload' : {
