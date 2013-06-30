@@ -249,7 +249,6 @@ endif
 "-------------------------
 "escape
 imap <C-j> <C-[>
-imap <C-k> <C-m>
 
 "escape Highlight
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
@@ -262,10 +261,10 @@ nnoremap k gk
 vnoremap v $h
 
 "move window
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
 
 "bracket
 imap { {}<LEFT>
