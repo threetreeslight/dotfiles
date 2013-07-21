@@ -108,7 +108,7 @@ fi
 #
 if [[ -f $HOME/.nvm/nvm.sh ]] ; then
   [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
-  nvm use 0.8.16
+  nvm use 0.10.13
   export NODE_PATH=${NVM_PATH}_modules${NODE_PATH:+:}${NODE_PATH}
 fi
 
