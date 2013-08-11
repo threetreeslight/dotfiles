@@ -99,21 +99,18 @@ function precmd () {
   z --add "$(pwd -P)"
 }
 
-## rvm
+## rbenv
 #
-if [[ -s $HOME/.rvm/bin ]] ; then
-  export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-  if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm; fi
-
-  rvm use 1.9.3@default
+if [[ -s /opt/boxen/rbenv/bin ]] ; then
+  rbenv global 2.0.0-p247
+  rbenv version | sed -e 's/ .*//'
 fi
 
-## nvm
+## nodenv
 #
-if [[ -f $HOME/.nvm/nvm.sh ]] ; then
-  [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
-  nvm use 0.10.13
-  export NODE_PATH=${NVM_PATH}_modules${NODE_PATH:+:}${NODE_PATH}
+if [[ -s /opt/boxen/nodenv/bin ]] ; then
+  nodenv global v0.10.13
+  nodenv version | sed -e 's/ .*//'
 fi
 
 ## phpenv
@@ -136,18 +133,16 @@ export PATH="/usr/local/heroku/bin:$PATH"
 #
 export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 
-## AWS
-export JAVA_HOME="$(/usr/libexec/java_home)"
-export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
-export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
-export EC2_HOME="/usr/local/Library/LinkedKegs/ec2-api-tools/jars"
-export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
-export EC2_URL="http://ec2.us-west-1.amazonaws.com"
+# ## AWS
+# export JAVA_HOME="$(/usr/libexec/java_home)"
+# export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
+# export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
+# export EC2_HOME="/usr/local/Library/LinkedKegs/ec2-api-tools/jars"
+# export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
+# export EC2_URL="http://ec2.us-west-1.amazonaws.com"
 
 
 ## antigen
 #
 source ~/dotfiles/.zshrc.antigen
 
-## powerline
-# . $HOME/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
