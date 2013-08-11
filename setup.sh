@@ -8,7 +8,7 @@ do
   if [ -a $HOME/$file ]; then
     echo "$file file is existed."
   else
-    ln -s $HOME/dotfiles/$file $HOME/$file
+    ln -s $HOME/my/dotfiles/$file $HOME/$file
   fi
 done
 
@@ -17,6 +17,6 @@ do
   if [ -d $HOME/$directory ]; then
     echo "$directory directory is existed."
   else
-    ln -s $HOME/dotfiles/$directory $HOME/$directory
+    ln -s $HOME/my/dotfiles/$directory $HOME/$directory
   fi
 done
