@@ -1,5 +1,9 @@
 ## Environment variable configuration
 #
+# Boxen
+#
+source /opt/boxen/env.sh
+
 # LANG
 #
 export LANG=ja_JP.UTF-8
@@ -90,7 +94,7 @@ export GIT_EDITOR="/usr/bin/vim"
 
 ## z
 #
-. /usr/local/etc/profile.d/z.sh
+. `brew --prefix`/etc/profile.d/z.sh
 function precmd () {
   z --add "$(pwd -P)"
 }

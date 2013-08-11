@@ -8,6 +8,12 @@
 [grep]
   lineNumber = true
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = /opt/boxen/config/git/gitignore
 [include]
   path = .gitconfig.local
+
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
+
+[hub]
+protocol = https
