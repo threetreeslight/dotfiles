@@ -103,14 +103,14 @@ function precmd () {
 #
 if [[ -s /opt/boxen/rbenv/bin ]] ; then
   rbenv global 2.0.0-p247
-  rbenv version | sed -e 's/ .*//'
+  echo "ruby is "`rbenv version | sed -e 's/ .*//'`
 fi
 
 ## nodenv
 #
 if [[ -s /opt/boxen/nodenv/bin ]] ; then
   nodenv global v0.10.13
-  nodenv version | sed -e 's/ .*//'
+  echo "node is "`nodenv version | sed -e 's/ .*//'`
 fi
 
 ## phpenv
