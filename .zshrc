@@ -8,11 +8,9 @@ source /opt/boxen/env.sh
 #
 export LANG=ja_JP.UTF-8
 
-
 ## antigen
 #
 source ~/dotfiles/.zshrc.antigen
-
 
 ## Default shell configuration
 #
@@ -101,33 +99,26 @@ function precmd () {
 
 ## rbenv
 #
-if [[ -s /opt/boxen/rbenv/bin ]] ; then
+if [[ -s $BOXEN_HOME/rbenv/bin ]] ; then
   rbenv global 2.0.0-p247
   echo "ruby is "`rbenv version | sed -e 's/ .*//'`
 fi
 
 ## nodenv
 #
-if [[ -s /opt/boxen/nodenv/bin ]] ; then
+if [[ -s $BOXEN_HOME/nodenv/bin ]] ; then
   nodenv global v0.10.13
   echo "node is "`nodenv version | sed -e 's/ .*//'`
 fi
 
 ## phpenv
 #
-if [ -f $HOME/.phpenv/bin/phpenv ]; then
-    export PATH=$PATH:$HOME/.phpenv/bin
-    eval "$(phpenv init -)"
+if [[ -s $BOXEN_HOME/phpenv/bin ]] ; then
+    # export PATH=$PATH:$HOME/.phpenv/bin
+    # eval "$(phpenv init -)"
+  phpenv global 5.4.17
+  echo "php is "`phpenv version | sed -e 's/ .*//'`
 fi
-
-## PostgresApp
-#
-PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
-
-
-## Heroku Toolbelt
-#
-export PATH="/usr/local/heroku/bin:$PATH"
 
 ## Action Script
 #
@@ -140,9 +131,4 @@ export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 # export EC2_HOME="/usr/local/Library/LinkedKegs/ec2-api-tools/jars"
 # export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
 # export EC2_URL="http://ec2.us-west-1.amazonaws.com"
-
-
-## antigen
-#
-source ~/dotfiles/.zshrc.antigen
 
