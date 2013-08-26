@@ -114,10 +114,14 @@ fi
 ## phpenv
 #
 if [[ -s $BOXEN_HOME/phpenv/bin ]] ; then
-    # export PATH=$PATH:$HOME/.phpenv/bin
-    # eval "$(phpenv init -)"
-  phpenv global 5.4.17
-  echo "php is "`phpenv version | sed -e 's/ .*//'`
+  echo "php is "`phpenv global 5.4.17`
+fi
+
+## phantomenv
+#
+if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
+  phantomenv global 1.9.1
+  echo "phantomjs is "`phantomenv version | sed -e 's/ .*//'`
 fi
 
 ## Action Script
