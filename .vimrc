@@ -101,7 +101,7 @@ else
         \   'insert' : 1,
         \ }}
   "ruby, rails
-  let s:ruby_filetypes =  [ 'rb', 'rake', 'haml', 'erb' ]
+  let s:ruby_filetypes =  [ 'rb', 'rake', 'haml', 'erb', 'pp' ]
   NeoBundleLazy 'vim-ruby/vim-ruby', {
               \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] }
               \ }
