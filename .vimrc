@@ -62,7 +62,8 @@ else
   function! s:bundle.hooks.on_source(bundle)
     let g:unite_enable_start_insert=0 "start by insert mode
 
-    "buffer list
+    "buffer list 
+    "TODO: humm...not working
     noremap <C-U><C-B> :Unite buffer<CR>
     "file list
     noremap <C-U><C-F> :UniteWithBufferDir -buffer-name=files file<CR>
@@ -83,25 +84,21 @@ else
   "
   " nardtree {{{
   NeoBundle 'scrooloose/nerdtree'
-  let s:bundle = neobundle#get('nerdtree')
-  function! s:bundle.hooks.on_source(bundle)
-    " NERDTree auto open when vim start with no files
-    let NERDTreeShowHidden = 1
-    let file_name = expand("%")
-    if has('vim_starting') && file_name == ""
-      autocmd VimEnter * NERDTree ./
-    endif
-  endfunction
+  " NERDTree auto open when vim start with no files
+  let NERDTreeShowHidden = 1
+  let file_name = expand("%")
+  if has('vim_starting') && file_name == ""
+    autocmd VimEnter * NERDTree ./
+  endif
   "}}}
 
   " vimfiler{{{
   NeoBundleLazy 'Shougo/vimfiler', {
-        \   'autoload' : { 'commands' : [ 'VimFilerBufferDir' ] },
+        \   'autoload' : { 'commands' : [ 'VimFilerBufferDir', 'VimFilerExplorer' ] },
         \   'depends' : [ 'Shougo/unite.vim' ]
         \ }
   let s:bundle = neobundle#get('vimfiler')
   function! s:bundle.hooks.on_source(bundle)
-    "Vimfiler use :e, help a
     let g:vimfiler_as_default_explorer = 1
   endfunction
   "}}}
@@ -356,13 +353,6 @@ set expandtab
 set ts=2 sw=2 sts=0
 set smartindent
 set backspace=indent,eol,start "Allow backspacing over autoindent, line breaks and start of insert action
-
-"NERDTree auto OPEN
-let NERDTreeShowHidden = 1
-let file_name = expand("%")
-if has('vim_starting') &&  file_name == ""
-  autocmd VimEnter * NERDTree ./
-endif
 
 "-------------------------
 " keybind & mcro
