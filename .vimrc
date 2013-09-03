@@ -237,24 +237,28 @@ else
       \   'autoload' : { 'filetypes' : 'ruby' },
       \   'depends' : [ 'Shougo/unite.vim' ]
       \ }
+  " unite-rails {{{
   NeoBundleLazy 'basyura/unite-rails', {
       \   'autoload' : { 'filetypes' : 'ruby' },
       \   'depends' : ['Shougo/unite.vim']
       \ }
-  let s:bundle_rails = 'unite-rails unite-rake'
-  function! s:bundleLoadDepends(bundle_names)
-    execute 'NeoBundleSource '.a:bundle_names
-    nnoremap <buffer><C-H><C-H><C-H>  :<C-U>Unite rails/view<CR>
-    nnoremap <buffer><C-H><C-H>       :<C-U>Unite rails/model<CR>
-    nnoremap <buffer><C-H>            :<C-U>Unite rails/controller<CR>
-    nnoremap <buffer><C-H>c           :<C-U>Unite rails/config<CR>
-    nnoremap <buffer><C-H>d           :<C-U>Unite rails/db<CR>
-    nnoremap <buffer><C-H>l           :<C-U>Unite rails/lib<CR>
+  let s:bundle = neobundle#get('unite-rails')
+  function! s:bundle.hooks.on_source(bundle)
+    nnoremap <buffer><C-H>   :<C-U>Unite rails/controller<CR>
+    nnoremap <buffer><C-H>v  :<C-U>Unite rails/view<CR>
+    nnoremap <buffer><C-H>m  :<C-U>Unite rails/model<CR>
+    nnoremap <buffer><C-H>j  :<C-U>Unite rails/javascript<CR>
+    nnoremap <buffer><C-H>s  :<C-U>Unite rails/stylesheet<CR>
+    nnoremap <buffer><C-H>c  :<C-U>Unite rails/config<CR>
+    nnoremap <buffer><C-H>d  :<C-U>Unite rails/db<CR>
+    nnoremap <buffer><C-H>l  :<C-U>Unite rails/lib<CR>
     au! RailsLazyPlugins
   endfunction
   aug RailsLazyPlugins
     au User Rails call <SID>bundleLoadDepends(s:bundle_rails)
   aug END
+  " }}}
+
   " rspec
   NeoBundleLazy 'alpaca-tc/neorspec.vim', {
         \ 'depends' : 'tpope/vim-rails',
