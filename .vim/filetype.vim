@@ -9,7 +9,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.javascript,*.coffeescript,*.node,*.json,*.typescript,Grantfile setfiletype javascript
   au BufRead,BufNewFile *.php,*.phtml setfiletype php
   au BufRead,BufNewFile *.py setfiletype python
-  au BufRead,BufNewFile *.rb,*.erb,*.haml,*.eruby,Gemfile,Rakefile,Puppetfile,Guradfile setfiletype ruby
+  au BufRead,BufNewFile *.rb,*.erb,*.haml,*.eruby,*.pp,Gemfile,Rakefile,Puppetfile,Guradfile setfiletype ruby
   au BufRead,BufNewFile *.scala setfiletype scala
   au BufRead,BufNewFile *.shell setfiletype shell
 augroup END
