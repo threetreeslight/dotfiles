@@ -206,36 +206,44 @@ else
   "" syntax
   " ----------------------------------------
   "
-  NeoBundleLazy 'othree/html5.vim.git', {'autoload': {'filetypes': ['html']}}
-  "css,less,sass
-  NeoBundleLazy 'hail2u/vim-css3-syntax', {'autoload': {'filetypes': ['css']}}
-  NeoBundleLazy 'skammer/vim-css-color.git', {'autoload': {'filetypes': ['css','less','scss','sass']}}
-  NeoBundleLazy 'groenewege/vim-less', {'autoload': {'filetypes': ['less']}}
-  NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload': {'filetypes': ['scss','sass']}}
+  NeoBundleLazy 'othree/html5.vim.git', {
+      \ 'autoload': {'filetypes': ['html'] }}
+  "css
+  NeoBundleLazy 'hail2u/vim-css3-syntax', {
+      \ 'autoload': {'filetypes': ['css']}}
+  NeoBundleLazy 'skammer/vim-css-color', {
+      \ 'autoload': {'filetypes': ['css','less','scss.css','sass.css'] }}
+  " less
+  NeoBundleLazy 'groenewege/vim-less', {
+      \ 'autoload': { 'filetypes': 'less'}}
+  " scss
+  NeoBundleLazy 'cakebaker/scss-syntax.vim', {
+      \ 'autoload': { 'filetypes': ['scss.css','sass.css'] }}
   "js,node
-  NeoBundleLazy 'pangloss/vim-javascript', {'autoload': {'filetypes': ['javascript']}}
-  NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload': {'filetypes': ['coffee']}}
+  NeoBundleLazy 'pangloss/vim-javascript', {
+      \ 'autoload': { 'filetypes': ['javascript']}}
+  NeoBundleLazy 'kchmck/vim-coffee-script', {
+      \ 'autoload': { 'filetypes': ['coffee']}}
 
 
 
   "" ruby, rails
   " ----------------------------------------
   "
-  let s:ruby_filetypes =  [ 'rb', 'rake', 'haml', 'erb', 'pp' ]
   NeoBundleLazy 'vim-ruby/vim-ruby', {
-              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] }
-              \ }
+      \   'autoload' : { 'filetypes' : 'ruby' }
+      \ }
   NeoBundleLazy 'tpope/vim-rails', {
-              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] }
-              \ }
+      \   'autoload' : { 'filetypes' : 'ruby' }
+      \ }
   NeoBundleLazy 'ujihisa/unite-rake', {
-              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] },
-              \   'depends' : 'Shougo/unite.vim'
-              \ }
+      \   'autoload' : { 'filetypes' : 'ruby' },
+      \   'depends' : [ 'Shougo/unite.vim' ]
+      \ }
   NeoBundleLazy 'basyura/unite-rails', {
-              \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] },
-              \   'depends' : 'Shougo/unite.vim'
-              \ }
+      \   'autoload' : { 'filetypes' : 'ruby' },
+      \   'depends' : ['Shougo/unite.vim']
+      \ }
   let s:bundle_rails = 'unite-rails unite-rake'
   function! s:bundleLoadDepends(bundle_names)
     execute 'NeoBundleSource '.a:bundle_names
@@ -260,8 +268,8 @@ else
         \ 'commands' : ['Dispatch', 'FocusDispatch', 'Start']
         \ }}
  
-  NeoBundle 'vim-scripts/dbext.vim'
-  NeoBundle 'digitaltoad/vim-jade'
+  " NeoBundle 'vim-scripts/dbext.vim'
+  " NeoBundle 'digitaltoad/vim-jade'
 
 
 
