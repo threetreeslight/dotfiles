@@ -203,6 +203,9 @@ else
   "" syntax
   " ----------------------------------------
   "
+  " syntax check
+  NeoBundle 'scrooloose/syntastic'
+  " xyntax highlight
   NeoBundleLazy 'othree/html5.vim.git', {
       \ 'autoload': {'filetypes': ['html'] }}
   "css
