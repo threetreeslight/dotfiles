@@ -33,10 +33,27 @@ else
       \   },
       \}
 
-  "utlity
-  NeoBundle 'sakuraiyuta/commentout.vim' "commentout alias command
-  NeoBundle 'scrooloose/nerdtree' "directory tree
-  "Unite
+  "" Display
+  " ----------------------------------------
+  "
+  " powerlineline
+  NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+  " solarizedcolor schema
+  NeoBundle 'altercation/vim-colors-solarized'
+  " indet syntax {{{
+  NeoBundle 'nathanaelkane/vim-indent-guides'
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_auto_colors = 0
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkblue
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=yellow ctermbg=darkcyan
+  let g:indent_guides_color_change_percent = 30
+  let g:indent_guides_guide_size = 1
+  "}}}
+
+
+  "" Unite
+  " ----------------------------------------
+  "
   NeoBundleLazy 'Shougo/unite.vim', {
         \ 'autoload' : {
         \   'commands' : [ 'Unite' ]
@@ -61,7 +78,23 @@ else
     au FileType unite inoremap <silent> <buffer> <C-j><C-j> <ESC>:q<CR>
   endfunction
 
-  "filer
+  "" filer
+  " ----------------------------------------
+  "
+  " nardtree {{{
+  NeoBundle 'scrooloose/nerdtree'
+  let s:bundle = neobundle#get('nerdtree')
+  function! s:bundle.hooks.on_source(bundle)
+    " NERDTree auto open when vim start with no files
+    let NERDTreeShowHidden = 1
+    let file_name = expand("%")
+    if has('vim_starting') && file_name == ""
+      autocmd VimEnter * NERDTree ./
+    endif
+  endfunction
+  "}}}
+
+  " vimfiler{{{
   NeoBundleLazy 'Shougo/vimfiler', {
         \   'autoload' : { 'commands' : [ 'VimFilerBufferDir' ] },
         \   'depends' : [ 'Shougo/unite.vim' ]
@@ -71,12 +104,32 @@ else
     "Vimfiler use :e, help a
     let g:vimfiler_as_default_explorer = 1
   endfunction
+  "}}}
 
-  NeoBundle 'nathanaelkane/vim-indent-guides' "indent syntax
-  NeoBundle 'altercation/vim-colors-solarized' "color schema
-  NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'} "for pwoerline
+  "" utility
+  " ----------------------------------------
+  "
+  NeoBundle 'thinca/vim-quickrun'
+  NeoBundle 'vim-scripts/surround.vim'
+  let s:bundle = neobundle#get('surround.vim')
+  function! s:bundle.hooks.on_source(bundle)
+    nmap ,( csw(
+    nmap ,) csw)
+    nmap ,{ csw{
+    nmap ,} csw}
+    nmap ,[ csw[
+    nmap ,] csw]
+    nmap ,' csw'
+    nmap ," csw"
+  endfunction
 
-  ""complement
+  NeoBundleLazy 'tpope/vim-endwise', {
+        \ 'autoload' : {
+        \   'insert' : 1,
+        \ }}
+ 
+  "" complement
+  " ----------------------------------------
   "
   NeoBundleLazy 'Shougo/neocomplcache', {
         \ 'autoload' : {
@@ -94,7 +147,7 @@ else
     let g:neocomplcache_min_syntax_length = 3
     let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-    "Define dictionary.
+    " Define dictionary.
     let g:neocomplcache_dictionary_filetype_lists = {
        \ 'default' : '',
        \ 'vimshell' : $HOME.'/.vimshell_hist',
@@ -113,8 +166,6 @@ else
     inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplcache#close_popup()
     inoremap <expr><C-e>  neocomplcache#cancel_popup()
-    " Close popup by <Space>.
-    inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 
     " AutoComplPop like behavior.
     let g:neocomplcache_enable_auto_select = 1
@@ -137,30 +188,39 @@ else
     let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
     let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
     let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
   endfunction
 
-
-  NeoBundle 'm2ym/rsense' "ruby comple
-  NeoBundle 'Shougo/neocomplcache-rsense.vim' "rsense for neocomplcache
-
-  "compile
-  NeoBundle 'thinca/vim-quickrun'
-
   "" git
+  " ----------------------------------------
   "
   NeoBundle 'airblade/vim-gitgutter'
   NeoBundle 'tpope/vim-fugitive'
-  "vim-fugitive map map
-  nnoremap <silent> <Space>gb :Gblame<CR>
-  nnoremap <silent> <Space>gd :Gdiff<CR>
-  nnoremap <silent> <Space>gs :Gstatus<CR>
+  let s:bundle = neobundle#get('vim-fugitive')
+  function! s:bundle.hooks.on_source(bundle)
+    "vim-fugitive map map
+    nnoremap <silent> <Space>gb :Gblame<CR>
+    nnoremap <silent> <Space>gd :Gdiff<CR>
+    nnoremap <silent> <Space>gs :Gstatus<CR>
+  endfunction
 
-  NeoBundleLazy 'tpope/vim-endwise', {
-        \ 'autoload' : {
-        \   'insert' : 1,
-        \ }}
-  "ruby, rails
+  "" syntax
+  " ----------------------------------------
+  "
+  NeoBundleLazy 'othree/html5.vim.git', {'autoload': {'filetypes': ['html']}}
+  "css,less,sass
+  NeoBundleLazy 'hail2u/vim-css3-syntax', {'autoload': {'filetypes': ['css']}}
+  NeoBundleLazy 'skammer/vim-css-color.git', {'autoload': {'filetypes': ['css','less','scss','sass']}}
+  NeoBundleLazy 'groenewege/vim-less', {'autoload': {'filetypes': ['less']}}
+  NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload': {'filetypes': ['scss','sass']}}
+  "js,node
+  NeoBundleLazy 'pangloss/vim-javascript', {'autoload': {'filetypes': ['javascript']}}
+  NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload': {'filetypes': ['coffee']}}
+
+
+
+  "" ruby, rails
+  " ----------------------------------------
+  "
   let s:ruby_filetypes =  [ 'rb', 'rake', 'haml', 'erb', 'pp' ]
   NeoBundleLazy 'vim-ruby/vim-ruby', {
               \   'autoload' : { 'filetypes' : [ 'rb', 'rake', 'haml', 'erb' ] }
@@ -190,23 +250,23 @@ else
   aug RailsLazyPlugins
     au User Rails call <SID>bundleLoadDepends(s:bundle_rails)
   aug END
-
+  " rspec
+  NeoBundleLazy 'alpaca-tc/neorspec.vim', {
+        \ 'depends' : 'tpope/vim-rails',
+        \ 'autoload' : {
+        \   'commands' : [ 'RSpecAll', 'RSpecNearest', 'RSpecRetry', 'RSpecCurrent', 'RSpec' ]
+        \ }}
+  NeoBundleLazy 'tpope/vim-dispatch', { 'autoload' : {
+        \ 'commands' : ['Dispatch', 'FocusDispatch', 'Start']
+        \ }}
+ 
   NeoBundle 'vim-scripts/dbext.vim'
   NeoBundle 'digitaltoad/vim-jade'
-  "html5
-  NeoBundle 'othree/html5.vim.git'
-  "css,less,sass
-  NeoBundle 'hail2u/vim-css3-syntax'
-  NeoBundle 'skammer/vim-css-color.git'
-  NeoBundle 'groenewege/vim-less'
-  NeoBundle 'cakebaker/scss-syntax.vim'
-  "js,node
-  NeoBundle 'teramako/jscomplete-vim'
-  NeoBundle 'myhere/vim-nodejs-complete'
-  NeoBundle 'kchmck/vim-coffee-script' 
 
 
-  "check plugin and not installed plugin download
+
+  "" check plugin and not installed plugin download
+  " ----------------------------------------
   NeoBundleCheck
 
 endif
@@ -240,14 +300,14 @@ set matchpairs& matchpairs+=<:> "add matchtipes <>
 "backspace can delete any item
 set backspace=indent,eol,start
 
-"Yank
+" Yank
 if has('unnamedplus')
   set clipboard& clipboard+=unnamedplus
 else
   " set clipboard& clipboard+=unnamed,autoselect 2013-06-24 10:00 autoselect 削除
   set clipboard& clipboard+=unnamed
 endif
-"share Mac OS X ClipBoard
+" share Mac OS X ClipBoard
 vmap <C-c> :w !pbcopy<cr><cr>
 
 "backups
@@ -286,16 +346,8 @@ colorscheme solarized
 "tab, indent
 set expandtab
 set ts=2 sw=2 sts=0
-set smartindent 
+set smartindent
 set backspace=indent,eol,start "Allow backspacing over autoindent, line breaks and start of insert action
-
-"Indent Syntax (vim indent guids)
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkblue
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=yellow ctermbg=darkcyan
-let g:indent_guides_color_change_percent = 30
-let g:indent_guides_guide_size = 1
 
 "NERDTree auto OPEN
 let NERDTreeShowHidden = 1
@@ -320,12 +372,6 @@ nnoremap k gk
 "selection line by double v
 vnoremap v $h
 
-"move window
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-"nnoremap <C-l> <C-w>l
-
 "bracket
 imap { {}<LEFT>
 imap [ []<LEFT>
@@ -338,23 +384,6 @@ set mouse=a "Set the command window height to 2 lines, to avoid many cases of ha
 " complement
 "-------------------------
 set wildmenu "Better command-line completion
-
-"Enable omni completion.
-autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType javascript,coffee setlocal omnifunc=nodejscomplete#CompleteJS
-"Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.javascript = 'nodejscomplete#CompleteJS'
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
 
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
