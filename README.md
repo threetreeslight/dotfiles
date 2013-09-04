@@ -83,6 +83,52 @@ Usage
 * AWS setting file located (`$HOME/Dropbox/dev/.ec2`) in Dropbox
 
 
+Local Application Setting
+-------------------------
+
+```
+## Priference
+#
+iPhoto : preference assign -> none
+Finder : preference search target -> in this folder
+
+## iterm2 preference
+#
+# download sole solarized
+Change Therme Solarize
+font: SourceCodePro 14px
+draw blod text in blod font : false
+draw bold text in bright colors : false
+enable clipboard
+
+## sublime text 2
+#
+# install package manager
+#
+https://sublime.wbond.net/
+
+## virtualBox
+#
+# download from http://www.modern.ie
+# access: 10.0.2.2   localhost
+#
+ie8 win7 or winXP
+ie9 win7
+
+# setting
+NAT
+Bridge network
+
+
+## chrome
+#
+access to chrome://flags
+Enable Developer Tools experimentsをenable
+
+## skype
+#
+privacy setting : no histroy
+```
 
 
 
