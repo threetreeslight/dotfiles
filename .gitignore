@@ -1,1 +1,7 @@
+# neobundle
 .vim/bundle
+out
+
+# zsh
+.zsh-completions
+antigen

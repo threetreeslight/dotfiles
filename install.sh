@@ -20,3 +20,10 @@ do
     ln -s $HOME/dotfiles/$directory $HOME/$directory
   fi
 done
+
+
+# install via antigen and neobundle
+if [ -a $HOME/.vimrc ]; then
+  $ source ~/.zshrc
+  $ vim ~/.vimrc
+fi

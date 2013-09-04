@@ -10,13 +10,13 @@ export LANG=ja_JP.UTF-8
 
 ## antigen
 #
-source ~/dotfiles/.zshrc.antigen
+source $HOME/dotfiles/.zshrc.antigen
 
 ## Default shell configuration
 #
 # set prompt
 #
-source ~/dotfiles/.zshrc.prompt
+source $HOME/dotfiles/.zshrc.prompt
 
 # auto change directory
 #
@@ -65,7 +65,7 @@ zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'b
 zstyle ':completion:*' group-name ''
 
 # zsh-completions
-fpath=(~/.zsh-completions $fpath)
+fpath=($HOME/.zsh-completions $fpath)
 
 ## other settings
 #
@@ -134,6 +134,7 @@ if [[ -s $HOME/Dropbox/dev/.ec2 ]] ; then
   export AWS_ACCESS_KEY_ID=`cat $HOME/Dropbox/dev/.ec2/ae06710_access_key_id`
   export AWS_SECRET_ACCESS_KEY=`cat $HOME/Dropbox/dev/.ec2/ae06710_secret_access_key`
 fi
+
 # export JAVA_HOME="$(/usr/libexec/java_home)"
 # export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
 # export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"

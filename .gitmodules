@@ -6,4 +6,4 @@
 	url = git://github.com/zsh-users/antigen.git
 [submodule "/Users/akira/.vim/neobundle/neobundle.vim"]
 	path = .vim/neobundle/neobundle.vim
-	url = https://github.com/Shougo/neobundle.vim.git
+	url = git://github.com/Shougo/neobundle.vim.git
