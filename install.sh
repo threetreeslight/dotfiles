@@ -5,7 +5,7 @@ DOT_DIRECTORIES=(.vim .zsh-completions)
 
 for file in ${DOT_FILES[@]}
 do
-  if [ -a $HOME/$file ]; then
+  if [ -e $HOME/$file ]; then
     echo "$file file is existed."
   else
     ln -s $HOME/dotfiles/$file $HOME/$file
