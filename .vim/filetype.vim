@@ -12,4 +12,5 @@ augroup filetypedetect
   au BufRead,BufNewFile *.rb,*.erb,*.haml,*.eruby,*.pp,Gemfile,Rakefile,Puppetfile,Guradfile setfiletype ruby
   au BufRead,BufNewFile *.scala setfiletype scala
   au BufRead,BufNewFile *.shell setfiletype shell
+  au BufRead,BufNewFile *.sql setfiletype sql
 augroup END
