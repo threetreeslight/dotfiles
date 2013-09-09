@@ -128,7 +128,16 @@ Enable Developer Tools experimentsをenable
 ## skype
 #
 privacy setting : no histroy
+
+
+## composer global install
+#
+# we cant install via boxen
+# because mac default php has not php.ini
+#
+$ sudo mkdir -p /usr/local/bin
+$ sudo curl -sS https://getcomposer.org/installer | sudo php
+$ sudo chmod a+x composer.phar
+
 ```
-
-
 

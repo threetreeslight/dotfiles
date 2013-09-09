@@ -185,6 +185,24 @@ else
     let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
   endfunction
 
+  NeoBundleLazy 'mattn/emmet-vim', {
+      \ 'autoload': {'filetypes': ['html','ruby','php','css'] }}
+  let s:bundle = neobundle#get('emmet-vim')
+  function! s:bundle.hooks.on_source(bundle)
+    let g:user_emmet_settings = {
+      \  'php' : {
+      \    'extends' : 'html',
+      \    'filters' : 'c',
+      \  },
+      \  'xml' : {
+      \    'extends' : 'html',
+      \  },
+      \  'haml' : {
+      \    'extends' : 'html',
+      \  },
+      \}
+  endfunction
+
   "" git
   " ----------------------------------------
   "
