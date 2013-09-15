@@ -1,6 +1,6 @@
 ## antigen
 #
-source $HOME/dotfiles/antigen/antigen.zsh
+source $HOME/dotfiles/.zsh/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 # antigen-lib

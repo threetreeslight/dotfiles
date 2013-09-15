@@ -24,6 +24,11 @@ done
 
 # install via antigen and neobundle
 if [ -a $HOME/.vimrc ]; then
-  $ source ~/.zshrc
-  $ vim ~/.vimrc
+  source ~/.zshrc
+  vim ~/.vimrc
+fi
+
+# antigen plugin install
+if [ -d $HOME/.zsh/antigen ]; then
+  antigen update
 fi

@@ -1,0 +1,10 @@
+#
+# dependency linux
+#
+
+
+## Completion
+#
+
+# colors
+eval $(discolors $HOME/dotfiles/.zsh/discolors-solarized/dircolors.ansi-dark)

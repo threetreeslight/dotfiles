@@ -4,7 +4,18 @@
 #
 source /opt/boxen/env.sh
 
-# LANG
+## color definition
+#
+local DEFAULT=$'%{^[[m%}'$
+local RED=$'%{^[[1;31m%}'$
+local GREEN=$'%{^[[1;32m%}'$
+local YELLOW=$'%{^[[1;33m%}'$
+local BLUE=$'%{^[[1;34m%}'$
+local PURPLE=$'%{^[[1;35m%}'$
+local LIGHT_BLUE=$'%{^[[1;36m%}'$
+local WHITE=$'%{^[[1;37m%}'$
+
+## LANG
 #
 export LANG=ja_JP.UTF-8
 
@@ -19,20 +30,17 @@ source $HOME/dotfiles/.zshrc.antigen
 source $HOME/dotfiles/.zshrc.prompt
 
 # auto change directory
-#
 setopt auto_cd
 
 # auto directory pushd that you can get dirs list by cd -[tab]
-#
 setopt auto_pushd
 
 # command correct edition before each completion attempt
-#
 setopt correct
 
-## Keybind configuration
-#
+# Keybind configuration
 bindkey -v
+
 
 ## Command history configuration
 #
@@ -49,24 +57,48 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 
-## Completion configuration
+## Completion
 #
-autoload -U compinit
-compinit
-
-export LSCOLORS=ExFxCxdxBxegedabagacad
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# zsh-completions( have to write compinit before )
+fpath=($HOME/dotfiles/.zsh/zsh-completions/src $fpath)
 
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                                /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
-                                                            /usr/local/git/bin
+                               /usr/local/git/bin
+
+# hilight selected option
+zstyle ':completion:*:default' menu select=2
+
+# grouping options
 zstyle ':completion:*' format '%B%d%b'
-zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
 zstyle ':completion:*' group-name ''
 
-## zsh-completions
-#
-fpath=($HOME/.zsh-completions $fpath)
+autoload -U compinit; compinit
+
+# coloring
+case "${OSTYPE}" in
+  freebsd*|darwin*)
+    if [ -f ~/dotfiles/.zshrc.mac ]; then
+      source ~/dotfiles/.zshrc.mac
+    fi
+    ;;
+  linux*)
+    if [ -f ~/dotfiles/.zshrc.linux ]; then
+      source ~/dotfiles/.zshrc.linux
+    fi
+  ;;
+esac
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+autoload colors; colors
+
+# command
+setopt auto_param_slash # add autometicaly "/", when comple directory name
+setopt mark_dirs # add autometicaly "/", deploying dir
+setopt list_types # add file type mark like `ls -F`
+setopt interactive_comments # In command line cognition "#" as comment
+
+
 
 ## other settings
 #
@@ -82,10 +114,6 @@ alias vi='/usr/bin/vim'
 alias g='git'
 alias gg="git grep -H --heading --break"
 alias be='bundle exec'
-
-## homebrew
-#
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 ## git
 #
