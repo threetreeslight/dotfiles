@@ -64,7 +64,8 @@ zstyle ':completion:*' format '%B%d%b'
 zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
 zstyle ':completion:*' group-name ''
 
-# zsh-completions
+## zsh-completions
+#
 fpath=($HOME/.zsh-completions $fpath)
 
 ## other settings

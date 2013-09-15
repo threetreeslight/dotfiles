@@ -10,8 +10,7 @@ antigen-bundle git
 antigen-bundle heroku
 antigen-bundle bundler
 antigen-bundle command-not-found
-antigen-bundle rails3
-antigen-bundle sublime
+# antigen-bundle rails3
 
 # Syntax highlighting bundle.
 antigen-bundle zsh-users/zsh-syntax-highlighting
