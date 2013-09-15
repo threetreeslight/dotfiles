@@ -5,3 +5,6 @@ out
 # zsh
 .zsh-completions
 antigen
+
+# pit
+.pit

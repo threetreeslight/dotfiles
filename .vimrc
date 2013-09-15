@@ -125,7 +125,12 @@ else
         \ 'autoload' : {
         \   'insert' : 1,
         \ }}
- 
+
+  " filtering faster then ack,grep
+  NeoBundle 'rking/ag.vim'
+
+
+
   "" complement
   " ----------------------------------------
   "
