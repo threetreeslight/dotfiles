@@ -226,10 +226,15 @@ else
   "
   " syntax check
   NeoBundle 'scrooloose/syntastic'
-  " xyntax highlight
+  " syntax highlight
   NeoBundleLazy 'othree/html5.vim.git', {
       \ 'autoload': {'filetypes': ['html'] }}
-  "css
+  " template engine
+  NeoBundleLazy 'tpope/vim-haml', {
+      \ 'autoload': {'filetypes': ['haml'] }}
+  NeoBundleLazy 'slim-template/vim-slim', {
+      \ 'autoload': {'filetypes': ['slim'] }}
+  " css
   NeoBundleLazy 'hail2u/vim-css3-syntax', {
       \ 'autoload': {'filetypes': ['css']}}
   NeoBundleLazy 'skammer/vim-css-color', {
