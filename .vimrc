@@ -257,35 +257,35 @@ else
   " ----------------------------------------
   "
   NeoBundleLazy 'vim-ruby/vim-ruby', {
-      \   'autoload' : { 'filetypes' : 'ruby' }
+      \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] }
       \ }
   NeoBundleLazy 'tpope/vim-rails', {
-      \   'autoload' : { 'filetypes' : 'ruby' }
+      \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] }
       \ }
   NeoBundleLazy 'ujihisa/unite-rake', {
-      \   'autoload' : { 'filetypes' : 'ruby' },
+      \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] },
       \   'depends' : [ 'Shougo/unite.vim' ]
       \ }
   " unite-rails {{{
   NeoBundleLazy 'basyura/unite-rails', {
-      \   'autoload' : { 'filetypes' : 'ruby' },
+      \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] },
       \   'depends' : ['Shougo/unite.vim']
       \ }
   let s:bundle = neobundle#get('unite-rails')
   function! s:bundle.hooks.on_source(bundle)
-    nnoremap <buffer><C-H>   :<C-U>Unite rails/controller<CR>
-    nnoremap <buffer><C-H>v  :<C-U>Unite rails/view<CR>
-    nnoremap <buffer><C-H>m  :<C-U>Unite rails/model<CR>
-    nnoremap <buffer><C-H>j  :<C-U>Unite rails/javascript<CR>
-    nnoremap <buffer><C-H>s  :<C-U>Unite rails/stylesheet<CR>
-    nnoremap <buffer><C-H>c  :<C-U>Unite rails/config<CR>
-    nnoremap <buffer><C-H>d  :<C-U>Unite rails/db<CR>
-    nnoremap <buffer><C-H>l  :<C-U>Unite rails/lib<CR>
-    au! RailsLazyPlugins
+    nnoremap <C-H>    :<C-U>Unite rails/controller<CR>
+    nnoremap <C-H>v   :<C-U>Unite rails/view<CR>
+    nnoremap <C-H>m   :<C-U>Unite rails/model<CR>
+    nnoremap <C-H>j   :<C-U>Unite rails/javascript<CR>
+    nnoremap <C-H>s   :<C-U>Unite rails/stylesheet<CR>
+    nnoremap <C-H>c   :<C-U>Unite rails/config<CR>
+    nnoremap <C-H>d   :<C-U>Unite rails/db<CR>
+    nnoremap <C-H>l   :<C-U>Unite rails/lib<CR>
+    " au! RailsLazyPlugins
   endfunction
-  aug RailsLazyPlugins
-    au User Rails call <SID>bundleLoadDepends(s:bundle_rails)
-  aug END
+  "aug RailsLazyPlugins
+  "  au User Rails call <SID>bundleLoadDepends(s:bundle_rails)
+  "aug END
   " }}}
 
   " rspec
