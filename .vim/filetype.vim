@@ -1,4 +1,5 @@
 augroup filetypedetect
+  au BufRead,BufNewFile *.ini.* setfiletype dosini
   au BufRead,BufNewFile *.c setfiletype c
   au BufRead,BufNewFile *.cpp setfiletype cpp
   au BufRead,BufNewFile *.css setfiletype css

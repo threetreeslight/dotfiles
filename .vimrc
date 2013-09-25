@@ -229,6 +229,9 @@ else
   " syntax highlight
   NeoBundleLazy 'othree/html5.vim.git', {
       \ 'autoload': {'filetypes': ['html'] }}
+  " ini
+  NeoBundleLazy 'vim-scripts/ini-syntax-definition', {
+      \ 'autoload': {'filetypes': ['dosini'] }}
   " template engine
   NeoBundleLazy 'tpope/vim-haml', {
       \ 'autoload': {'filetypes': ['haml'] }}
