@@ -247,7 +247,7 @@ else
       \ 'autoload': { 'filetypes': 'less'}}
   " scss
   NeoBundleLazy 'cakebaker/scss-syntax.vim', {
-      \ 'autoload': { 'filetypes': ['scss.css','sass.css'] }}
+      \ 'autoload': { 'filetypes': ['scss.css'] }}
   "js,node
   NeoBundleLazy 'pangloss/vim-javascript', {
       \ 'autoload': { 'filetypes': ['javascript']}}
