@@ -106,6 +106,7 @@ else
   "" utility
   " ----------------------------------------
   "
+  NeoBundle 'Shougo/vimshell.vim'
   NeoBundle 'thinca/vim-quickrun'
   NeoBundle 'vim-scripts/YankRing.vim'
   NeoBundle 'vim-scripts/surround.vim'
@@ -220,6 +221,7 @@ else
     nnoremap <silent> <Space>gd :Gdiff<CR>
     nnoremap <silent> <Space>gs :Gstatus<CR>
   endfunction
+
 
   "" syntax
   " ----------------------------------------
@@ -355,6 +357,12 @@ vmap <C-c> :w !pbcopy<cr><cr>
 set nobackup
 set noswapfile
 set nowritebackup
+
+
+"-------------------------
+" ctags
+"-------------------------
+set tags=./tags
 
 "-------------------------
 " display
