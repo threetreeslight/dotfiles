@@ -153,6 +153,10 @@ if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
   echo "phantomjs is "`phantomenv version | sed -e 's/ .*//'`
 fi
 
+## redis for hubot
+#
+export REDISTOGO_URL=$BOXEN_REDIS_URL
+
 ## Action Script
 #
 export PATH=$PATH:/Applications/flex_sdk_4.6/bin
