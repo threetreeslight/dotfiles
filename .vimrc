@@ -261,6 +261,16 @@ else
   "" ruby, rails
   " ----------------------------------------
   "
+  " Ruby static code analyzer.
+  NeoBundleLazy 'ngmy/vim-rubocop', {
+      \   'autoload' : { 'filetypes' : ['ruby'] }
+      \ }
+  let s:bundle = neobundle#get('vim-rubocop')
+  function! s:bundle.hooks.on_source(bundle)
+    let g:vimrubocop_keymap = 0
+    nmap <Leader>r :RuboCop<CR>
+  endfunction
+
   NeoBundleLazy 'vim-ruby/vim-ruby', {
       \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] }
       \ }
