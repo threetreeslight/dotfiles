@@ -7,7 +7,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.sass,*.scss setfiletype scss.css
   au BufRead,BufNewFile *.html setfiletype html
   au BufRead,BufNewFile *.javascript,*.coffeescript,*.node,*.json,*.typescript,Grantfile setfiletype javascript
-  au BufRead,BufNewFile *.php,*.phtml setfiletype php
+  au BufRead,BufNewFile *.php,*.phtml,*.ctp setfiletype php
   au BufRead,BufNewFile *.py setfiletype python
   au BufRead,BufNewFile *.rb,*.erb,*.eruby,*.pp,Gemfile,Rakefile,Puppetfile,Guradfile,Routefile setfiletype ruby
   au BufRead,BufNewFile *.haml setfiletype haml
