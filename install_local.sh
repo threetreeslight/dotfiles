@@ -55,8 +55,7 @@ fi
 #
 # add to pubkey
 #
-RSA_PUB_ARRY=(`echo $(cat ${HOME}/.ssh/id_rsa.pub)`)
-HOST_PC_NAME=${RSA_PUB_ARRY[2]}
+HOST_PC_NAME=`cat ${HOME}/.ssh/id_rsa.pub | awk -F' ' '{ print $3 }'`
 RSA_IN_HEROKU=`heroku keys | grep ${HOST_PC_NAME}`
 if [ ${#RSA_IN_HEROKU} > 0 ]; then
   echo "[notice] already added this host rsa key to heroku"
@@ -83,20 +82,20 @@ fi
 # ln -sfv ${BOXEN_HOME}/homebrew/opt/mysql/*.plist ~/Library/LaunchAgents
 # launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 
-## pow
-#
-# after registration application by powder
-# $ cd ~/.pow
-# $ ln -s ${rails application directory}
-#
-if [ -d $POW_HOST_ROOT ]; then
-  echo "[notice] already pow initialized"
-else
-  eval $(pow --print-config)
-  mkdir -p "`echo $POW_HOST_ROOT`"
-  ln -s "`echo $POW_HOST_ROOT`" ~/.pow
-  echo "initializing pow"
-fi
+# ## pow
+# #
+# # after registration application by powder
+# # $ cd ~/.pow
+# # $ ln -s ${rails application directory}
+# #
+# if [ -d $POW_HOST_ROOT ]; then
+#   echo "[notice] already pow initialized"
+# else
+#   eval $(pow --print-config)
+#   mkdir -p "`echo $POW_HOST_ROOT`"
+#   ln -s "`echo $POW_HOST_ROOT`" ~/.pow
+#   echo "initializing pow"
+# fi
 
 ## vagrant
 #
@@ -107,4 +106,17 @@ else
   vagrant plugin install sahara
   echo "adding vagrant plugin sahara"
 fi
+
+
+## sublime_text_2
+#
+SUBLIME_HOME="${HOME}/Library/Application Support/Sublime Text 2/Packages/User"
+SUBLIME_PREFERENCE_FILE="${SUBLIME_HOME}/Preferences.sublime-settings"
+if [ -e "${SUBLIME_PREFERENCE_FILE}" ]; then
+  echo "[notice] already exists preference"
+else
+  echo "symlink sublime_text_2 preferences"
+  ln -s ${HOME}/dotfiles/sublime_text_2/Preferences.sublime-settings "${SUBLIME_HOME}/"
+fi
+
 
