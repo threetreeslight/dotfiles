@@ -119,4 +119,14 @@ else
   ln -s ${HOME}/dotfiles/sublime_text_2/Preferences.sublime-settings "${SUBLIME_HOME}/"
 fi
 
+## xcode5
+#
+XCODE_HOME=${HOME}/Library/Developer/Xcode/UserData/FontAndColorThemes
+if [ -L ${XCODE_HOME}/Solarized\ -\ Dark.dvtcolortheme ]; then
+  echo "[notice] already exist xcode themes"
+else
+  echo "copy xcode themes"
+  ln -s ${HOME}/dotfiles/themes/apple-xcode4-solarized/* ${XCODE_HOME}
+fi
+
 
