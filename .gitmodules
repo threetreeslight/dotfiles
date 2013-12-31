@@ -10,3 +10,6 @@
 [submodule ".zsh/discolors-solarized"]
 	path = .zsh/discolors-solarized
 	url = git://github.com/seebi/dircolors-solarized.git
+[submodule "themes/solarized"]
+	path = themes/solarized
+	url = git://github.com/altercation/solarized
