@@ -5,23 +5,23 @@
 	<key>DVTConsoleDebuggerInputTextColor</key>
 	<string>0.505992 0.564858 0.563637 1</string>
 	<key>DVTConsoleDebuggerInputTextFont</key>
-	<string>SourceCodePro-BoldForPowerline - 14.0</string>
+	<string>SourceCodePro-BoldForPowerline - 12.0</string>
 	<key>DVTConsoleDebuggerOutputTextColor</key>
 	<string>0.505992 0.564858 0.563637 1</string>
 	<key>DVTConsoleDebuggerOutputTextFont</key>
-	<string>SourceCodePro-RegularForPowerline - 14.0</string>
+	<string>SourceCodePro-RegularForPowerline - 12.0</string>
 	<key>DVTConsoleDebuggerPromptTextColor</key>
 	<string>0.146795 0.570824 0.525023 1</string>
 	<key>DVTConsoleDebuggerPromptTextFont</key>
-	<string>SourceCodePro-BoldForPowerline - 14.0</string>
+	<string>SourceCodePro-BoldForPowerline - 12.0</string>
 	<key>DVTConsoleExectuableInputTextColor</key>
 	<string>0.44058 0.509629 0.516858 1</string>
 	<key>DVTConsoleExectuableInputTextFont</key>
-	<string>SourceCodePro-RegularForPowerline - 14.0</string>
+	<string>SourceCodePro-RegularForPowerline - 12.0</string>
 	<key>DVTConsoleExectuableOutputTextColor</key>
 	<string>0.44058 0.509629 0.516858 1</string>
 	<key>DVTConsoleExectuableOutputTextFont</key>
-	<string>SourceCodePro-BoldForPowerline - 14.0</string>
+	<string>SourceCodePro-RegularForPowerline - 12.0</string>
 	<key>DVTConsoleTextBackgroundColor</key>
 	<string>0.0159244 0.126521 0.159696 1</string>
 	<key>DVTConsoleTextInsertionPointColor</key>
@@ -39,7 +39,7 @@
 	<key>DVTSourceTextInvisiblesColor</key>
 	<string>0.5 0.5 0.5 1</string>
 	<key>DVTSourceTextSelectionColor</key>
-	<string>0.0393807 0.160116 0.198333 1</string>
+	<string>0.0613971 0.251584 0.310823 1</string>
 	<key>DVTSourceTextSyntaxColors</key>
 	<dict>
 		<key>xcode.syntax.attribute</key>
@@ -92,51 +92,51 @@
 	<key>DVTSourceTextSyntaxFonts</key>
 	<dict>
 		<key>xcode.syntax.attribute</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.character</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.comment</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.comment.doc</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.comment.doc.keyword</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.class</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.class.system</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.constant</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.constant.system</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.function</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.function.system</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.macro</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.macro.system</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.type</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.type.system</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.variable</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.identifier.variable.system</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.keyword</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.number</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.plain</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.preprocessor</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.string</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 		<key>xcode.syntax.url</key>
-		<string>SourceCodePro-RegularForPowerline - 14.0</string>
+		<string>SourceCodePro-RegularForPowerline - 13.0</string>
 	</dict>
 </dict>
 </plist>
