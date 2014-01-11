@@ -2,6 +2,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.ini.* setfiletype dosini
   au BufRead,BufNewFile *.c setfiletype c
   au BufRead,BufNewFile *.cpp setfiletype cpp
+  au BufRead,BufNewFile *.m,*.h setfiletype objc
   au BufRead,BufNewFile *.css setfiletype css
   au BufRead,BufNewFile *.less setfiletype less
   au BufRead,BufNewFile *.sass,*.scss setfiletype scss.css

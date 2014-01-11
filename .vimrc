@@ -212,6 +212,8 @@ else
   "" git
   " ----------------------------------------
   "
+  NeoBundleLazy 'kchmck/vim-coffee-script', {
+      \ 'autoload': { 'filetypes': ['coffee']}}
   NeoBundle 'airblade/vim-gitgutter'
   NeoBundle 'tpope/vim-fugitive'
   let s:bundle = neobundle#get('vim-fugitive')
@@ -256,6 +258,11 @@ else
   NeoBundleLazy 'kchmck/vim-coffee-script', {
       \ 'autoload': { 'filetypes': ['coffee']}}
 
+
+  "" objective-c
+  "
+  NeoBundleLazy 'msanders/cocoa.vim', {
+      \ 'autoload': { 'filetypes': ['objc']}}
 
 
   "" ruby, rails
