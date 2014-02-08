@@ -1,9 +1,8 @@
 {
-    "font_size": 14,
-	// Vim モード
-	"ignored_packages": [],
-	// Vim のキーバインドを使用
+	"font_size": 14,
+	"ignored_packages":
+	[
+	],
 	"vintage_ctrl_keys": true,
-	// 新規ファイルを開いたらノーマルモード
 	"vintage_start_in_command_mode": true
 }
