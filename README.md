@@ -3,6 +3,19 @@ dotfiles
 
 ae06710's dotfiles setting
 
+
+require
+-------
+
+* boxen
+* rbenv (option)
+* nodenv (option)
+* phpenv (option)
+* phantomenv (option)
+* mysql (option)
+* redis (option)
+
+
 Install global settings
 ----------------------
 
@@ -140,4 +153,62 @@ $ sudo curl -sS https://getcomposer.org/installer | sudo php
 $ sudo chmod a+x composer.phar
 
 ```
+
+
+## Vim Frequency Usage
+
+Unite
+
+* `<C-U><C-U>` : buffer file
+* `<C-U><C-R>` : file
+* `<C-U><C-D>` : dir
+* `<C-U><C-F>` : exploer
+
+git
+
+* `<Space>gb` : git blame
+* `<Space>gd` : git diff
+* `<Space>gs` : git status
+* `<C-C>` : git commit
+
+* `<Space>gb` : git blame
+
+complement
+
+* `tab`
+
+sunippet
+
+html
+
+* <http://emmet.io/>
+
+ruby
+
+* `r` : RuboCop
+
+rails
+
+* `<C-H>` : show controllers list
+* `<C-H>v` : show views list
+* `<C-H>m` : show models list
+* `<C-H>j` : show javascripts list
+* `<C-H>s` : show stylesheets list
+* `<C-H>c` : show config list
+* `<C-H>d` : show db list
+* `<C-H>l` : show lib list
+
+other usage
+
+* `<C-J>` : escape insert mode
+* `<Esc><Esc>` : escape highlight
+* `:Codic <args>` saerch variable words
+* `<C-c>` : yank clipbord (mac osx only)
+* `<C-P>` : Yank Ring
+* `,)` : srround ` {} [] ' " `
+* `:ag` : grep
+
+
+## zsh frequency Usage
+
 

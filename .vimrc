@@ -64,7 +64,7 @@ else
     let g:unite_enable_start_insert=0 "start by insert mode
 
     "file list
-    noremap <C-U><C-F> :UniteWithBufferDir -buffer-name=files file<CR>
+    noremap <C-U><C-D> :UniteWithBufferDir -buffer-name=files file<CR>
     "recent access file list
     noremap <C-U><C-R> :Unite file_mru<CR>
     "register list
@@ -103,6 +103,8 @@ else
   function! s:bundle.hooks.on_source(bundle)
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_safe_mode_by_default = 0
+
+    noremap <C-U><C-F> :VimFilerExplorer<CR>
   endfunction
 
   " "" atometic open Vimfilerexplorer
