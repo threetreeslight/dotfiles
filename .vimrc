@@ -54,6 +54,7 @@ else
   "" Unite
   " ----------------------------------------
   "
+  "
   NeoBundleLazy 'Shougo/unite.vim', {
         \ 'autoload' : {
         \   'commands' : [ 'Unite' ]
@@ -62,9 +63,6 @@ else
   function! s:bundle.hooks.on_source(bundle)
     let g:unite_enable_start_insert=0 "start by insert mode
 
-    "buffer list 
-    "TODO: humm...not working
-    noremap <C-U><C-B> :Unite buffer<CR>
     "file list
     noremap <C-U><C-F> :UniteWithBufferDir -buffer-name=files file<CR>
     "recent access file list
@@ -74,34 +72,47 @@ else
     "file and buffer list
     noremap <C-U><C-U> :Unite buffer file_mru<CR>
 
-    "quite Unite
-    au FileType unite nnoremap <silent> <buffer> <C-j><C-j> :q<CR>
-    au FileType unite inoremap <silent> <buffer> <C-j><C-j> <ESC>:q<CR>
+    " when only open unite, active key mappings
+    augroup vimrc
+      autocmd FileType unite call s:unite_my_settings()
+    augroup END
+    function! s:unite_my_settings()
+      " Quite Unite by :q
+      au FileType unite nnoremap <silent> <buffer> <C-j><C-j> :q<CR>
+      au FileType unite inoremap <silent> <buffer> <C-j><C-j> <ESC>:q<CR>
+
+      " split open
+      nnoremap <silent><buffer><expr> s unite#smart_map('s', unite#do_action('split'))
+      inoremap <silent><buffer><expr> s unite#smart_map('s', unite#do_action('split'))
+      " vslipt open
+      nnoremap <silent><buffer><expr> v unite#smart_map('v', unite#do_action('vsplit'))
+      inoremap <silent><buffer><expr> v unite#smart_map('v', unite#do_action('vsplit'))
+      " open as vimfiler
+      nnoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
+      inoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
+    endfunction
   endfunction
 
-  "" filer
-  " ----------------------------------------
-  "
-  " nardtree {{{
-  NeoBundle 'scrooloose/nerdtree'
-  " NERDTree auto open when vim start with no files
-  let NERDTreeShowHidden = 1
-  let file_name = expand("%")
-  if has('vim_starting') && file_name == ""
-    autocmd VimEnter * NERDTree ./
-  endif
-  "}}}
+  " codic library Unite module
 
   " vimfiler{{{
-  NeoBundleLazy 'Shougo/vimfiler', {
-        \   'autoload' : { 'commands' : [ 'VimFilerBufferDir', 'VimFilerExplorer' ] },
+  NeoBundle 'Shougo/vimfiler', {
         \   'depends' : [ 'Shougo/unite.vim' ]
         \ }
   let s:bundle = neobundle#get('vimfiler')
   function! s:bundle.hooks.on_source(bundle)
     let g:vimfiler_as_default_explorer = 1
+    let g:vimfiler_safe_mode_by_default = 0
   endfunction
+
+  " "" atometic open Vimfilerexplorer
+  " let file_name = expand("%")
+  " if has('vim_starting') && file_name == ""
+  "   autocmd VimEnter * VimFilerExplorer ./
+  " endif
   "}}}
+
+  " codic library Unite module
 
   "" utility
   " ----------------------------------------
@@ -129,7 +140,6 @@ else
 
   " filtering faster then ack,grep
   NeoBundle 'rking/ag.vim'
-
 
 
   "" complement
