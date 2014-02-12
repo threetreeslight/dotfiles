@@ -110,9 +110,8 @@ else
   " if has('vim_starting') && file_name == ""
   "   autocmd VimEnter * VimFilerExplorer ./
   " endif
-  "}}}
 
-  " codic library Unite module
+  "}}}
 
   "" utility
   " ----------------------------------------
@@ -140,6 +139,13 @@ else
 
   " filtering faster then ack,grep
   NeoBundle 'rking/ag.vim'
+
+  " code dictionary {{{
+  NeoBundleLazy 'koron/codic-vim', {
+        \ 'autoload' : {
+        \   'commands' : [ 'Codic' ]
+        \ }}
+  "}}}
 
 
   "" complement
