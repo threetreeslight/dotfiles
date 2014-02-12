@@ -2,9 +2,10 @@
   ui = true
 [alias]
   co = checkout
-  st = status
+  st = status --short --branch
   br = branch
   ci = commit
+  lo = log --graph --decorate --oneline
 [grep]
   lineNumber = true
 [core]
