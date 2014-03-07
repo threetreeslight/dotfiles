@@ -295,6 +295,9 @@ else
       \ 'autoload': { 'filetypes': ['javascript']}}
   NeoBundleLazy 'kchmck/vim-coffee-script', {
       \ 'autoload': { 'filetypes': ['coffee']}}
+  "python
+  NeoBundleLazy 'python.vim', {
+      \ 'autoload': { 'filetypes': ['coffee']}}
 
 
   "" objective-c
