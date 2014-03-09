@@ -140,10 +140,18 @@ if [[ -s $BOXEN_HOME/nodenv/bin ]] ; then
   echo "node is "`nodenv version | sed -e 's/ .*//'`
 fi
 
+## pyenv
+#
+if [[ -s $BOXEN_HOME/pyenv/bin ]] ; then
+  pyenv global 2.7.6
+  # source $BOXEN_HOME/pyenv/shims/virtualenvwrapper.sh
+fi
+
 ## phpenv
 #
 if [[ -s $BOXEN_HOME/phpenv/bin ]] ; then
-  echo "php is "`phpenv global 5.4.17`
+  phpenv global 5.4.17
+  echo "php is "`phpenv version`
 fi
 
 ## phantomenv
