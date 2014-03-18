@@ -115,11 +115,25 @@ else
 
   "}}}
 
+
   "" utility
   " ----------------------------------------
   "
   NeoBundle 'Shougo/vimshell.vim'
-  NeoBundle 'thinca/vim-quickrun'
+
+  " vim-quickrun {{{
+  NeoBundleLazy "thinca/vim-quickrun", {
+        \ "autoload": {
+        \   "mappings": [['nxo', '<Plug>(quickrun)']]
+        \ }}
+  let s:bundle = neobundle#get('vim-quickrun')
+  function! s:bundle.hooks.on_source(bundle)
+    let g:quickrun_config = {
+          \ "*": {"runner": "remote/vimproc"},
+          \ }
+  endfunction
+  "}}}
+
   NeoBundle 'vim-scripts/YankRing.vim'
   NeoBundle 'vim-scripts/surround.vim'
   let s:bundle = neobundle#get('surround.vim')
