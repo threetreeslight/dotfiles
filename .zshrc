@@ -128,58 +128,61 @@ function precmd () {
 
 ## rbenv
 #
-if [[ -s $BOXEN_HOME/rbenv/bin ]] ; then
-  rbenv global 2.0.0-p247
-  echo "ruby is "`rbenv version | sed -e 's/ .*//'`
+GLOBAL_VERSION="2.0.0-p353"
+if [[ -s $BOXEN_HOME/rbenv/bin ]];then
+  if [ $GLOBAL_VERSION != `rbenv global` ];then
+    rbenv global $GLOBAL_VERSION
+  fi
+  echo "ruby: " $GLOBAL_VERSION
 fi
 
 ## nodenv
 #
+GLOBAL_VERSION="v0.10.21"
 if [[ -s $BOXEN_HOME/nodenv/bin ]] ; then
-  nodenv global v0.10.13
-  echo "node is "`nodenv version | sed -e 's/ .*//'`
+  if [ $GLOBAL_VERSION != `nodenv version` ];then
+    nodenv global $GLOBAL_VERSION
+  fi
+  echo "node: " $GLOBAL_VERSION
 fi
 
 ## pyenv
 #
+GLOBAL_VERSION="2.7.6"
 if [[ -s $BOXEN_HOME/pyenv/bin ]] ; then
-  pyenv global 2.7.6
+  if [ $GLOBAL_VERSION != `pyenv global` ];then
+    pyenv global 2.7.6
+  fi
   # source $BOXEN_HOME/pyenv/shims/virtualenvwrapper.sh
+  echo "python: " $GLOBAL_VERSION
 fi
 
 ## phpenv
 #
+GLOBAL_VERSION="5.4.17"
 if [[ -s $BOXEN_HOME/phpenv/bin ]] ; then
-  phpenv global 5.4.17
-  echo "php is "`phpenv version`
+  if [ $GLOBAL_VERSION != `phpenv version | awk '{print $1}'` ];then
+    phpenv global 5.4.17
+  fi
+  echo "php: " $GLOBAL_VERSION
 fi
 
 ## phantomenv
 #
+GLOBAL_VERSION="1.9.1"
 if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
-  phantomenv global 1.9.1
-  echo "phantomjs is "`phantomenv version | sed -e 's/ .*//'`
+  if [ $GLOBAL_VERSION != `phantomenv version` ];then
+    phantomenv global 1.9.1
+  fi
+  echo "phantomjs: " $GLOBAL_VERSION
 fi
 
 ## redis for hubot
 #
 export REDISTOGO_URL=$BOXEN_REDIS_URL
 
+
 ## Action Script
 #
 export PATH=$PATH:/Applications/flex_sdk_4.6/bin
-
-## AWS
-#
-if [[ -s $HOME/Dropbox/dev/.ec2 ]] ; then
-  export AWS_ACCESS_KEY_ID=`cat $HOME/Dropbox/dev/.ec2/ae06710_access_key_id`
-  export AWS_SECRET_ACCESS_KEY=`cat $HOME/Dropbox/dev/.ec2/ae06710_secret_access_key`
-fi
-
-# export JAVA_HOME="$(/usr/libexec/java_home)"
-# export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
-# export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
-# export EC2_HOME="/usr/local/Library/LinkedKegs/ec2-api-tools/jars"
-# export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
-# export EC2_URL="http://ec2.us-west-1.amazonaws.com"
 
