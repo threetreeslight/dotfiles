@@ -1,7 +1,8 @@
-## Environment variable configuration
 #
+# Load Environment variable
+#
+
 # Boxen
-#
 source /opt/boxen/env.sh
 
 ## color definition
@@ -21,13 +22,13 @@ export LANG=ja_JP.UTF-8
 
 ## antigen
 #
-source $HOME/dotfiles/.zshrc.antigen
+source $HOME/dotfiles/.zsh/.zshrc.antigen
 
 ## Default shell configuration
 #
 # set prompt
 #
-source $HOME/dotfiles/.zshrc.prompt
+source $HOME/dotfiles/.zsh/.zshrc.prompt
 
 # auto change directory
 setopt auto_cd
@@ -57,8 +58,10 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 
-## Completion
 #
+# Completion
+#
+
 # zsh-completions( have to write compinit before )
 fpath=($HOME/dotfiles/.zsh/zsh-completions/src $fpath)
 
@@ -75,22 +78,24 @@ zstyle ':completion:*' group-name ''
 
 autoload -U compinit; compinit
 
+
 # coloring
 case "${OSTYPE}" in
   freebsd*|darwin*)
-    if [ -f ~/dotfiles/.zshrc.mac ]; then
-      source ~/dotfiles/.zshrc.mac
+    if [ -f $HOME/dotfiles/.zsh/.zshrc.mac ]; then
+      source $HOME/dotfiles/.zsh/.zshrc.mac
     fi
     ;;
   linux*)
-    if [ -f ~/dotfiles/.zshrc.linux ]; then
-      source ~/dotfiles/.zshrc.linux
+    if [ -f $HOME/dotfiles/.zshrc.linux ]; then
+      source $HOME/dotfiles/.zshrc.linux
     fi
   ;;
 esac
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 autoload colors; colors
+
 
 # command
 setopt auto_param_slash # add autometicaly "/", when comple directory name
@@ -99,90 +104,24 @@ setopt list_types # add file type mark like `ls -F`
 setopt interactive_comments # In command line cognition "#" as comment
 
 
+#
+# develop
+#
+source ~/dotfiles/.zsh/.zshrc.alias
+source ~/dotfiles/.zsh/.zshrc.language
 
-## other settings
-#
-# common alias
-#
-alias ll='ls -laG'
-alias rm='rm -i'
-alias cp="cp -i"
-alias mv="mv -i"
-alias du="du -h"
-alias df="df -h"
-alias vi='/usr/bin/vim'
-alias g='git'
-alias gg="git grep -H --heading --break"
-alias be='bundle exec'
-
-## git
-#
+# git
 export GIT_EDITOR="/usr/bin/vim"
 
-## z
-#
+# z
 . `brew --prefix`/etc/profile.d/z.sh
 function precmd () {
   z --add "$(pwd -P)"
 }
 
-## rbenv
-#
-GLOBAL_VERSION="2.0.0-p353"
-if [[ -s $BOXEN_HOME/rbenv/bin ]];then
-  if [ $GLOBAL_VERSION != `rbenv global` ];then
-    rbenv global $GLOBAL_VERSION
-  fi
-  echo "ruby: " $GLOBAL_VERSION
-fi
-
-## nodenv
-#
-GLOBAL_VERSION="v0.10.21"
-if [[ -s $BOXEN_HOME/nodenv/bin ]] ; then
-  if [ $GLOBAL_VERSION != `nodenv version` ];then
-    nodenv global $GLOBAL_VERSION
-  fi
-  echo "node: " $GLOBAL_VERSION
-fi
-
-## pyenv
-#
-GLOBAL_VERSION="2.7.6"
-if [[ -s $BOXEN_HOME/pyenv/bin ]] ; then
-  if [ $GLOBAL_VERSION != `pyenv global` ];then
-    pyenv global 2.7.6
-  fi
-  # source $BOXEN_HOME/pyenv/shims/virtualenvwrapper.sh
-  echo "python: " $GLOBAL_VERSION
-fi
-
-## phpenv
-#
-GLOBAL_VERSION="5.4.17"
-if [[ -s $BOXEN_HOME/phpenv/bin ]] ; then
-  if [ $GLOBAL_VERSION != `phpenv version | awk '{print $1}'` ];then
-    phpenv global 5.4.17
-  fi
-  echo "php: " $GLOBAL_VERSION
-fi
-
-## phantomenv
-#
-GLOBAL_VERSION="1.9.1"
-if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
-  if [ $GLOBAL_VERSION != `phantomenv version` ];then
-    phantomenv global 1.9.1
-  fi
-  echo "phantomjs: " $GLOBAL_VERSION
-fi
-
-## redis for hubot
-#
+# redis for hubot
 export REDISTOGO_URL=$BOXEN_REDIS_URL
 
-
-## Action Script
-#
+# Action Script
 export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 

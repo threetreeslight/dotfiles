@@ -1,0 +1,13 @@
+# common alias
+alias ll='ls -laG'
+alias rm='rm -i'
+alias cp="cp -i"
+alias mv="mv -i"
+alias du="du -h"
+alias df="df -h"
+alias vi='/usr/bin/vim'
+alias g='git'
+alias gg="git grep -H --heading --break"
+alias be='bundle exec'
+
+

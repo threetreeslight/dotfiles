@@ -29,8 +29,6 @@ fi
 
 ## add git config local to $HOME
 #
-#
-#
 if [ ! -f $HOME/Dropbox/dev/.gitconfig.local ]; then
   echo "[error] .gitconfig.local is not exist in $HOME/Dropbox/dev"
 elif [ -f $HOME/.gitconfig.local ]; then
@@ -78,25 +76,6 @@ else
   echo "starting mysql"
 fi
 
-# mysql:auto load
-# ln -sfv ${BOXEN_HOME}/homebrew/opt/mysql/*.plist ~/Library/LaunchAgents
-# launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-
-# ## pow
-# #
-# # after registration application by powder
-# # $ cd ~/.pow
-# # $ ln -s ${rails application directory}
-# #
-# if [ -d $POW_HOST_ROOT ]; then
-#   echo "[notice] already pow initialized"
-# else
-#   eval $(pow --print-config)
-#   mkdir -p "`echo $POW_HOST_ROOT`"
-#   ln -s "`echo $POW_HOST_ROOT`" ~/.pow
-#   echo "initializing pow"
-# fi
-
 ## vagrant
 #
 VAGRANT_SAHARA=`vagrant plugin list | grep sahara`
@@ -118,6 +97,7 @@ else
   echo "symlink sublime_text_2 preferences"
   ln -s ${HOME}/dotfiles/sublime_text_2/Preferences.sublime-settings "${SUBLIME_HOME}/"
 fi
+
 
 ## xcode5
 #
