@@ -157,6 +157,13 @@ $ sudo chmod a+x composer.phar
 
 ## Vim Frequency Usage
 
+When you want Insert Mode Paste, cancel auto Indent
+
+```
+:set paste
+:set nopaste
+```
+
 Unite
 
 * `<C-U><C-U>` : buffer file

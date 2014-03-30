@@ -1,11 +1,12 @@
 {
-    "ignored_packages": [],
-    "font_size": 14,
-    "tab_size": 2,
-    "translate_tabs_to_spaces": true,
-    "draw_white_space": "all",
-    "highlight_line": true,
-    "vintage_ctrl_keys": true,
-    "vintage_start_in_command_mode": true
+	"draw_white_space": "all",
+	"font_size": 14,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+	],
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true,
+	"vintage_ctrl_keys": true,
+	"vintage_start_in_command_mode": true
 }
-
