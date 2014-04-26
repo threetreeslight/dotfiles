@@ -65,6 +65,7 @@ bindkey "^N" history-beginning-search-forward-end
 # zsh-completions( have to write compinit before )
 fpath=($HOME/dotfiles/.zsh/zsh-completions/src $fpath)
 
+autoload -U compinit; compinit
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                                /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
                                /usr/local/git/bin
@@ -75,8 +76,6 @@ zstyle ':completion:*:default' menu select=2
 # grouping options
 zstyle ':completion:*' format '%B%d%b'
 zstyle ':completion:*' group-name ''
-
-autoload -U compinit; compinit
 
 
 # coloring

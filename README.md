@@ -218,4 +218,13 @@ other usage
 
 ## zsh frequency Usage
 
+## Other shell tips
+
+`ctrl + u` : Reset Command
+
+`cd -` : back to old current directory
+
+`cd -<TAB>` : select back directory on histroy
+
+
 
