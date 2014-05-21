@@ -111,6 +111,7 @@ source ~/dotfiles/.zsh/.zshrc.language
 
 # git
 export GIT_EDITOR="/usr/bin/vim"
+eval "$(hub alias -s)"
 
 # z
 . `brew --prefix`/etc/profile.d/z.sh
