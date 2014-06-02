@@ -10,11 +10,17 @@
   lineNumber = true
 [core]
   excludesfile = /opt/boxen/config/git/gitignore
+
+[pager]
+  log  = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
+
 [include]
   path = .gitconfig.local
 
 [credential]
-helper = /opt/boxen/bin/boxen-git-credential
+  helper = /opt/boxen/bin/boxen-git-credential
 
 [hub]
-protocol = https
+  protocol = https

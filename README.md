@@ -154,6 +154,12 @@ $ sudo chmod a+x composer.phar
 
 ```
 
+## git
+
+if you can't use git diff-highlight, you should
+
+- find diff-highlight
+- symlink to /usr/local/bin(PATH passed localtion)
 
 ## Vim Frequency Usage
 
@@ -225,6 +231,7 @@ other usage
 `cd -` : back to old current directory
 
 `cd -<TAB>` : select back directory on histroy
+
 
 
 
