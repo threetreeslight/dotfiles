@@ -1,0 +1,3 @@
+# show commit ID in left of main view
+set main-view = id:width=12 date author commit-title:graph=yes,refs=yes
+
