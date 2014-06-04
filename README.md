@@ -161,6 +161,15 @@ if you can't use git diff-highlight, you should
 - find diff-highlight
 - symlink to /usr/local/bin(PATH passed localtion)
 
+## tmux
+
+- ctrl + b + ] : scroll mode
+- ctrl + b + [ : copy mode
+
+## tig
+
+- <shift>+b : browse commit on github
+
 ## Vim Frequency Usage
 
 When you want Insert Mode Paste, cancel auto Indent
