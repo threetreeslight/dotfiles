@@ -179,6 +179,15 @@ When you want Insert Mode Paste, cancel auto Indent
 :set nopaste
 ```
 
+Tab
+
+```
+tc : create new tab
+tx : close current tab
+tn : move to next tab
+tp : move to previous tab
+```
+
 Unite
 
 * `<C-U><C-U>` : buffer file
