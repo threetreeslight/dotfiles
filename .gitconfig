@@ -31,3 +31,5 @@
   diff = B @hub browse -- commit/%(commit)
   tree = B @hub browse -- tree/%(commit)/%(directory)
   blob = B @hub browse -- tree/%(commit)/%(file)
+[branch]
+	autosetuprebase = always
