@@ -75,12 +75,12 @@ vagrant
 
 ```
 # vagrant
-# 
+#
 # http://www.vagrantbox.es/
-# 
+#
 # under both was setting by boxen
 # but when there are some reason (network is slow), cut pupput on vagrant centos and ubuntu. and install by manual.
-# 
+#
 $ vagrant box add centos64 ...
 $ vagrant box add ubuntu1210 ...)
 ```
@@ -238,6 +238,7 @@ other usage
 * `<C-P>` : Yank Ring
 * `,)` : srround ` {} [] ' " `
 * `:ag` : grep
+* `:FixWhitespace` : Trim white space
 
 
 ## zsh frequency Usage
@@ -251,5 +252,9 @@ other usage
 `cd -<TAB>` : select back directory on histroy
 
 
+
+## Reference
+
+- [脱初心者を目指すなら知っておきたい便利なVimコマンド25選](http://qiita.com/jnchito/items/57ffda5712636a9a1e62)
 
 

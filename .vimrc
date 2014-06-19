@@ -374,7 +374,7 @@ else
   NeoBundleLazy 'tpope/vim-dispatch', { 'autoload' : {
         \ 'commands' : ['Dispatch', 'FocusDispatch', 'Start']
         \ }}
- 
+
   " NeoBundle 'vim-scripts/dbext.vim'
   " NeoBundle 'digitaltoad/vim-jade'
 
@@ -471,6 +471,15 @@ set nobackup
 set noswapfile
 set nowritebackup
 
+" Run :FixWhitespace to remove end of line white space
+function! s:FixWhitespace(line1,line2)
+    let l:save_cursor = getpos(".")
+    silent! execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//'
+    call setpos('.', l:save_cursor)
+endfunction
+command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
+
+
 
 "-------------------------
 " ctags
@@ -484,7 +493,7 @@ set showmode
 set showcmd "Show partial commands in the last line of the screen
 set title
 set number "Display line numbers on the left
-set ruler "Display the cursor position 
+set ruler "Display the cursor position
 set laststatus=2 "Always display the status line
 set cmdheight=2 "cmd line hiehgt
 set visualbell "Use visual bell instead of beeping when doing something wrong
