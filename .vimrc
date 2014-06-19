@@ -136,17 +136,6 @@ else
 
   NeoBundle 'vim-scripts/YankRing.vim'
   NeoBundle 'vim-scripts/surround.vim'
-  let s:bundle = neobundle#get('surround.vim')
-  function! s:bundle.hooks.on_source(bundle)
-    nmap ,( csw(
-    nmap ,) csw)
-    nmap ,{ csw{
-    nmap ,} csw}
-    nmap ,[ csw[
-    nmap ,] csw]
-    nmap ,' csw'
-    nmap ," csw"
-  endfunction
 
   NeoBundleLazy 'tpope/vim-endwise', {
         \ 'autoload' : {

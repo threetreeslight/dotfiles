@@ -236,7 +236,9 @@ other usage
 * `:Codic <args>` saerch variable words
 * `<C-c>` : yank clipbord (mac osx only)
 * `<C-P>` : Yank Ring
-* `,)` : srround ` {} [] ' " `
+* `cs'"` : srround `'` to `"`
+* `ds'` : delete srround `'`
+* `csw'` : srround `'`
 * `:ag` : grep
 * `:FixWhitespace` : Trim white space
 
