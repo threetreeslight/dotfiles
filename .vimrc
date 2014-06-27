@@ -66,11 +66,9 @@ else
     "file list
     noremap <C-U><C-D> :UniteWithBufferDir -buffer-name=files file<CR>
     "recent access file list
-    noremap <C-U><C-R> :Unite file_mru<CR>
-    "register list
-    noremap <C-U><C-Y> :Unite -buffer-name=register register<CR>
+    noremap <C-U><C-R> :Unite file_rec<CR>
     "file and buffer list
-    noremap <C-U><C-U> :Unite buffer file_mru<CR>
+    noremap <C-U><C-U> :Unite buffer file<CR>
 
     " when only open unite, active key mappings
     augroup vimrc
@@ -339,14 +337,14 @@ else
       \ }
   let s:bundle = neobundle#get('unite-rails')
   function! s:bundle.hooks.on_source(bundle)
-    nnoremap <C-H>    :<C-U>Unite rails/controller<CR>
-    nnoremap <C-H>v   :<C-U>Unite rails/view<CR>
-    nnoremap <C-H>m   :<C-U>Unite rails/model<CR>
-    nnoremap <C-H>j   :<C-U>Unite rails/javascript<CR>
-    nnoremap <C-H>s   :<C-U>Unite rails/stylesheet<CR>
-    nnoremap <C-H>c   :<C-U>Unite rails/config<CR>
-    nnoremap <C-H>d   :<C-U>Unite rails/db<CR>
-    nnoremap <C-H>l   :<C-U>Unite rails/lib<CR>
+    nnoremap <C-U><C-C> :<C-U>Unite rails/controller<CR>
+    nnoremap <C-U><C-V> :<C-U>Unite rails/view<CR>
+    nnoremap <C-U><C-M> :<C-U>Unite rails/model<CR>
+    nnoremap <C-U><C-J> :<C-U>Unite rails/javascript<CR>
+    nnoremap <C-U><C-S> :<C-U>Unite rails/stylesheet<CR>
+    nnoremap <C-U><C-C> :<C-U>Unite rails/config<CR>
+    nnoremap <C-U><C-B> :<C-U>Unite rails/db<CR>
+    nnoremap <C-U><C-L> :<C-U>Unite rails/lib<CR>
     " au! RailsLazyPlugins
   endfunction
   "aug RailsLazyPlugins

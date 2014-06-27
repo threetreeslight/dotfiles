@@ -201,7 +201,6 @@ git
 * `<Space>gd` : git diff
 * `<Space>gs` : git status
 * `<C-C>` : git commit
-
 * `<Space>gb` : git blame
 
 complement
@@ -220,14 +219,14 @@ ruby
 
 rails
 
-* `<C-H>` : show controllers list
-* `<C-H>v` : show views list
-* `<C-H>m` : show models list
-* `<C-H>j` : show javascripts list
-* `<C-H>s` : show stylesheets list
-* `<C-H>c` : show config list
-* `<C-H>d` : show db list
-* `<C-H>l` : show lib list
+* `<C-U><C-C>` : show controllers list
+* `<C-U><C-V>` : show views list
+* `<C-U><C-M>` : show models list
+* `<C-U><C-J>` : show javascripts list
+* `<C-U><C-S>` : show stylesheets list
+* `<C-U><C-C>` : show config list
+* `<C-U><C-B>` : show db list
+* `<C-U><C-L>` : show lib list
 
 other usage
 
