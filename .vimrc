@@ -337,14 +337,14 @@ else
       \ }
   let s:bundle = neobundle#get('unite-rails')
   function! s:bundle.hooks.on_source(bundle)
-    nnoremap <C-U><C-C> :<C-U>Unite rails/controller<CR>
-    nnoremap <C-U><C-V> :<C-U>Unite rails/view<CR>
-    nnoremap <C-U><C-M> :<C-U>Unite rails/model<CR>
-    nnoremap <C-U><C-J> :<C-U>Unite rails/javascript<CR>
-    nnoremap <C-U><C-S> :<C-U>Unite rails/stylesheet<CR>
-    nnoremap <C-U><C-C> :<C-U>Unite rails/config<CR>
-    nnoremap <C-U><C-B> :<C-U>Unite rails/db<CR>
-    nnoremap <C-U><C-L> :<C-U>Unite rails/lib<CR>
+    noremap <C-H><C-H> :Unite rails/controller<CR>
+    noremap <C-H><C-V> :Unite rails/view<CR>
+    noremap <C-H><C-M> :Unite rails/model<CR>
+    noremap <C-H>j :Unite rails/javascript<CR>
+    noremap <C-H>s :Unite rails/stylesheet<CR>
+    noremap <C-H>c :Unite rails/config<CR>
+    noremap <C-H>d :Unite rails/db<CR>
+    noremap <C-H>l :Unite rails/lib<CR>
     " au! RailsLazyPlugins
   endfunction
   "aug RailsLazyPlugins
