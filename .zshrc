@@ -108,6 +108,7 @@ setopt interactive_comments # In command line cognition "#" as comment
 #
 source ~/dotfiles/.zsh/.zshrc.alias
 source ~/dotfiles/.zsh/.zshrc.language
+source ~/dotfiles/.zsh/.zshrc.percol
 
 # git
 export GIT_EDITOR="/usr/bin/vim"

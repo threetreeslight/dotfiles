@@ -244,13 +244,18 @@ other usage
 
 ## zsh frequency Usage
 
-## Other shell tips
+```bash
+# Kill process with percol
+$ ppkill
 
-`ctrl + u` : Reset Command
+# Get PID with percol
+$ ppgrep
+```
 
-`cd -` : back to old current directory
-
-`cd -<TAB>` : select back directory on histroy
+* `ctrl + r` : search history with percol
+* `ctrl + u` : Reset Command
+* `cd -` : back to old current directory
+* `cd -<TAB>` : select back directory on histroy
 
 
 
