@@ -4,9 +4,6 @@
 [submodule "/User/mikiakira/dotfiles/.zsh/antigen"]
 	path = .zsh/antigen
 	url = git://github.com/zsh-users/antigen.git
-[submodule "/Users/mikiakira/dotfiles/.zsh/zsh-completions"]
-	path = .zsh/zsh-completions
-	url = git://github.com/zsh-users/zsh-completions.git
 [submodule ".zsh/discolors-solarized"]
 	path = .zsh/discolors-solarized
 	url = git://github.com/seebi/dircolors-solarized.git

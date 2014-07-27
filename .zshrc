@@ -63,7 +63,8 @@ bindkey "^N" history-beginning-search-forward-end
 #
 
 # zsh-completions( have to write compinit before )
-fpath=($HOME/dotfiles/.zsh/zsh-completions/src $fpath)
+# fpath=($HOME/dotfiles/.zsh/zsh-completions/src $fpath)
+fpath=(`brew --prefix`/share/zsh-completions $fpath)
 
 autoload -U compinit; compinit
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
