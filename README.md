@@ -250,6 +250,12 @@ $ ppkill
 
 # Get PID with percol
 $ ppgrep
+
+# Git checkout
+$ git-use
+
+# Git checkout ( list include remote repo branches)
+$ git-all-use
 ```
 
 * `ctrl + r` : search history with percol

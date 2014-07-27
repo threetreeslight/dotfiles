@@ -1,4 +1,4 @@
-# ppkill (dependent percol)
+# ppgrep
 function ppgrep() {
     if [[ $1 == "" ]]; then
         PERCOL=percol
@@ -8,6 +8,7 @@ function ppgrep() {
     ps aux | eval $PERCOL | awk '{ print $2 }'
 }
 
+# ppkill
 function ppkill() {
     if [[ $1 =~ "^-" ]]; then
         QUERY=""            # options only
@@ -18,7 +19,8 @@ function ppkill() {
     ppgrep $QUERY | xargs kill $*
 }
 
-# zsh history search (dependent percol)
+
+# zsh history search
 function exists { which $1 &> /dev/null }
 
 if exists percol; then
@@ -34,3 +36,22 @@ if exists percol; then
     bindkey '^R' percol_select_history
 fi
 
+
+# checkout branch
+function git-use () {
+    local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads | \
+        perl -pne 's{^refs/heads/}{}' | \
+        percol --query "$LBUFFER")
+    if [ -n "$selected_branch" ]; then
+        git checkout ${selected_branch}
+    fi
+}
+
+function git-all-use () {
+    local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
+        perl -pne 's{^refs/(heads|remotes)/}{}' | \
+        percol --query "$LBUFFER")
+    if [ -n "$selected_branch" ]; then
+        git checkout -t ${selected_branch}
+    fi
+}
