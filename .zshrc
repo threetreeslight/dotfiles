@@ -35,6 +35,12 @@ setopt auto_pushd # auto directory pushd that you can get dirs list by cd -[tab]
 setopt correct    # command correct edition before each completion attempt
 bindkey -v        # vim keybind
 
+setopt auto_param_slash     # add autometicaly "/", when comple directory name
+setopt mark_dirs            # add autometicaly "/", deploying dir
+setopt list_types           # add file type mark like `ls -F`
+setopt interactive_comments # In command line cognition "#" as comment
+
+
 #
 # Command history configuration
 #
@@ -87,13 +93,6 @@ esac
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 autoload colors; colors
-
-
-# command
-setopt auto_param_slash # add autometicaly "/", when comple directory name
-setopt mark_dirs # add autometicaly "/", deploying dir
-setopt list_types # add file type mark like `ls -F`
-setopt interactive_comments # In command line cognition "#" as comment
 
 
 #
