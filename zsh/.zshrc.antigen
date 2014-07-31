@@ -3,11 +3,11 @@ if [[ -f $HOME/dotfiles/.zsh/antigen/antigen.zsh ]]; then
   source $HOME/dotfiles/.zsh/antigen/antigen.zsh
 
   antigen bundle zsh-users/zsh-syntax-highlighting
-  antigen bundle git
-  antigen bundle pip
-  antigen bundle heroku
-  antigen bundle bundler
-  antigen bundle command-not-found
+  # antigen bundle git
+  # antigen bundle pip
+  # antigen bundle heroku
+  # antigen bundle bundler
+  # antigen bundle command-not-found
 
   antigen apply
 

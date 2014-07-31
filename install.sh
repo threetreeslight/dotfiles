@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOT_FILES=(.vimrc .tmux.conf .zshrc .gitconfig .gitignore_global .tigrc)
-DOT_DIRECTORIES=(.vim .zsh-completions)
+DOT_DIRECTORIES=(.vim)
 
 for file in ${DOT_FILES[@]}
 do
@@ -29,6 +29,6 @@ if [ -a $HOME/.vimrc ]; then
 fi
 
 # antigen plugin install
-if [ -d $HOME/.zsh/antigen ]; then
+if [ -d $HOME/zsh/antigen ]; then
   antigen update
 fi

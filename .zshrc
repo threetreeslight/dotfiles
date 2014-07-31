@@ -1,11 +1,12 @@
 #
-# Load Environment variable
+# zshrc
 #
 
 # Boxen
 source /opt/boxen/env.sh
 
-## color definition
+#
+# Color definition
 #
 local DEFAULT=$'%{^[[m%}'$
 local RED=$'%{^[[1;31m%}'$
@@ -16,40 +17,32 @@ local PURPLE=$'%{^[[1;35m%}'$
 local LIGHT_BLUE=$'%{^[[1;36m%}'$
 local WHITE=$'%{^[[1;37m%}'$
 
-## LANG
 #
+# Default shell configuration
+#
+# LANG
 export LANG=ja_JP.UTF-8
 
-## antigen
-#
-source $HOME/dotfiles/.zsh/.zshrc.antigen
+# antigen
+source $HOME/dotfiles/zsh/.zshrc.antigen
 
-## Default shell configuration
-#
 # set prompt
+source $HOME/dotfiles/zsh/.zshrc.prompt
+
+setopt nobeep     # no beep sound
+setopt auto_cd    # auto change directory
+setopt auto_pushd # auto directory pushd that you can get dirs list by cd -[tab]
+setopt correct    # command correct edition before each completion attempt
+bindkey -v        # vim keybind
+
 #
-source $HOME/dotfiles/.zsh/.zshrc.prompt
-
-# auto change directory
-setopt auto_cd
-
-# auto directory pushd that you can get dirs list by cd -[tab]
-setopt auto_pushd
-
-# command correct edition before each completion attempt
-setopt correct
-
-# Keybind configuration
-bindkey -v
-
-
-## Command history configuration
+# Command history configuration
 #
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt hist_ignore_dups     # ignore duplication command history list
-setopt share_history        # share command history data
+setopt hist_ignore_dups # ignore duplication command history list
+setopt share_history    # share command history data
 
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -81,13 +74,13 @@ zstyle ':completion:*' group-name ''
 # coloring
 case "${OSTYPE}" in
   freebsd*|darwin*)
-    if [ -f $HOME/dotfiles/.zsh/.zshrc.mac ]; then
-      source $HOME/dotfiles/.zsh/.zshrc.mac
+    if [ -f $HOME/dotfiles/zsh/.zshrc.mac ]; then
+      source $HOME/dotfiles/zsh/.zshrc.mac
     fi
     ;;
   linux*)
-    if [ -f $HOME/dotfiles/.zshrc.linux ]; then
-      source $HOME/dotfiles/.zshrc.linux
+    if [ -f $HOME/dotfiles/zsh/.zshrc.linux ]; then
+      source $HOME/dotfiles/zsh/.zshrc.linux
     fi
   ;;
 esac
@@ -106,9 +99,9 @@ setopt interactive_comments # In command line cognition "#" as comment
 #
 # develop
 #
-source ~/dotfiles/.zsh/.zshrc.alias
-source ~/dotfiles/.zsh/.zshrc.language
-source ~/dotfiles/.zsh/.zshrc.percol
+source ~/dotfiles/zsh/.zshrc.alias
+source ~/dotfiles/zsh/.zshrc.language
+source ~/dotfiles/zsh/.zshrc.percol
 
 # git
 export GIT_EDITOR="/usr/bin/vim"

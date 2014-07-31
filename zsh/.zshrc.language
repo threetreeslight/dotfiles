@@ -43,5 +43,3 @@ if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
   fi
   echo "phantomjs: " $GLOBAL_VERSION
 fi
-
-

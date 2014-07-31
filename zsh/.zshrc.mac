@@ -1,0 +1,10 @@
+#
+# Dependency mac(freebsd)
+#
+
+## Completion
+#
+
+# colors
+eval $(gdircolors $HOME/dotfiles/zsh/discolors-solarized/dircolors.ansi-dark)
+

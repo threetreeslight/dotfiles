@@ -4,3 +4,6 @@ out
 
 # pit
 .pit
+
+# tmux
+*.log

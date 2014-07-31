@@ -38,7 +38,7 @@ fi
 
 
 # checkout branch
-function git-use () {
+function gu () {
     local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads | \
         perl -pne 's{^refs/heads/}{}' | \
         percol --query "$LBUFFER")
@@ -47,7 +47,7 @@ function git-use () {
     fi
 }
 
-function git-all-use () {
+function gua () {
     local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
         perl -pne 's{^refs/(heads|remotes)/}{}' | \
         percol --query "$LBUFFER")
