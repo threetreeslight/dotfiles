@@ -179,6 +179,14 @@ When you want Insert Mode Paste, cancel auto Indent
 :set nopaste
 ```
 
+History
+
+```
+q:
+q\
+q?
+```
+
 Tab
 
 ```
