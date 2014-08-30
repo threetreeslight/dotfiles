@@ -223,7 +223,7 @@ html
 
 ruby
 
-* `r` : RuboCop
+* `,r` : RuboCop
 
 rails
 
@@ -235,6 +235,15 @@ rails
 * `<C-H>c` : show config list
 * `<C-H>d` : show db list
 * `<C-H>l` : show lib list
+
+rspec
+
+```
+,t : run current spec file
+,s : run nearest spec
+,l : run last spec
+,a : run all spec
+```
 
 other usage
 
@@ -276,5 +285,6 @@ $ git-all-use
 ## Reference
 
 - [脱初心者を目指すなら知っておきたい便利なVimコマンド25選](http://qiita.com/jnchito/items/57ffda5712636a9a1e62)
+- [vimでキーマッピングする際に考えたほうがいいこと](http://deris.hatenablog.jp/entry/2013/05/02/192415)
 
 

@@ -4,6 +4,8 @@
 set nocompatible " be iMproved
 filetype off     " Required!
 
+let mapleader = ","
+
 let s:noplugin = 0
 let s:bundle_root = expand('~/.vim/bundle')
 let s:neobundle_root = expand('~/.vim/neobundle/neobundle.vim')
@@ -353,19 +355,18 @@ else
   " }}}
 
   " rspec
-  NeoBundleLazy 'alpaca-tc/neorspec.vim', {
-        \ 'depends' : 'tpope/vim-rails',
-        \ 'autoload' : {
-        \   'commands' : [ 'RSpecAll', 'RSpecNearest', 'RSpecRetry', 'RSpecCurrent', 'RSpec' ]
-        \ }}
-  NeoBundleLazy 'tpope/vim-dispatch', { 'autoload' : {
-        \ 'commands' : ['Dispatch', 'FocusDispatch', 'Start']
-        \ }}
-
-  " NeoBundle 'vim-scripts/dbext.vim'
-  " NeoBundle 'digitaltoad/vim-jade'
-
-
+  NeoBundleLazy 'thoughtbot/vim-rspec', {
+      \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] }
+      \ }
+  let s:bundle = neobundle#get('vim-rspec')
+  let g:rspec_command = "!spring rspec -f doc {spec}"
+  function! s:bundle.hooks.on_source(bundle)
+    " RSpec.vim mappings
+    map <Leader>t :call RunCurrentSpecFile()<CR>
+    map <Leader>s :call RunNearestSpec()<CR>
+    map <Leader>l :call RunLastSpec()<CR>
+    map <Leader>a :call RunAllSpecs()<CR>
+  endfunction
 
   "" check plugin and not installed plugin download
   " ----------------------------------------
