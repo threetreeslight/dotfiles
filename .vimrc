@@ -39,7 +39,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " ----------------------------------------
 "
 " powerlineline
-NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+NeoBundle 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'solarized'
+      \ }
+if !has('gui_running')
+  set t_Co=256
+endif
 " solarizedcolor schema
 NeoBundle 'altercation/vim-colors-solarized'
 " " indet syntax {{{
@@ -480,22 +486,21 @@ set cmdheight=2 "cmd line hiehgt
 set visualbell "Use visual bell instead of beeping when doing something wrong
 set nowrap "nowrap sentence
 
-"invisible charactor visual setting
+" invisible charactor visual setting
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 highlight JpSpace cterm=underline ctermfg=Blue guifg=Blue
 match JpSpace /　/
 
-"negative screen bell
+" negative screen bell
 set t_vb=
 set novisualbell
 
-"colorscheme
+" colorscheme
 syntax enable
-" set background=dark
 colorscheme solarized
 
-"tab, indent
+" tab, indent
 set expandtab
 set ts=2 sw=2 sts=0
 set smartindent
@@ -504,20 +509,20 @@ set backspace=indent,eol,start "Allow backspacing over autoindent, line breaks a
 "-------------------------
 " keybind & mcro
 "-------------------------
-"escape
+" escape
 imap <C-j> <C-[>
 
-"escape Highlight
+" escape Highlight
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
-"j, k による移動を折り返されたテキストでも自然に振る舞うように変更
+" j, k による移動を折り返されたテキストでも自然に振る舞うように変更
 nnoremap j gj
 nnoremap k gk
 
 "selection line by double v
 vnoremap v $h
 
-"bracket
+" bracket
 imap { {}<LEFT>
 imap [ []<LEFT>
 imap ( ()<LEFT>
