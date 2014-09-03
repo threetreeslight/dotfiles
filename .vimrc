@@ -527,6 +527,9 @@ imap { {}<LEFT>
 imap [ []<LEFT>
 imap ( ()<LEFT>
 
+" trim space
+nmap <C-t> :%s/ *$//g<CR><Esc><Esc>
+
 set nostartofline "Stop certain movements from always going to the first character of a line.
 set mouse=a "Set the command window height to 2 lines, to avoid many cases of having to press <Enter> to continue
 
