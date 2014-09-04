@@ -163,8 +163,15 @@ if you can't use git diff-highlight, you should
 
 ## tmux
 
-- ctrl + b + ] : scroll mode
-- ctrl + b + [ : copy mode
+ctrl + b + ] : scroll mode
+
+copy mode
+
+```
+ctrl + b + [ : change mode to copy
+Space        : start
+Enter        : end
+```
 
 ## tig
 
