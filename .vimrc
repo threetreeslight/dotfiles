@@ -286,8 +286,8 @@ NeoBundleLazy 'slim-template/vim-slim', {
 " css
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
     \ 'autoload': {'filetypes': ['css']}}
-NeoBundleLazy 'skammer/vim-css-color', {
-    \ 'autoload': {'filetypes': ['css','less','scss.css','sass.css'] }}
+" NeoBundleLazy 'skammer/vim-css-color', {
+"     \ 'autoload': {'filetypes': ['css','less','scss.css','sass.css'] }}
 " less
 NeoBundleLazy 'groenewege/vim-less', {
     \ 'autoload': { 'filetypes': 'less'}}
