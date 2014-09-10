@@ -22,6 +22,7 @@ local WHITE=$'%{^[[1;37m%}'$
 #
 # LANG
 export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
 
 # antigen
 source $HOME/dotfiles/zsh/.zshrc.antigen
