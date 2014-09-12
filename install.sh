@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOT_FILES=(.vimrc .tmux.conf .zshrc .zshenv .gitconfig .gitignore_global .tigrc)
+DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global tigrc gemrc)
 DOT_DIRECTORIES=(vim bundle)
 
 for file in ${DOT_FILES[@]}
@@ -8,7 +8,7 @@ do
   if [ -e $HOME/$file ]; then
     echo "$file file is existed."
   else
-    ln -s $HOME/dotfiles/$file $HOME/$file
+    ln -s $HOME/dotfiles/$file $HOME/.$file
   fi
 done
 
