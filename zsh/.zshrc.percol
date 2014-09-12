@@ -1,22 +1,22 @@
 # ppgrep
 function ppgrep() {
-    if [[ $1 == "" ]]; then
-        PERCOL=percol
-    else
-        PERCOL="percol --query $1"
-    fi
-    ps aux | eval $PERCOL | awk '{ print $2 }'
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+  ps aux | eval $PERCOL | awk '{ print $2 }'
 }
 
 # ppkill
 function ppkill() {
-    if [[ $1 =~ "^-" ]]; then
-        QUERY=""            # options only
-    else
-        QUERY=$1            # with a query
-        [[ $# > 0 ]] && shift
-    fi
-    ppgrep $QUERY | xargs kill $*
+  if [[ $1 =~ "^-" ]]; then
+    QUERY=""            # options only
+  else
+    QUERY=$1            # with a query
+    [[ $# > 0 ]] && shift
+  fi
+  ppgrep $QUERY | xargs kill $*
 }
 
 
@@ -58,7 +58,12 @@ function gua () {
 
 # ec2-ip
 function ec2-ip() {
-  instances | percol | awk '{ print $1 }'
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+  instances | eval $PERCOL | awk '{ print $1 }'
 }
 
 function instances() {
@@ -75,6 +80,21 @@ function instances() {
 
 # ec2-ssh
 function ec2-ssh() {
-  ssh webadmin@`ec2-ip` -p2222 -i ~/.ssh/id_rsa
+  if [[ $1 =~ "^-" ]]; then
+    QUERY=""            # options only
+  else
+    QUERY=$1            # with a query
+    [[ $# > 0 ]] && shift
+  fi
+  ssh webadmin@$(ec2-ip $QUERY) -p2222 -i ~/.ssh/id_rsa
 }
 
+# ghq
+function gcd() {
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+  cd $(ghq list --full-path | eval $PERCOL)
+}

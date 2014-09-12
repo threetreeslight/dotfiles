@@ -1,3 +1,6 @@
+# Go
+export GOPATH=$HOME
+
 # rbenv
 GLOBAL_VERSION="2.0.0-p353"
 if [[ -s $BOXEN_HOME/rbenv/bin ]];then

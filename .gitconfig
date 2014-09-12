@@ -35,3 +35,5 @@
   blob = B @hub browse -- tree/%(commit)/%(file)
 [branch]
   autosetuprebase = always
+[ghq]
+	root = /Users/mikiakira/src
