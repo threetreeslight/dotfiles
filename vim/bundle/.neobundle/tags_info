@@ -1,4 +1,5 @@
 YankRing.vim
+cocoa.vim
 html5.vim
 ini-syntax-definition
 lightline.vim
@@ -22,3 +23,4 @@ vim-rspec
 vim-rubocop
 vim-slim
 vimfiler
+vimproc

@@ -5,7 +5,8 @@ augroup filetypedetect
   au BufRead,BufNewFile *.m,*.h setfiletype objc
   au BufRead,BufNewFile *.css setfiletype css
   au BufRead,BufNewFile *.less setfiletype less
-  au BufRead,BufNewFile *.sass,*.scss setfiletype scss.css
+  au BufRead,BufNewFile *.sass setfiletype scss
+  au BufRead,BufNewFile *.scss setfiletype sass
   au BufRead,BufNewFile *.html setfiletype html
   au BufRead,BufNewFile *.javascript,*.coffeescript,*.node,*.json,*.typescript,Grantfile setfiletype javascript
   au BufRead,BufNewFile *.php,*.phtml,*.ctp setfiletype php

@@ -1,12 +1,9 @@
 "-------------------------
 " plugin
 "-------------------------
-" set nocompatible " be iMproved
-" filetype off     " Required!
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
 
-let mapleader = ","
-
-"include initialize NeoBundle to runtimepath
 if has('vim_starting')
   set nocompatible               " Be iMproved
 
@@ -20,20 +17,16 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-
-" " Recommended to install
-" " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-" NeoBundle 'Shougo/vimproc', {
-"     \'build' : {
-"     \   'windows' : 'make -f make_mingw32.mak',
-"     \   'cygwin'  : 'make -f make_cygwin.mak',
-"     \   'mac'     : 'make -f make_mac.mak',
-"     \   'unix'    : 'make -f make_unix.mak',
-"     \   },
-"     \}
+" Recommended to install
+" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+NeoBundle 'Shougo/vimproc', {
+    \'build' : {
+    \   'windows' : 'make -f make_mingw32.mak',
+    \   'cygwin'  : 'make -f make_cygwin.mak',
+    \   'mac'     : 'make -f make_mac.mak',
+    \   'unix'    : 'make -f make_unix.mak',
+    \   },
+    \}
 
 "" Display
 " ----------------------------------------
@@ -48,16 +41,6 @@ if !has('gui_running')
 endif
 " solarizedcolor schema
 NeoBundle 'altercation/vim-colors-solarized'
-" " indet syntax {{{
-" NeoBundle 'nathanaelkane/vim-indent-guides'
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkblue
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=yellow ctermbg=darkcyan
-" let g:indent_guides_color_change_percent = 30
-" let g:indent_guides_guide_size = 1
-" "}}}
-
 
 "" Unite
 " ----------------------------------------
@@ -70,10 +53,8 @@ let s:bundle = neobundle#get('unite.vim')
 function! s:bundle.hooks.on_source(bundle)
   let g:unite_enable_start_insert=1 "start by insert mode
 
-  " " file list
-  " noremap <C-U><C-D> :UniteWithBufferDir -buffer-name=files file<CR>
-  " " recent access file list
-  " noremap <C-U><C-R> :Unite file_rec<CR>
+  " recent access file list
+  noremap <C-U><C-R> :Unite file_rec<CR>
   " file list
   noremap <C-U><C-U> :Unite file<CR>
   " file buffer list
@@ -150,14 +131,6 @@ NeoBundle 'vim-scripts/surround.vim'
 " " filtering faster then ack,grep
 " NeoBundle 'rking/ag.vim'
 
-" " code dictionary {{{
-" NeoBundleLazy 'koron/codic-vim', {
-"       \ 'autoload' : {
-"       \   'commands' : [ 'Codic' ]
-"       \ }}
-" "}}}
-
-
 "" complement
 " ----------------------------------------
 "
@@ -210,7 +183,6 @@ function! s:bundle.hooks.on_source(bundle)
   if !exists('g:neocomplcache_omni_patterns')
     let g:neocomplcache_omni_patterns = {}
   endif
-  " let g:neocomplcache_omni_patterns.javascript = 'nodejscomplete#CompleteJS'
   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
   let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
   let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
@@ -237,9 +209,6 @@ endfunction
 
 "" git
 " ----------------------------------------
-"
-" NeoBundleLazy 'kchmck/vim-coffee-script', {
-"     \ 'autoload': { 'filetypes': ['coffee']}}
 NeoBundle 'tpope/vim-fugitive'
 let s:bundle = neobundle#get('vim-fugitive')
 function! s:bundle.hooks.on_source(bundle)
@@ -280,39 +249,33 @@ NeoBundleLazy 'vim-scripts/ini-syntax-definition', {
     \ 'autoload': {'filetypes': ['dosini'] }}
 " template engine
 NeoBundleLazy 'tpope/vim-haml', {
-    \ 'autoload': {'filetypes': ['haml'] }}
+    \ 'autoload': {'filetypes': ['haml', 'scss'] }}
 NeoBundleLazy 'slim-template/vim-slim', {
     \ 'autoload': {'filetypes': ['slim'] }}
 " css
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
     \ 'autoload': {'filetypes': ['css']}}
-" NeoBundleLazy 'skammer/vim-css-color', {
-"     \ 'autoload': {'filetypes': ['css','less','scss.css','sass.css'] }}
 " less
 NeoBundleLazy 'groenewege/vim-less', {
     \ 'autoload': { 'filetypes': 'less'}}
 " scss
 NeoBundleLazy 'cakebaker/scss-syntax.vim', {
-    \ 'autoload': { 'filetypes': ['scss.css'] }}
+    \ 'autoload': { 'filetypes': ['scss'] }}
 "js,node
 NeoBundleLazy 'pangloss/vim-javascript', {
     \ 'autoload': { 'filetypes': ['javascript']}}
 NeoBundleLazy 'kchmck/vim-coffee-script', {
     \ 'autoload': { 'filetypes': ['coffee']}}
-"python
+" python
 NeoBundleLazy 'python.vim', {
-    \ 'autoload': { 'filetypes': ['coffee']}}
-
-
-" "" objective-c
-" "
-" NeoBundleLazy 'msanders/cocoa.vim', {
-"     \ 'autoload': { 'filetypes': ['objc']}}
+    \ 'autoload': { 'filetypes': ['python']}}
+"" objective-c
+NeoBundleLazy 'msanders/cocoa.vim', {
+    \ 'autoload': { 'filetypes': ['objc']}}
 
 
 "" ruby, rails
 " ----------------------------------------
-"
 " Ruby static code analyzer.
 NeoBundleLazy 'ngmy/vim-rubocop', {
     \   'autoload' : { 'filetypes' : ['ruby'] }
@@ -373,7 +336,6 @@ filetype plugin indent on
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
-
 
 "-------------------------
 "search
@@ -468,10 +430,10 @@ command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
 
 
 
-" "-------------------------
-" " ctags
-" "-------------------------
-" set tags=./tags
+"-------------------------
+" ctags
+"-------------------------
+set tags=./tags
 
 "-------------------------
 " display
@@ -501,9 +463,9 @@ syntax enable
 colorscheme solarized
 
 " tab, indent
-set expandtab
-set ts=2 sw=2 sts=0
 set smartindent
+set ts=2 sw=2 sts=0
+set expandtab
 set backspace=indent,eol,start "Allow backspacing over autoindent, line breaks and start of insert action
 
 "-------------------------
@@ -539,4 +501,3 @@ set mouse=a "Set the command window height to 2 lines, to avoid many cases of ha
 set wildmenu "Better command-line completion
 
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-
