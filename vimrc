@@ -112,7 +112,7 @@ endif
 "" utility
 " ----------------------------------------
 "
-" NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimshell.vim'
 
 " " vim-quickrun {{{
 " NeoBundleLazy "thinca/vim-quickrun", {

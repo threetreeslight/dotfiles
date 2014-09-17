@@ -203,6 +203,13 @@ tn : move to next tab
 tp : move to previous tab
 ```
 
+VimShell
+
+```
+:VimShell : open shell window
+Ctrl + l  : open vimshell history
+```
+
 Unite
 
 * `<C-U><C-U>` : buffer file

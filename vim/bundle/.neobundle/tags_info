@@ -24,3 +24,4 @@ vim-rubocop
 vim-slim
 vimfiler
 vimproc
+vimshell.vim
