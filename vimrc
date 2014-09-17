@@ -54,11 +54,18 @@ function! s:bundle.hooks.on_source(bundle)
   let g:unite_enable_start_insert=1 "start by insert mode
 
   " recent access file list
-  noremap <C-U><C-R> :Unite file_rec<CR>
+  noremap <C-U><C-U> :Unite file_rec<CR>
   " file list
-  noremap <C-U><C-U> :Unite file<CR>
+  noremap <C-U><C-C>L> :Unite file<CR>
   " file buffer list
   noremap <C-U><C-B> :Unite buffer<CR>
+
+  " use grep by ag
+  if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+    let g:unite_source_grep_recursive_opt = ''
+  endif
 
   " when only open unite, active key mappings
   augroup vimrc
