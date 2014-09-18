@@ -219,11 +219,11 @@ Unite
 
 git
 
-* `<Space>gb` : git blame
-* `<Space>gd` : git diff
-* `<Space>gs` : git status
-* `<C-C>` : git commit
-* `<Space>gb` : git blame
+* `<Space>gb`: git blame
+* `<Space>gd`: git diff
+* `<Space>gs`: git status
+* `<C-C>`:     git commit
+* `<Space>gb`: git blame
 
 complement
 

@@ -129,6 +129,15 @@ NeoBundle 'Shougo/vimshell.vim'
 
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-scripts/surround.vim'
+NeoBundle 'junegunn/vim-easy-align'
+let s:bundle = neobundle#get('vim-easy-align')
+function! s:bundle.hooks.on_source(bundle)
+  " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+  vmap <Enter> <Plug>(EasyAlign)
+
+  " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+  nmap <Leader>a <Plug>(EasyAlign)
+endfunction
 
 " NeoBundleLazy 'tpope/vim-endwise', {
 "       \ 'autoload' : {

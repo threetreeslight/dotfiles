@@ -15,6 +15,7 @@ unite.vim
 vim-coffee-script
 vim-colors-solarized
 vim-css3-syntax
+vim-easy-align
 vim-fugitive
 vim-haml
 vim-javascript
