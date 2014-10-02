@@ -17,3 +17,12 @@ tags
 
 # stellar
 stellar.yaml
+
+#Project files
+[Bb]uild/
+
+#Subversion files
+.svn
+
+# Office Temp Files
+~$*

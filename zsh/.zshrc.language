@@ -3,7 +3,7 @@ export GOPATH=$HOME
 export PATH=$GOPATH/bin:$PATH
 
 # rbenv
-GLOBAL_VERSION="2.0.0-p353"
+GLOBAL_VERSION="2.1.2"
 if [[ -s $BOXEN_HOME/rbenv/bin ]];then
   if [ $GLOBAL_VERSION != `rbenv global` ];then
     rbenv global $GLOBAL_VERSION
@@ -12,7 +12,7 @@ if [[ -s $BOXEN_HOME/rbenv/bin ]];then
 fi
 
 # nodenv
-GLOBAL_VERSION="v0.10.21"
+GLOBAL_VERSION="v0.10.29"
 if [[ -s $BOXEN_HOME/nodenv/bin ]] ; then
   if [ $GLOBAL_VERSION != `nodenv version` ];then
     nodenv global $GLOBAL_VERSION

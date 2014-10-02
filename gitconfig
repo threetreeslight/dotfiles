@@ -13,6 +13,7 @@
   lineNumber = true
 [core]
   excludesfile = /opt/boxen/config/git/gitignore
+  attributesfile = ~/.gitattributes
 
 [pager]
   log  = diff-highlight | less
@@ -36,4 +37,6 @@
 [branch]
   autosetuprebase = always
 [ghq]
-	root = /Users/mikiakira/src
+  root = /Users/mikiakira/src
+[diff "sheetjs"]
+  textconv = j

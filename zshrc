@@ -103,6 +103,10 @@ source ~/dotfiles/zsh/.zshrc.alias
 source ~/dotfiles/zsh/.zshrc.language
 source ~/dotfiles/zsh/.zshrc.percol
 
+# tmux
+export EDITOR='vim'
+# source ~/.bin/tmuxinator.zsh
+
 # git
 export GIT_EDITOR="/usr/bin/vim"
 eval "$(hub alias -s)"

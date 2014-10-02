@@ -1,0 +1,8 @@
+*.xls diff=sheetjs
+*.xlsb diff=sheetjs
+*.xlsm diff=sheetjs
+*.xlsx diff=sheetjs
+*.XLS diff=sheetjs
+*.XLSB diff=sheetjs
+*.XLSM diff=sheetjs
+*.XLSX diff=sheetjs

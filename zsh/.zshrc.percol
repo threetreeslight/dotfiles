@@ -44,10 +44,8 @@ function pgb () {
   else
     PERCOL="percol --query $1"
   fi
-  # git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads | \
-  #     perl -pne 's{^refs/heads/}{}' | eval $PERCOL
-  git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
-      perl -pne 's{^refs/(heads|remotes)/}{}' | eval $PERCOL
+  git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads | \
+      perl -pne 's{^refs/heads/}{}' | eval $PERCOL
 }
 
 function pgu () {
@@ -63,13 +61,19 @@ function pgu () {
   fi
 }
 
-# function pgua () {
-#   local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
-#       perl -pne 's{^refs/(heads|remotes)/}{}' | eval $PERCOL )
-#   if [ -n "$selected_branch" ]; then
-#       git checkout -t ${selected_branch}
-#   fi
-# }
+function pgo () {
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+
+  local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
+      perl -pne 's{^refs/(heads|remotes)/}{}' | eval $PERCOL )
+  if [ -n "$selected_branch" ]; then
+      git checkout -t ${selected_branch}
+  fi
+}
 
 # ec2-ip
 function ec2-ip() {
