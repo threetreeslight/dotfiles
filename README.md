@@ -15,6 +15,13 @@ require
 * mysql (option)
 * redis (option)
 
+libraries
+
+* z
+* percol
+* j
+* resty
+* mergepbx
 
 Install global settings
 ----------------------

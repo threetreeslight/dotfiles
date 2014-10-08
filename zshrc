@@ -123,3 +123,5 @@ export REDISTOGO_URL=$BOXEN_REDIS_URL
 # Action Script
 export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 
+# curl wripper
+. resty

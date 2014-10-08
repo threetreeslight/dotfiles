@@ -6,3 +6,4 @@
 *.XLSB diff=sheetjs
 *.XLSM diff=sheetjs
 *.XLSX diff=sheetjs
+*.pbxproj merge=mergepbx

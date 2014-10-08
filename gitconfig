@@ -40,3 +40,8 @@
   root = /Users/mikiakira/src
 [diff "sheetjs"]
   textconv = j
+
+#driver for merging XCode project files
+[merge "mergepbx"]
+  name = XCode project files merger
+  driver = mergepbx %O %A %B
