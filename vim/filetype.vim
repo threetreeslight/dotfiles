@@ -11,7 +11,7 @@ augroup filetypedetect
   au BufRead,BufNewFile *.javascript,*.coffeescript,*.node,*.json,*.typescript,Grantfile setfiletype javascript
   au BufRead,BufNewFile *.php,*.phtml,*.ctp setfiletype php
   au BufRead,BufNewFile *.py setfiletype python
-  au BufRead,BufNewFile *.rb,*.erb,*.eruby,*.pp,*.cap,Capfile,Gemfile,Rakefile,Puppetfile,Guradfile,Routefile,Podfile setfiletype ruby
+  au BufRead,BufNewFile *.rb,*.erb,*.eruby,*.rspec,*.pp,*.cap,Capfile,Gemfile,Rakefile,Puppetfile,Guradfile,Routefile,Podfile setfiletype ruby
   au BufRead,BufNewFile *.haml setfiletype haml
   au BufRead,BufNewFile *.slim setfiletype slim
   au BufRead,BufNewFile *.scala setfiletype scala

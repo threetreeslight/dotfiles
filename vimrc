@@ -1,3 +1,5 @@
+let mapleader = ","
+
 "-------------------------
 " plugin
 "-------------------------
@@ -112,7 +114,7 @@ endif
 
 "" utility
 " ----------------------------------------
-"
+"let mapleader = ","
 NeoBundle 'Shougo/vimshell.vim'
 
 " " vim-quickrun {{{
