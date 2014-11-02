@@ -25,10 +25,10 @@ export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 
 # antigen
-source $HOME/dotfiles/zsh/.zshrc.antigen
+source $HOME/dotfiles/zsh/zshrc.antigen
 
 # set prompt
-source $HOME/dotfiles/zsh/.zshrc.prompt
+source $HOME/dotfiles/zsh/zshrc.prompt
 
 setopt nobeep     # no beep sound
 setopt auto_cd    # auto change directory
@@ -81,13 +81,13 @@ zstyle ':completion:*' group-name ''
 # coloring
 case "${OSTYPE}" in
   freebsd*|darwin*)
-    if [ -f $HOME/dotfiles/zsh/.zshrc.mac ]; then
-      source $HOME/dotfiles/zsh/.zshrc.mac
+    if [ -f $HOME/dotfiles/zsh/zshrc.mac ]; then
+      source $HOME/dotfiles/zsh/zshrc.mac
     fi
     ;;
   linux*)
-    if [ -f $HOME/dotfiles/zsh/.zshrc.linux ]; then
-      source $HOME/dotfiles/zsh/.zshrc.linux
+    if [ -f $HOME/dotfiles/zsh/zshrc.linux ]; then
+      source $HOME/dotfiles/zsh/zshrc.linux
     fi
   ;;
 esac
@@ -99,9 +99,9 @@ autoload colors; colors
 #
 # develop
 #
-source ~/dotfiles/zsh/.zshrc.alias
-source ~/dotfiles/zsh/.zshrc.language
-source ~/dotfiles/zsh/.zshrc.percol
+source ~/dotfiles/zsh/zshrc.alias
+source ~/dotfiles/zsh/zshrc.language
+source ~/dotfiles/zsh/zshrc.percol
 
 # tmux
 export EDITOR='vim'
