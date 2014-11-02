@@ -73,7 +73,7 @@ if [ -e "${SUBLIME_PREFERENCE_FILE}" ]; then
   echo "[info] already exists preference"
 else
   echo "Symlink Sublime_text preferences"
-  ln -s ${HOME}/dotfiles/sublime_text_2/Preferences.sublime-settings "${SUBLIME_HOME}/"
+  ln -s ${HOME}/dotfiles/sublime_text_3/Preferences.sublime-settings "${SUBLIME_HOME}/"
 fi
 
 #
