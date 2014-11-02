@@ -1,21 +1,22 @@
 #!/bin/bash
 
 #
-# this script use for OS X only
+# script for OS X
 #
 
-## change readline for use japanese
+# #
+# # change readline for use japanese
+# #
+# CURRENT_READLINE=`otool -L $(find /opt/boxen/rbenv -name readline.bundle) | grep /opt/boxen/homebrew/Cellar/readline`
+# if [ ${#CURRENT_READLINE} > 0 ]; then
+#   echo "[notice] already updated readline.bundle"
+# else
+#   find /opt/boxen/rbenv -name readline.bundle -exec install_name_tool -change /usr/lib/libedit.3.dylib `find /opt/boxen -name libreadline.dylib` {} \;
+#   echo "update readline.bundle"
+# fi
+
 #
-CURRENT_READLINE=`otool -L $(find /opt/boxen/rbenv -name readline.bundle) | grep /opt/boxen/homebrew/Cellar/readline`
-
-if [ ${#CURRENT_READLINE} > 0 ]; then
-  echo "[notice] already updated readline.bundle"
-else
-  find /opt/boxen/rbenv -name readline.bundle -exec install_name_tool -change /usr/lib/libedit.3.dylib `find /opt/boxen -name libreadline.dylib` {} \;
-  echo "update readline.bundle"
-fi
-
-## fotns
+# fotns
 #
 if [ ! -d $HOME/Dropbox/dev/fonts ]; then
   echo "[error] Fonts directory is not exist"
@@ -27,7 +28,8 @@ else
 fi
 
 
-## add git config local to $HOME
+#
+# Add git config local to $HOME
 #
 if [ ! -f $HOME/Dropbox/dev/.gitconfig.local ]; then
   echo "[error] .gitconfig.local is not exist in $HOME/Dropbox/dev"
@@ -39,7 +41,8 @@ else
 fi
 
 
-## rsa keys
+#
+# rsa keys
 #
 if [ -e $HOME/.ssh/id_rsa ]; then
   echo "[notice] already generated rsa key"
@@ -49,64 +52,16 @@ else
   echo "generating rsa key"
 fi
 
-## heroku setting
-#
-# add to pubkey
-#
-HOST_PC_NAME=`cat ${HOME}/.ssh/id_rsa.pub | awk -F' ' '{ print $3 }'`
-RSA_IN_HEROKU=`heroku keys | grep ${HOST_PC_NAME}`
-if [ ${#RSA_IN_HEROKU} > 0 ]; then
-  echo "[notice] already added this host rsa key to heroku"
-else
-  heroku keys:add
-  echo "adding rsa key to heroku"
-fi
-
-
-## mysql setting
-#
-# $ unset TMPDIR
-# $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-#
-MYSQL_SERVER_STATUS=`mysql.server status | grep running`
-if [ ${#MYSQL_SERVER_STATUS} > 0 ]; then
-  echo "[notice] already started mysql server"
-else
-  mysql.server start
-  echo "starting mysql"
-fi
-
-## vagrant
-#
-VAGRANT_SAHARA=`vagrant plugin list | grep sahara`
-if [ ${#VAGRANT_SAHARA} > 0 ]; then
-  echo "[notice] already added sahara to vagrant plugin"
-else
-  vagrant plugin install sahara
-  echo "adding vagrant plugin sahara"
-fi
-
-
-## sublime_text_2
-#
-SUBLIME_HOME="${HOME}/Library/Application Support/Sublime Text 2/Packages/User"
-SUBLIME_PREFERENCE_FILE="${SUBLIME_HOME}/Preferences.sublime-settings"
-if [ -e "${SUBLIME_PREFERENCE_FILE}" ]; then
-  echo "[notice] already exists preference"
-else
-  echo "symlink sublime_text_2 preferences"
-  ln -s ${HOME}/dotfiles/sublime_text_2/Preferences.sublime-settings "${SUBLIME_HOME}/"
-fi
-
-
-## xcode5
-#
-XCODE_HOME=${HOME}/Library/Developer/Xcode/UserData/FontAndColorThemes
-if [ -L ${XCODE_HOME}/Solarized\ -\ Ae06710.dvtcolortheme ]; then
-  echo "[notice] already exist xcode themes"
-else
-  echo "copy xcode themes"
-  ln -s ${HOME}/dotfiles/themes/apple-xcode4-solarized/Solarized\ -\ Ae06710.dvtcolortheme ${XCODE_HOME}
-fi
-
+# ## heroku setting
+# #
+# # add to pubkey
+# #
+# HOST_PC_NAME=`cat ${HOME}/.ssh/id_rsa.pub | awk -F' ' '{ print $3 }'`
+# RSA_IN_HEROKU=`heroku keys | grep ${HOST_PC_NAME}`
+# if [ ${#RSA_IN_HEROKU} > 0 ]; then
+#   echo "[notice] already added this host rsa key to heroku"
+# else
+#   heroku keys:add
+#   echo "adding rsa key to heroku"
+# fi
 

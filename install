@@ -3,13 +3,13 @@
 #
 # symlink dot files and directories
 #
-DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global gitattributes tigrc gemrc agignore)
+DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global gitattributes tigrc gemrc ptignore)
 DOT_DIRECTORIES=(vim bundle)
 
 for file in ${DOT_FILES[@]}
 do
   if [ -e $HOME/.$file ]; then
-    echo "$file file is existed."
+    echo "[info] $file file is existed."
   else
     ln -s $HOME/dotfiles/$file $HOME/.$file
   fi
@@ -18,7 +18,7 @@ done
 for directory in ${DOT_DIRECTORIES[@]}
 do
   if [ -d $HOME/.$directory ]; then
-    echo ".$directory directory is existed."
+    echo "[info] .$directory directory is existed."
   else
     ln -s $HOME/dotfiles/$directory $HOME/.$directory
   fi
@@ -27,8 +27,8 @@ done
 #
 # symlink diff-highlight
 #
-if [ -e /usr/bin/diff-highlight ]; then
-  echo "diff-highlight is symlinked"
+if [ -L /usr/bin/diff-highlight ]; then
+  echo "[info] Symlinked diff-highlight"
 else
   find /opt/boxen -name diff-highlight | awk 'NR == 2 {print "sudo ln -s",$0,"/usr/bin/"}'
 fi
@@ -37,14 +37,79 @@ fi
 # ghq
 #
 if [ -d $HOME/src/github.com/motemen ]; then
+  echo "[info] Exist ghq"
+else
   go get github.com/motemen/ghq
 fi
 
-# install via antigen and neobundle
-if [ -a $HOME/.vimrc ]; then
-  source ~/.zshrc
-  vim ~/.vimrc
+#
+# vagrant
+#
+vagrant plugin list | grep sahara
+if [ $? -eq 0 ]; then
+  echo "[info] already added sahara to vagrant plugin"
+else
+  vagrant plugin install sahara
 fi
+
+#
+# xcode 6
+#
+XCODE_HOME=${HOME}/Library/Developer/Xcode/UserData/FontAndColorThemes
+if [ -L ${XCODE_HOME}/Solarized\ -\ Ae06710.dvtcolortheme ]; then
+  echo "[info] Exist xcode themes"
+else
+  echo "Copy xcode themes"
+  mkdir -p ~/Library/Developer/Xcode/UserData/FontAndColorThemes/
+  ln -s ${HOME}/dotfiles/themes/apple-xcode4-solarized/Solarized\ -\ Ae06710.dvtcolortheme ${XCODE_HOME}
+fi
+
+#
+# sublime_text_3
+#
+SUBLIME_HOME="${HOME}/Library/Application Support/Sublime Text 3/Packages/User"
+SUBLIME_PREFERENCE_FILE="${SUBLIME_HOME}/Preferences.sublime-settings"
+if [ -e "${SUBLIME_PREFERENCE_FILE}" ]; then
+  echo "[info] already exists preference"
+else
+  echo "Symlink Sublime_text preferences"
+  ln -s ${HOME}/dotfiles/sublime_text_2/Preferences.sublime-settings "${SUBLIME_HOME}/"
+fi
+
+#
+# Python
+#
+packages=(percol awscli stellar)
+
+for package in ${packages[@]}
+do
+  pip list | grep $package
+  if [ $? -eq 0 ]; then
+    echo "[info] $package is already installed"
+  else
+    pip install $package
+  fi
+done
+
+#
+# mysql setting
+#
+# $ unset TMPDIR
+# $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+#
+mysql.server status | grep ERROR
+if [ $? -eq 1 ]; then
+  echo "[info] Started mysql server"
+else
+  mysql.server start
+  echo "starting mysql"
+fi
+
+# # install via antigen and neobundle
+# if [ -a $HOME/.vimrc ]; then
+#   source ~/.zshrc
+#   vim ~/.vimrc
+# fi
 
 # # antigen plugin install
 # if [ -d $HOME/zsh/antigen ]; then
