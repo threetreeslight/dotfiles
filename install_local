@@ -21,12 +21,11 @@
 if [ ! -d $HOME/Dropbox/dev/fonts ]; then
   echo "[error] Fonts directory is not exist"
 elif [ -f $HOME/Library/Fonts/Source\ Code\ Pro\ Regular\ for\ Powerline.otf ]; then
-  echo "[notice] already copied fonts"
+  echo "[info] already copied fonts"
 else
   echo "Copying fonts to local"
   cp $HOME/Dropbox/dev/fonts/* $HOME/Library/Fonts/
 fi
-
 
 #
 # Add git config local to $HOME
@@ -34,18 +33,29 @@ fi
 if [ ! -f $HOME/Dropbox/dev/.gitconfig.local ]; then
   echo "[error] .gitconfig.local is not exist in $HOME/Dropbox/dev"
 elif [ -f $HOME/.gitconfig.local ]; then
-  echo "[notice] already copeid .gitconfig.local"
+  echo "[info] already copeid .gitconfig.local"
 else
   ln -s $HOME/Dropbox/dev/.gitconfig.local $HOME/
   echo "Copying .gitconfig.local to local"
 fi
 
+#
+# tmuxinator
+#
+if [ ! -d $HOME/Dropbox/dev/tmuxinator ]; then
+  echo "[error] tmuxinator directory is not exist"
+elif [ -L $HOME/.tmuxinator ]; then
+  echo "[info] Symlinked tmuxinator"
+else
+  echo "Symlink tmuxinator"
+  ln -s $HOME/Dropbox/dev/tmuxinator $HOME/.tmuxinator
+fi
 
 #
 # rsa keys
 #
 if [ -e $HOME/.ssh/id_rsa ]; then
-  echo "[notice] already generated rsa key"
+  echo "[info] Exit id_rsa"
 else
   cd ~/.ssh/
   ssh-keygen -t rsa
