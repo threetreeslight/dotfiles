@@ -3,7 +3,6 @@ dotfiles
 
 ae06710's dotfiles setting
 
-
 require
 -------
 
@@ -23,46 +22,22 @@ libraries
 * resty
 * mergepbx
 
-Install global settings
-----------------------
+Getting Started
+---------------
 
-clone git submodules
+Clone git submodules
 
 ```bash
+$ ghq get ae06710/dotfiles
 $ git submodule init
 $ git submodule update
 ```
 
-Link any dot files to home
+Symlink any dot files to own home directory
 
 ```bash
-$ ./install.sh
+$ ./install
 ```
-
-NeoBundleInstall
-
-```bash
-$ vim
-```
-
-mysql setting
-
-```bash
-$ unset TMPDIR
-# $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-$ mysql.server start
-$ mysql -u root
-> show databases;
-> set password for root@localhost=password('root');
-> exit
-$ mysql -u root -p
-```
-
-other task
-
-1. add rsa keys to github.
-2. after add to keys by impoted github
-
 
 Install local settings
 ----------------------
@@ -72,10 +47,10 @@ require
 * Boxen installed
 * Dropbox contents loaded
 
-installing
+Installing
 
 ```bash
-$ ./install_local.sh
+$ ./install_local
 ```
 
 vagrant
@@ -92,10 +67,18 @@ $ vagrant box add centos64 ...
 $ vagrant box add ubuntu1210 ...)
 ```
 
-other task
+Mysql setting
 
-1. add rsa keys to github.
-2. after add to keys by impoted github
+```bash
+$ unset TMPDIR
+# $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+$ mysql.server start
+$ mysql -u root
+> show databases;
+> set password for root@localhost=password('root');
+> exit
+$ mysql -u root -p
+```
 
 Usage
 -----
@@ -103,52 +86,45 @@ Usage
 * AWS setting file located (`$HOME/Dropbox/dev/.ec2`) in Dropbox
 
 
-Local Application Setting
--------------------------
+Application Settings
+--------------------
 
 ```
 ## Priference
 #
 iPhoto : preference assign -> none
 Finder : preference search target -> in this folder
+```
 
-## iterm2 preference
-#
-# download sole solarized
-Change Therme Solarize
-font: SourceCodePro 14px
-draw blod text in blod font : false
-draw bold text in bright colors : false
-enable clipboard
+iterm2 preference
 
+Key                                             | Attr
+---                                             | ---
+Colors                                          | Solarized Dark
+Regular font                                    | Source Code Pro for powerline 14px
+Text Rendering: draw blod text in blod font     | false
+Text Rendering: draw bold text in bright colors | false
+
+VirtualBox
+
+- download from <http://www.modern.ie>
+  - ie8 win7 or winXP
+  - ie9 win7
+- NAT
+- Bridge network
+
+Skype
+
+Key             | Attr
+---             | ---
+privacy setting | no histroy
+
+```
 ## sublime text 2
 #
 # install package manager
 #
 https://sublime.wbond.net/
-
-## virtualBox
-#
-# download from http://www.modern.ie
-# access: 10.0.2.2   localhost
-#
-ie8 win7 or winXP
-ie9 win7
-
-# setting
-NAT
-Bridge network
-
-
-## chrome
-#
-access to chrome://flags
-Enable Developer Tools experimentsをenable
-
-## skype
-#
-privacy setting : no histroy
-
 
 ## composer global install
 #
@@ -158,15 +134,7 @@ privacy setting : no histroy
 $ sudo mkdir -p /usr/local/bin
 $ sudo curl -sS https://getcomposer.org/installer | sudo php
 $ sudo chmod a+x composer.phar
-
 ```
-
-## git
-
-if you can't use git diff-highlight, you should
-
-- find diff-highlight
-- symlink to /usr/local/bin(PATH passed localtion)
 
 ## tmux
 
@@ -301,8 +269,6 @@ $ git-all-use
 * `ctrl + u` : Reset Command
 * `cd -` : back to old current directory
 * `cd -<TAB>` : select back directory on histroy
-
-
 
 ## Reference
 

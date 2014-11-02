@@ -1,11 +1,14 @@
 #!/bin/bash
 
+#
+# symlink dot files and directories
+#
 DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global gitattributes tigrc gemrc agignore)
 DOT_DIRECTORIES=(vim bundle)
 
 for file in ${DOT_FILES[@]}
 do
-  if [ -e $HOME/$file ]; then
+  if [ -e $HOME/.$file ]; then
     echo "$file file is existed."
   else
     ln -s $HOME/dotfiles/$file $HOME/.$file
@@ -21,6 +24,14 @@ do
   fi
 done
 
+#
+# symlink diff-highlight
+#
+if [ -e /usr/bin/diff-highlight ]; then
+  echo "diff-highlight is symlinked"
+else
+  find /opt/boxen -name diff-highlight | awk 'NR == 2 {print "sudo ln -s",$0,"/usr/bin/"}'
+fi
 
 # install via antigen and neobundle
 if [ -a $HOME/.vimrc ]; then

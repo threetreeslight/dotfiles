@@ -35,7 +35,7 @@ elif [ -f $HOME/.gitconfig.local ]; then
   echo "[notice] already copeid .gitconfig.local"
 else
   ln -s $HOME/Dropbox/dev/.gitconfig.local $HOME/
-  echo "copying .gitconfig.local to local"
+  echo "Copying .gitconfig.local to local"
 fi
 
 

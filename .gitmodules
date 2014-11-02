@@ -1,5 +1,5 @@
-[submodule "vim/bundle/neobundle.vim"]
-	path = vim/bundle/neobundle.vim
+[submodule "vim/neobundle/neobundle.vim"]
+	path = vim/neobundle/neobundle.vim
 	url = git://github.com/Shougo/neobundle.vim.git
 [submodule "themes/solarized"]
 	path = themes/solarized
