@@ -106,6 +106,14 @@ Key    | Attr
 ---    | ---
 assign | none
 
+Xcode
+
+- install <http://alcatraz.io/>
+  - XVim
+  - DerivedData Exterminator
+  - VVDDocumentor-Xcode
+  - XAlign
+  - XToDo
 
 iterm2 preference
 
@@ -131,12 +139,6 @@ Key             | Attr
 privacy setting | no histroy
 
 ```
-## sublime text 2
-#
-# install package manager
-#
-https://sublime.wbond.net/
-
 ## composer global install
 #
 # we cant install via boxen
