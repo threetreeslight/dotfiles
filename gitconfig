@@ -37,7 +37,7 @@
 [branch]
   autosetuprebase = always
 [ghq]
-  root = /Users/mikiakira/src
+  root = /Users/ae06710/src
 [diff "sheetjs"]
   textconv = j
 

@@ -7,6 +7,7 @@ require
 -------
 
 * boxen
+* go
 * rbenv (option)
 * nodenv (option)
 * phpenv (option)
@@ -89,12 +90,22 @@ Usage
 Application Settings
 --------------------
 
-```
-## Priference
-#
-iPhoto : preference assign -> none
-Finder : preference search target -> in this folder
-```
+Keyboard
+
+Trackpad
+
+Finder
+
+Key           | Attr
+---           | ---
+search target | in this folder
+
+iPhoto
+
+Key    | Attr
+---    | ---
+assign | none
+
 
 iterm2 preference
 

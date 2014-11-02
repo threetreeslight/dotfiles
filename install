@@ -33,6 +33,13 @@ else
   find /opt/boxen -name diff-highlight | awk 'NR == 2 {print "sudo ln -s",$0,"/usr/bin/"}'
 fi
 
+#
+# ghq
+#
+if [ -d $HOME/src/github.com/motemen ]; then
+  go get github.com/motemen/ghq
+fi
+
 # install via antigen and neobundle
 if [ -a $HOME/.vimrc ]; then
   source ~/.zshrc
