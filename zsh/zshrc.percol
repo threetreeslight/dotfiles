@@ -82,17 +82,20 @@ function ec2-ip() {
   else
     PERCOL="percol --query $1"
   fi
-  instances | eval $PERCOL | awk '{ print $1 }'
+  instances | eval $PERCOL | awk '{ print $2 }'
 }
 
 function instances() {
   instances=( $(aws ec2 describe-instances \
-    --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value[],PublicIpAddress]' \
-    --output text | awk '{ print $0}') )
+    --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value[],PublicIpAddress,PrivateIpAddress]' \
+    --output text) )
 
   for i in `seq 1 ${#instances[@]}`; do
-    if [ `expr $i % 2` -eq 0 ]; then
-      echo ${instances[$i-1]} ${instances[$i]}
+    # if [ `expr $i % 2` -eq 0 ]; then
+    #   echo ${instances[$i]}
+    # fi
+    if [ `expr $i % 3` -eq 0 ]; then
+      echo ${instances[$i-2]} ${instances[$i-2]} ${instances[$i]}
     fi
   done
 }

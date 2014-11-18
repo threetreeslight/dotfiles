@@ -5,6 +5,7 @@
   st = status --short --branch
   br = branch
   ci = commit
+  pr = pull-request
   lo = log --graph --decorate --oneline
   show = !tig show --pretty=fuller
   branch-root = merge-base master HEAD
