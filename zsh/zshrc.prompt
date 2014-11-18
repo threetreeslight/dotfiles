@@ -27,11 +27,8 @@ esac
 setopt prompt_subst
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
 
-function rprompt-git-current-branch {
+function prompt-git {
   local name st color gitdir action
-  if [[ "$PWD" =~ '/¥.git(/.*)?$' ]]; then
-    return
-  fi
   name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
   if [[ -z $name ]]; then
     return
@@ -39,7 +36,7 @@ function rprompt-git-current-branch {
   local git==git
   gitdir=`git rev-parse --git-dir 2> /dev/null`
   action=`VCS_INFO_git_getaction "$gitdir"` && action="($action)"
-             
+
   st=`git status 2> /dev/null`
   if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
     color=%F{green}
@@ -50,8 +47,10 @@ function rprompt-git-current-branch {
   else
     color=%F{red}
   fi
-  echo "[$color$name$action%f%b]"
+
+  echo "$color$name$action%f%b "
 }
 
-RPROMPT='`rprompt-git-current-branch`[%~]'
+PROMPT='%{${fg[yellow]}%}%~%{${reset_color}%}
+`prompt-git`%% '
 
