@@ -105,6 +105,17 @@ else
   echo "starting mysql"
 fi
 
+#
+# memcached
+#
+if [ -e ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist ]; then
+  echo "[info] Already symlinked memcached plist"
+else
+  echo "Symlink memcached plist to launchAgent"
+  ln -sfv /opt/boxen/homebrew/opt/memcached/*.plist ~/Library/LaunchAgents
+fi
+
+
 # # install via antigen and neobundle
 # if [ -a $HOME/.vimrc ]; then
 #   source ~/.zshrc
