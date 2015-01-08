@@ -130,6 +130,7 @@ NeoBundle 'Shougo/vimshell.vim'
 " endfunction
 " "}}}
 
+NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-scripts/surround.vim'
 NeoBundle 'junegunn/vim-easy-align'
@@ -141,14 +142,6 @@ function! s:bundle.hooks.on_source(bundle)
   " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
   nmap <Leader>a <Plug>(EasyAlign)
 endfunction
-
-" NeoBundleLazy 'tpope/vim-endwise', {
-"       \ 'autoload' : {
-"       \   'insert' : 1,
-"       \ }}
-
-" " filtering faster then ack,grep
-" NeoBundle 'rking/ag.vim'
 
 "" complement
 " ----------------------------------------
@@ -335,10 +328,11 @@ endfunction
 
 " rspec
 NeoBundleLazy 'thoughtbot/vim-rspec', {
+    \ 'depends'  : 'tpope/vim-dispatch',
     \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] }
     \ }
 let s:bundle = neobundle#get('vim-rspec')
-let g:rspec_command = "!spring rspec -f doc {spec}"
+let g:rspec_command = "Dispatch spring rspec -f doc {spec}"
 function! s:bundle.hooks.on_source(bundle)
   " RSpec.vim mappings
   map <Leader>t :call RunCurrentSpecFile()<CR>

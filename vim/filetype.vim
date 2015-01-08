@@ -8,7 +8,8 @@ augroup filetypedetect
   au BufRead,BufNewFile *.sass setfiletype scss
   au BufRead,BufNewFile *.scss setfiletype sass
   au BufRead,BufNewFile *.html setfiletype html
-  au BufRead,BufNewFile *.javascript,*.coffeescript,*.node,*.json,*.typescript,Grantfile setfiletype javascript
+  au BufRead,BufNewFile *.javascript,*.node,*.json,*.typescript,Grantfile setfiletype javascript
+  au BufRead,BufNewFile *.coffeescript, *.coffee setfiletype coffee
   au BufRead,BufNewFile *.php,*.phtml,*.ctp setfiletype php
   au BufRead,BufNewFile *.py setfiletype python
   au BufRead,BufNewFile *.rb,*.erb,*.eruby,*.rspec,*.pp,*.cap,Capfile,Gemfile,Rakefile,Puppetfile,Guradfile,Routefile,Podfile setfiletype ruby
