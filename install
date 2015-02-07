@@ -4,23 +4,25 @@
 # symlink dot files and directories
 #
 DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global gitattributes tigrc gemrc ptignore)
-DOT_DIRECTORIES=(vim bundle)
+DOT_DIRECTORIES=(vim bundle git_template)
 
 for file in ${DOT_FILES[@]}
 do
   if [ -e $HOME/.$file ]; then
-    echo "[info] $file file is existed."
+    echo "[WARN] $file file is existed."
   else
     ln -s $HOME/dotfiles/$file $HOME/.$file
+    echo "[INFO] $file symlinked."
   fi
 done
 
 for directory in ${DOT_DIRECTORIES[@]}
 do
   if [ -d $HOME/.$directory ]; then
-    echo "[info] .$directory directory is existed."
+    echo "[WARN] .$directory directory is existed."
   else
     ln -s $HOME/dotfiles/$directory $HOME/.$directory
+    echo "[INFO] $directory symlinked."
   fi
 done
 
@@ -28,18 +30,20 @@ done
 # symlink diff-highlight
 #
 if [ -L /usr/bin/diff-highlight ]; then
-  echo "[info] Symlinked diff-highlight"
+  echo "[WARN] Symlinked diff-highlight"
 else
   find /opt/boxen -name diff-highlight | awk 'NR == 2 {print "sudo ln -s",$0,"/usr/bin/"}'
+  echo "[INFO] diff-highlight symlinked."
 fi
 
 #
 # ghq
 #
 if [ -d $HOME/src/github.com/motemen ]; then
-  echo "[info] Exist ghq"
+  echo "[WARN] Exist ghq"
 else
   go get github.com/motemen/ghq
+  echo "[INFO] install ghq."
 fi
 
 #
@@ -47,9 +51,10 @@ fi
 #
 vagrant plugin list | grep sahara
 if [ $? -eq 0 ]; then
-  echo "[info] already added sahara to vagrant plugin"
+  echo "[WARN] already added sahara to vagrant plugin"
 else
   vagrant plugin install sahara
+  echo "[INFO] install sahara."
 fi
 
 #
@@ -57,9 +62,9 @@ fi
 #
 XCODE_HOME=${HOME}/Library/Developer/Xcode/UserData/FontAndColorThemes
 if [ -L ${XCODE_HOME}/Solarized\ -\ Ae06710.dvtcolortheme ]; then
-  echo "[info] Exist xcode themes"
+  echo "[WARN] Exist xcode themes"
 else
-  echo "Copy xcode themes"
+  echo "[INFO] Copy xcode themes"
   mkdir -p ~/Library/Developer/Xcode/UserData/FontAndColorThemes/
   ln -s ${HOME}/dotfiles/themes/apple-xcode4-solarized/Solarized\ -\ Ae06710.dvtcolortheme ${XCODE_HOME}
 fi
@@ -70,24 +75,25 @@ fi
 SUBLIME_HOME="${HOME}/Library/Application Support/Sublime Text 3/Packages/User"
 SUBLIME_PREFERENCE_FILE="${SUBLIME_HOME}/Preferences.sublime-settings"
 if [ -e "${SUBLIME_PREFERENCE_FILE}" ]; then
-  echo "[info] already exists preference"
+  echo "[WARN] already exists preference"
 else
-  echo "Symlink Sublime_text preferences"
+  echo "[INFO] Symlink Sublime_text preferences"
   ln -s ${HOME}/dotfiles/sublime_text_3/Preferences.sublime-settings "${SUBLIME_HOME}/"
 fi
 
 #
 # Python
 #
-packages=(percol awscli stellar)
+packages=(percol awscli)
 
 for package in ${packages[@]}
 do
   pip list | grep $package
   if [ $? -eq 0 ]; then
-    echo "[info] $package is already installed"
+    echo "[WARN] $package is already installed"
   else
     pip install $package
+    echo "[INFO] install $package"
   fi
 done
 
@@ -99,19 +105,19 @@ done
 #
 mysql.server status | grep ERROR
 if [ $? -eq 1 ]; then
-  echo "[info] Started mysql server"
+  echo "[WARN] Started mysql server"
 else
   mysql.server start
-  echo "starting mysql"
+  echo "[INFO] starting mysql"
 fi
 
 #
 # memcached
 #
 if [ -e ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist ]; then
-  echo "[info] Already symlinked memcached plist"
+  echo "[WARN] Already symlinked memcached plist"
 else
-  echo "Symlink memcached plist to launchAgent"
+  echo "[INFO] Symlink memcached plist to launchAgent"
   ln -sfv /opt/boxen/homebrew/opt/memcached/*.plist ~/Library/LaunchAgents
 fi
 

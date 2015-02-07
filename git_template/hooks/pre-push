@@ -1,0 +1,14 @@
+#!/bin/bash
+# Prevents force-pushing to master.
+# Based on: https://gist.github.com/pixelhandler/5718585
+
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+PUSH_COMMAND=`ps -ocommand= -p $PPID`
+
+if [[ "$BRANCH" == "master" && "$PUSH_COMMAND" =~ force|delete|-f ]]; then
+  echo "Prevented force-push to $BRANCH. This is a very dangerous command."
+  echo "If you really want to do this, use --no-verify to bypass this pre-push hook."
+  exit 1
+fi
+
+exit 0
