@@ -47,6 +47,23 @@ NeoBundle 'altercation/vim-colors-solarized'
 "" Unite
 " ----------------------------------------
 "
+NeoBundleLazy 'tsukkee/unite-tag', {
+      \ 'autoload' : {
+      \   'commands' : [ 'Unite' ]
+      \ }}
+let s:bundle = neobundle#get('unite-tag')
+function! s:bundle.hooks.on_source(bundle)
+  autocmd BufEnter *
+  \   if empty(&buftype)
+  \|      nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
+  \|  endif
+
+  autocmd BufEnter *
+  \   if empty(&buftype)
+  \|      nnoremap <buffer> <C-t> :<C-u>Unite jump<CR>
+  \|  endif
+endfunction
+
 NeoBundleLazy 'Shougo/unite.vim', {
       \ 'autoload' : {
       \   'commands' : [ 'Unite' ]

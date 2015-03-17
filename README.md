@@ -204,6 +204,8 @@ Unite
 * `<C-U><C-R>` : file
 * `<C-U><C-D>` : dir
 * `<C-U><C-F>` : exploer
+* `<C-]>`      : ctags jump
+* `<C-t>`      : jump history
 
 git
 
