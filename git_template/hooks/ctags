@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/boxen/homebrew/bin/ctags -R -f .git/tags `pwd`
