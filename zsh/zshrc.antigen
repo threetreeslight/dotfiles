@@ -10,5 +10,4 @@ if [[ -f $HOME/dotfiles/.zsh/antigen/antigen.zsh ]]; then
   # antigen bundle command-not-found
 
   antigen apply
-
 fi

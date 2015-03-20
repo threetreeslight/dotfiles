@@ -41,7 +41,6 @@ setopt mark_dirs            # add autometicaly "/", deploying dir
 setopt list_types           # add file type mark like `ls -F`
 setopt interactive_comments # In command line cognition "#" as comment
 
-
 #
 # Command history configuration
 #
@@ -56,7 +55,6 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
-
 
 #
 # Completion
@@ -77,7 +75,6 @@ zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' format '%B%d%b'
 zstyle ':completion:*' group-name ''
 
-
 # coloring
 case "${OSTYPE}" in
   freebsd*|darwin*)
@@ -94,14 +91,6 @@ esac
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 autoload colors; colors
-
-
-#
-# develop
-#
-source ~/dotfiles/zsh/zshrc.alias
-source ~/dotfiles/zsh/zshrc.language
-source ~/dotfiles/zsh/zshrc.percol
 
 # tmux
 export EDITOR='vim'
@@ -125,3 +114,12 @@ export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 
 # curl wripper
 . resty
+
+#
+# develop
+#
+source ~/dotfiles/zsh/zshrc.alias
+source ~/dotfiles/zsh/zshrc.language
+source ~/dotfiles/zsh/zshrc.percol
+
+

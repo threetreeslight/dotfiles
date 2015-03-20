@@ -3,21 +3,24 @@ export GOPATH=$HOME
 export PATH=$GOPATH/bin:$PATH
 
 # rbenv
-GLOBAL_VERSION="2.1.2"
+GLOBAL_VERSION="2.1.5"
 if [[ -s $BOXEN_HOME/rbenv/bin ]];then
   if [ $GLOBAL_VERSION != `rbenv global` ];then
     rbenv global $GLOBAL_VERSION
   fi
-  echo "ruby: " $GLOBAL_VERSION
+  echo "[info] ruby-"$GLOBAL_VERSION
 fi
 
-# nodenv
-GLOBAL_VERSION="v0.10.29"
-if [[ -s $BOXEN_HOME/nodenv/bin ]] ; then
-  if [ $GLOBAL_VERSION != `nodenv version` ];then
-    nodenv global $GLOBAL_VERSION
+# nvm
+export NVM_DIR="/Users/ae06710/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+GLOBAL_VERSION="v0.12.0"
+if [[ -s ~/.nvm ]] ; then
+  if [ $GLOBAL_VERSION != `nvm current` ];then
+    nvm alias default stable
   fi
-  echo "node: " $GLOBAL_VERSION
+  echo "[info] node-"$GLOBAL_VERSION
 fi
 
 # # pyenv
@@ -46,5 +49,5 @@ if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
   if [ $GLOBAL_VERSION != `phantomenv version` ];then
     phantomenv global 1.9.2
   fi
-  echo "phantomjs: " $GLOBAL_VERSION
+  echo "[info] phantomjs-" $GLOBAL_VERSION
 fi

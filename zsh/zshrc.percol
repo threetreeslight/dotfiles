@@ -1,4 +1,6 @@
 # ppgrep
+#
+#
 function ppgrep() {
   if [[ $1 == "" ]]; then
     PERCOL=percol
@@ -9,6 +11,8 @@ function ppgrep() {
 }
 
 # ppkill
+#
+#
 function ppkill() {
   if [[ $1 =~ "^-" ]]; then
     QUERY=""            # options only
@@ -21,6 +25,8 @@ function ppkill() {
 
 
 # zsh history search
+#
+#
 function exists { which $1 &> /dev/null }
 
 if exists percol; then
@@ -37,7 +43,10 @@ if exists percol; then
 fi
 
 
-# checkout branch
+# pgb
+#
+# git branch name
+#
 function pgb () {
   if [[ $1 == "" ]]; then
     PERCOL=percol
@@ -48,6 +57,10 @@ function pgb () {
       perl -pne 's{^refs/heads/}{}' | eval $PERCOL
 }
 
+# pgu
+#
+# git checkout to exist branch
+#
 function pgu () {
   if [[ $1 =~ "^-" ]]; then
     QUERY=""            # options only
@@ -61,6 +74,10 @@ function pgu () {
   fi
 }
 
+# pgo
+#
+# git checkout to fetched branch
+#
 function pgo () {
   if [[ $1 == "" ]]; then
     PERCOL=percol
@@ -69,13 +86,16 @@ function pgo () {
   fi
 
   local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
-      perl -pne 's{^refs/(heads|remotes)/}{}' | eval $PERCOL )
+      perl -pne 's{^refs/(remotes)/}{}' | eval $PERCOL )
   if [ -n "$selected_branch" ]; then
       git checkout -t ${selected_branch}
   fi
 }
 
 # ec2-ip
+#
+# get ec2's ip
+#
 function ec2-ip() {
   if [[ $1 == "" ]]; then
     PERCOL=percol
@@ -101,6 +121,9 @@ function instances() {
 }
 
 # ec2-ssh
+#
+# ssh login to ec2 server
+#
 function ec2-ssh() {
   if [[ $1 =~ "^-" ]]; then
     QUERY=""            # options only
@@ -108,10 +131,13 @@ function ec2-ssh() {
     QUERY=$1            # with a query
     [[ $# > 0 ]] && shift
   fi
-  ssh webadmin@$(ec2-ip $QUERY) -p2222 -i ~/.ssh/id_rsa
+  ssh akiramiki@$(ec2-ip $QUERY) -p2222 -i ~/.ssh/id_rsa
 }
 
-# ghq
+# gcd
+#
+# change directory to ghq managed repository
+#
 function gcd() {
   if [[ $1 == "" ]]; then
     PERCOL=percol
