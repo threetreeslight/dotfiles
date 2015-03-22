@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ppgrep
 #
 #
@@ -125,13 +127,34 @@ function instances() {
 # ssh login to ec2 server
 #
 function ec2-ssh() {
-  if [[ $1 =~ "^-" ]]; then
-    QUERY=""            # options only
-  else
-    QUERY=$1            # with a query
-    [[ $# > 0 ]] && shift
-  fi
-  ssh akiramiki@$(ec2-ip $QUERY) -p2222 -i ~/.ssh/id_rsa
+    usage_exit() {
+        echo "Usage: [-u user] [-q query]" 1>&2
+        # exit 1
+    }
+
+    QUERY=""
+    EC2_SSH_USER=akiramiki
+    RUN_FLG=1
+
+    while getopts u:q:h OPT
+    do
+        case $OPT in
+            u)  EC2_SSH_USER=$OPTARG
+                ;;
+            n)  QUERY=$OPTARG
+                ;;
+            h)  usage_exit
+                RUN_FLG=0
+                ;;
+            \?) usage_exit
+                RUN_FLG=0
+                ;;
+        esac
+    done
+
+    if [[ $RUN_FLG != 0 ]]; then
+      ssh $EC2_SSH_USER@$(ec2-ip $QUERY) -p2222 -i ~/.ssh/id_rsa
+    fi
 }
 
 # gcd
