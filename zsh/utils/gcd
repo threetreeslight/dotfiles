@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# gcd
+#
+# change directory to ghq managed repository
+#
+function gcd() {
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+  cd $(ghq list --full-path | eval $PERCOL)
+}
+

@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# s3ls
+#
+function s3ls() {
+  usage_exit() {
+    echo "Usage: [-b bucket] [-p prefix] [-q query]" 1>&2
+  }
+
+  bucket=""
+  prefix=""
+  query=""
+
+  while getopts b:p:q:h OPT
+  do
+    case $OPT in
+      b)  bucket=$OPTARG
+          ;;
+      p)  prefix="--prefix $OPTARG"
+          ;;
+      q)  query=$OPTARG
+          ;;
+      h)  usage_exit
+          return 0
+          ;;
+    esac
+  done
+
+  if [[ $query == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $query"
+  fi
+
+  if [[ $bucket == "" ]]; then
+    aws s3 ls | eval $PERCOL | awk '{ print $3 }'
+  else
+    aws s3api list-objects \
+      --bucket $bucket \
+      --query 'Contents[].{Key: Key}' \
+      $prefix \
+      --max-items 30 | \
+      eval $PERCOL
+  fi
+}
+
+# s3get
+#
+function s3get() {
+  usage_exit() {
+    echo "Usage: [-b bucket] [-k key] [-q query]" 1>&2
+  }
+
+  bucket=""
+  key=""
+  query=""
+  output=""
+
+  while getopts b:k:h OPT
+  do
+    case $OPT in
+      b)  bucket=$OPTARG
+          ;;
+      k)  key=$OPTARG
+          ;;
+      q)  query=$OPTARG
+          ;;
+      h)  usage_exit
+          return 0
+          ;;
+    esac
+  done
+
+
+  if [[ $bucket == "" ]]; then usage_exit; return 0; fi
+  if [[ $key == "" ]]; then usage_exit; return 0; fi
+
+  aws s3api get-object \
+    --bucket $bucket \
+    --key $key \
+    $(echo $key | awk -F/ '{print $NF}')
+}
+

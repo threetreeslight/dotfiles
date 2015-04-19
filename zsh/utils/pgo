@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# pgb
+#
+# git branch name
+#
+function pgb () {
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+  git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads | \
+      perl -pne 's{^refs/heads/}{}' | eval $PERCOL
+}
+
+# pgu
+#
+# git checkout to exist branch
+#
+function pgu () {
+  if [[ $1 =~ "^-" ]]; then
+    QUERY=""            # options only
+  else
+    QUERY=$1            # with a query
+    [[ $# > 0 ]] && shift
+  fi
+  local selected_branch=$(pgb $QUERY)
+  if [ -n "$selected_branch" ]; then
+      git checkout ${selected_branch}
+  fi
+}
+
+# pgo
+#
+# git checkout to fetched branch
+#
+function pgo () {
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+
+  local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
+      perl -pne 's{^refs/(remotes)/}{}' | eval $PERCOL )
+  if [ -n "$selected_branch" ]; then
+      git checkout -t ${selected_branch}
+  fi
+}
+
+
