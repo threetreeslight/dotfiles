@@ -37,8 +37,8 @@ function s3ls() {
   else
     aws s3api list-objects \
       --bucket $bucket \
+      $(echo $prefix) \
       --query 'Contents[].{Key: Key}' \
-      $prefix \
       --max-items 30 | \
       eval $PERCOL
   fi
