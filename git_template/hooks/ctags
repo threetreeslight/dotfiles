@@ -1,9 +1,11 @@
 #!/bin/sh
-$HOMEBREW_ROOT/bin/ctags -R -f .git/tags `pwd` \
---exclude=public \
---exclude='*.slim' \
---exclude='*.haml' \
---exclude='*.scss' \
---exclude='*.sass' \
---exclude='*.css' \
---exclude='*.js
+
+# $HOMEBREW_ROOT/bin/ctags -R -f .git/tags `pwd` \
+# --exclude=public \
+# --exclude='*.slim' \
+# --exclude='*.haml' \
+# --exclude='*.scss' \
+# --exclude='*.sass' \
+# --exclude='*.css' \
+# --exclude='*.js
+

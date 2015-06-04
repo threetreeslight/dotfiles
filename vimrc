@@ -458,8 +458,6 @@ function! s:FixWhitespace(line1,line2)
 endfunction
 command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
 
-
-
 "-------------------------
 " ctags
 "-------------------------

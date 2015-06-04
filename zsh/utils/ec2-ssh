@@ -10,7 +10,7 @@ function ec2-ip() {
   else
     PERCOL="percol --query $1"
   fi
-  instances | eval $PERCOL | awk '{ print $2 }'
+  instances | eval $PERCOL | awk '{ print $1 }'
 }
 
 function instances() {
@@ -23,9 +23,51 @@ function instances() {
     #   echo ${instances[$i]}
     # fi
     if [ `expr $i % 3` -eq 0 ]; then
-      echo ${instances[$i-2]} ${instances[$i-2]} ${instances[$i]}
+      echo ${instances[$i-2]} ${instances[$i-1]} ${instances[$i]}
     fi
   done
+}
+
+# ec2-scp
+#
+# ssh login to ec2 server
+#
+function ec2-scp() {
+    usage_exit() {
+        echo "Usage: [-u user] [-p port] [-q query] [-f original file] [-o output]" 1>&2
+        return 0
+    }
+
+    QUERY=""
+    EC2_SSH_USER=akiramiki
+    port=2222
+
+    while getopts u:q:i:o:h OPT
+    do
+        case $OPT in
+            u)  EC2_SSH_USER=$OPTARG
+                ;;
+            q)  QUERY=$OPTARG
+                ;;
+            f)  file=$OPTARG
+                ;;
+            o)  output=$OPTARG
+                ;;
+            p)  port=$OPTARG
+                ;;
+            h)  usage_exit
+                return 0
+                ;;
+            \?) usage_exit
+                return 0
+                ;;
+        esac
+    done
+
+  if [[ $bucket == "" ]]; then usage_exit; return 0; fi
+  if [[ $key == "" ]]; then usage_exit; return 0; fi
+
+  scp -P$port -i ~/.ssh/id_rsa $EC2_SSH_USER@$(ec2-ip $QUERY):$file $output
 }
 
 # ec2-ssh
