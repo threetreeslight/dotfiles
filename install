@@ -47,17 +47,6 @@ else
 fi
 
 #
-# vagrant
-#
-vagrant plugin list | grep sahara
-if [ $? -eq 0 ]; then
-  echo "[WARN] already added sahara to vagrant plugin"
-else
-  vagrant plugin install sahara
-  echo "[INFO] install sahara."
-fi
-
-#
 # xcode 6
 #
 XCODE_HOME=${HOME}/Library/Developer/Xcode/UserData/FontAndColorThemes

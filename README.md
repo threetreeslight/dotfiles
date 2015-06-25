@@ -54,20 +54,6 @@ Installing
 $ ./install_local
 ```
 
-vagrant
-
-```
-# vagrant
-#
-# http://www.vagrantbox.es/
-#
-# under both was setting by boxen
-# but when there are some reason (network is slow), cut pupput on vagrant centos and ubuntu. and install by manual.
-#
-$ vagrant box add centos64 ...
-$ vagrant box add ubuntu1210 ...)
-```
-
 Mysql setting
 
 ```bash
@@ -79,6 +65,16 @@ $ mysql -u root
 > set password for root@localhost=password('root');
 > exit
 $ mysql -u root -p
+```
+
+Daemonize redis
+
+```bash
+$ vim /opt/boxen/config/redis/redis.conf
+daemonize yes
+
+$ brew info redis
+=> Show how to set launchctl
 ```
 
 Usage
