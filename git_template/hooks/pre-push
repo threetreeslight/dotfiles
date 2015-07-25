@@ -12,3 +12,4 @@ if [[ "$BRANCH" == "master" && "$PUSH_COMMAND" =~ force|delete|-f ]]; then
 fi
 
 exit 0
+
