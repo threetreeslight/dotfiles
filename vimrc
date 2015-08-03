@@ -496,6 +496,9 @@ set ts=2 sw=2 sts=0
 set expandtab
 set backspace=indent,eol,start "Allow backspacing over autoindent, line breaks and start of insert action
 
+" colorcolumn
+set colorcolumn=120
+
 "-------------------------
 " keybind & mcro
 "-------------------------
