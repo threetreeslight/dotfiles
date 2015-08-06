@@ -72,10 +72,28 @@ let s:bundle = neobundle#get('unite.vim')
 function! s:bundle.hooks.on_source(bundle)
   let g:unite_enable_start_insert=1 "start by insert mode
 
+  " Ignore settings
+  let ignore_sources = []
+  if filereadable('./.gitignore')
+    for file in readfile('./.gitignore')
+      " コメント行と空行は追加しない
+      if file !~ "^#\\|^\s\*$"
+        call add(ignore_sources, file)
+      endif
+    endfor
+  endif
+  if isdirectory('./.git')
+    call add(ignore_sources, '.git')
+  endif
+  let ignore_sources = ignore_sources + ['.png', '.jpg', '.jpeg', '.svg', '.ico', '.mp4', '.webm']
+  let ignore_pattern = escape(join(ignore_sources, '|'), './|')
+  call unite#custom#source('file_rec', 'ignore_pattern', ignore_pattern)
+  call unite#custom#source('grep', 'ignore_pattern', ignore_pattern)
+
   " recent access file list
   noremap <C-U><C-U> :Unite file_rec<CR>
   " file list
-  noremap <C-U><C-C>L> :Unite file<CR>
+  noremap <C-U><C-D> :Unite file<CR>
   " file buffer list
   noremap <C-U><C-B> :Unite buffer<CR>
 
@@ -332,9 +350,8 @@ NeoBundleLazy 'basyura/unite-rails', {
     \ }
 let s:bundle = neobundle#get('unite-rails')
 function! s:bundle.hooks.on_source(bundle)
-  noremap <C-H><C-H> :Unite rails/controller<CR>
-  noremap <C-H><C-V> :Unite rails/view<CR>
-  noremap <C-H><C-M> :Unite rails/model<CR>
+  noremap <C-H><C-H> :Unite file_rec:app<CR>
+  noremap <C-H><C-S> :Unite rails/spec<CR>
   noremap <C-H>j :Unite rails/javascript<CR>
   noremap <C-H>s :Unite rails/stylesheet<CR>
   noremap <C-H>c :Unite rails/config<CR>
