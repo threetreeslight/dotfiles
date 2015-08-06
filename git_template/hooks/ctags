@@ -2,7 +2,18 @@
 
 $HOMEBREW_ROOT/bin/ctags -R \
 --exclude=node_modules \
+--exclude=spec \
 --exclude=public \
+--exclude=log \
+--exclude=tmp \
+--exclude=*.mp4 \
+--exclude=*.webm \
+--exclude=*.jpg \
+--exclude=*.jpeg \
+--exclude=*.png \
+--exclude=*.gif \
+--exclude=*.ico \
+--exclude=*.svg \
 --exclude=*.slim \
 --exclude=*.haml \
 --exclude=*.scss \
@@ -12,4 +23,3 @@ $HOMEBREW_ROOT/bin/ctags -R \
 --exclude=*.coffee \
 -f .git/tags \
 `pwd`
-
