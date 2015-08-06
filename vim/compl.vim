@@ -1,0 +1,1 @@
+set infercase " undifferentiated compl
