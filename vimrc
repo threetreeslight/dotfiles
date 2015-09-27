@@ -351,9 +351,8 @@ NeoBundleLazy 'basyura/unite-rails', {
 let s:bundle = neobundle#get('unite-rails')
 function! s:bundle.hooks.on_source(bundle)
   noremap <C-H><C-H> :Unite file_rec:app<CR>
-  noremap <C-H><C-S> :Unite rails/spec<CR>
-  noremap <C-H>j :Unite rails/javascript<CR>
-  noremap <C-H>s :Unite rails/stylesheet<CR>
+  noremap <C-H>s :Unite file_rec:spec<CR>
+  " noremap <C-H>c :Unite file_rec:config<CR>
   noremap <C-H>c :Unite rails/config<CR>
   noremap <C-H>d :Unite rails/db<CR>
   noremap <C-H>l :Unite rails/lib<CR>

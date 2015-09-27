@@ -49,6 +49,7 @@ function s3ls() {
 function s3get() {
   usage_exit() {
     echo "Usage: [-b bucket] [-k key] [-q query]" 1>&2
+    echo "s3get -b bucket -k \`s3ls -b bucket -p prefix\`" 1>&2
   }
 
   bucket=""
@@ -73,7 +74,7 @@ function s3get() {
 
 
   if [[ $bucket == "" ]]; then usage_exit; return 0; fi
-  if [[ $key == "" ]]; then usage_exit; return 0; fi
+  if [ -z $key ]; then usage_exit; return 0; fi
 
   aws s3api get-object \
     --bucket $bucket \
