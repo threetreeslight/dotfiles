@@ -1,9 +1,9 @@
 [submodule "vim/neobundle/neobundle.vim"]
 	path = vim/neobundle/neobundle.vim
-	url = git@github.com/Shougo/neobundle.vim.git
+	url = git@github.com:Shougo/neobundle.vim.git
 [submodule "themes/solarized"]
 	path = themes/solarized
-	url = git@github.com/altercation/solarized
+	url = git@github.com:altercation/solarized.git
 [submodule "zsh/dircolors-solarized"]
 	path = zsh/dircolors-solarized
 	url = git@github.com:seebi/dircolors-solarized.git
