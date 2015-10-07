@@ -19,9 +19,6 @@ function instances() {
     --output text) )
 
   for i in `seq 1 ${#instances[@]}`; do
-    # if [ `expr $i % 2` -eq 0 ]; then
-    #   echo ${instances[$i]}
-    # fi
     if [ `expr $i % 3` -eq 0 ]; then
       echo ${instances[$i-2]} ${instances[$i-1]} ${instances[$i]}
     fi
@@ -76,32 +73,35 @@ function ec2-scp() {
 #
 function ec2-ssh() {
     usage_exit() {
-        echo "Usage: [-u user] [-q query]" 1>&2
-        # exit 1
+        echo "Usage: [-u user] [-q query] [-k key]" 1>&2
+        return 0
     }
 
     QUERY=""
+    KEY=~/.ssh/id_rsa
     EC2_SSH_USER=akiramiki
     RUN_FLG=1
 
-    while getopts u:q:h OPT
+    while getopts u:q:k:h OPT
     do
         case $OPT in
             u)  EC2_SSH_USER=$OPTARG
                 ;;
-            n)  QUERY=$OPTARG
+            q)  QUERY=$OPTARG
+                ;;
+            k)  KEY=$OPTARG
                 ;;
             h)  usage_exit
-                RUN_FLG=0
+                return 0
                 ;;
             \?) usage_exit
-                RUN_FLG=0
+                return 0
                 ;;
         esac
     done
 
     if [[ $RUN_FLG != 0 ]]; then
-      ssh $EC2_SSH_USER@$(ec2-ip $QUERY) -p2222 -i ~/.ssh/id_rsa
+      mosh $EC2_SSH_USER@$(ec2-ip $QUERY) --ssh="ssh -p 2222 -i $KEY"
     fi
 }
 
