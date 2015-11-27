@@ -62,6 +62,16 @@ else
   echo "generating rsa key"
 fi
 
+#
+# KEY
+#
+if [ -L $HOME/.zsh.env ]; then
+  echo "[info] Exit zsh.env"
+else
+  ln -s $HOME/Dropbox/dev/zsh.env $HOME/.zsh.env
+  echo "Symlink zsh.env"
+fi
+
 # ## heroku setting
 # #
 # # add to pubkey
