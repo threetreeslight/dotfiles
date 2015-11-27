@@ -11,6 +11,6 @@ function phistory() {
     zle -R -c               # refresh
 }
 
-zle -N percol_select_history
-bindkey '^R' percol_select_history
+zle -N phistory
+bindkey '^R' phistory
 
