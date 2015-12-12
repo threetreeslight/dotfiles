@@ -33,7 +33,7 @@ fi
 if [ ! -f $HOME/Dropbox/dev/.gitconfig.local ]; then
   echo "[error] .gitconfig.local is not exist in $HOME/Dropbox/dev"
 elif [ -f $HOME/.gitconfig.local ]; then
-  echo "[info] already copeid .gitconfig.local"
+  echo "[info] already simlinked .gitconfig.local"
 else
   ln -s $HOME/Dropbox/dev/.gitconfig.local $HOME/
   echo "Copying .gitconfig.local to local"
@@ -43,9 +43,9 @@ fi
 # tmuxinator
 #
 if [ ! -d $HOME/Dropbox/dev/tmuxinator ]; then
-  echo "[error] tmuxinator directory is not exist"
+  echo "[ERROR] tmuxinator setting directory is not exist"
 elif [ -L $HOME/.tmuxinator ]; then
-  echo "[info] Symlinked tmuxinator"
+  echo "[INFO] Symlinked tmuxinator"
 else
   echo "Symlink tmuxinator"
   ln -s $HOME/Dropbox/dev/tmuxinator $HOME/.tmuxinator
@@ -57,9 +57,9 @@ fi
 if [ -e $HOME/.ssh/id_rsa ]; then
   echo "[info] Exit id_rsa"
 else
-  cd ~/.ssh/
-  ssh-keygen -t rsa
-  echo "generating rsa key"
+  # cd ~/.ssh/
+  # ssh-keygen -t rsa
+  # echo "generating rsa key"
 fi
 
 # ## heroku setting

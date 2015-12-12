@@ -123,3 +123,6 @@ source ~/dotfiles/zsh/zshrc.language
 source ~/dotfiles/zsh/zshrc.percol
 
 
+
+export NVM_DIR="/Users/ae06710/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

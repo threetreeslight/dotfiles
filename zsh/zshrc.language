@@ -3,24 +3,30 @@ export GOPATH=$HOME
 export PATH=$GOPATH/bin:$PATH
 
 # rbenv
-GLOBAL_VERSION="2.1.5"
+GLOBAL_VERSION="2.2.3"
 if [[ -s $BOXEN_HOME/rbenv/bin ]];then
   if [ $GLOBAL_VERSION != `rbenv global` ];then
     rbenv global $GLOBAL_VERSION
+    echo "[INFO] set ruby-"$GLOBAL_VERSION
   fi
-  echo "[info] ruby-"$GLOBAL_VERSION
+  echo "[INFO] ruby-"$GLOBAL_VERSION
+else
+  echo "[WARN] rbenv is not installed"
 fi
 
 # nvm
 export NVM_DIR="/Users/ae06710/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-GLOBAL_VERSION="v0.12.0"
+GLOBAL_VERSION="v4.2.2"
 if [[ -s ~/.nvm ]] ; then
   if [ $GLOBAL_VERSION != `nvm current` ];then
     nvm alias default stable
+    echo "[INFO] set node-"$GLOBAL_VERSION
   fi
-  echo "[info] node-"$GLOBAL_VERSION
+  echo "[INFO] node-"$GLOBAL_VERSION
+else
+  echo "[WARN] nvm is not installed"
 fi
 
 # # pyenv
@@ -48,6 +54,10 @@ GLOBAL_VERSION="1.9.2"
 if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
   if [ $GLOBAL_VERSION != `phantomenv version` ];then
     phantomenv global 1.9.2
+    echo "[INFO] set phantomjs-"$GLOBAL_VERSION
+  else
+    echo "[INFO] phantomjs-"$GLOBAL_VERSION
   fi
-  echo "[info] phantomjs-" $GLOBAL_VERSION
+else
+  echo "[WARN] phantomenv is not installed"
 fi
