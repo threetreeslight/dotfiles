@@ -47,6 +47,26 @@ else
 fi
 
 #
+# nvm
+# https://github.com/creationix/nvm
+if [[ -s ~/.nvm ]] ; then
+  echo "[WARN] Exist nvm"
+else
+  echo "[INFO] installing nvm...."
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+  echo "[INFO] installing node...."
+  nvm install v4.2.2
+fi
+
+
+if [ -d $HOME/src/github.com/motemen ]; then
+  echo "[WARN] Exist ghq"
+else
+  go get github.com/motemen/ghq
+  echo "[INFO] install ghq."
+fi
+
+#
 # xcode 6
 #
 XCODE_HOME=${HOME}/Library/Developer/Xcode/UserData/FontAndColorThemes
