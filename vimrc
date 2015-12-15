@@ -365,7 +365,7 @@ NeoBundleLazy 'thoughtbot/vim-rspec', {
     \   'autoload' : { 'filetypes' : ['ruby', 'haml', 'slim'] }
     \ }
 let s:bundle = neobundle#get('vim-rspec')
-let g:rspec_command = "Dispatch spring rspec {spec}"
+let g:rspec_command = "Dispatch rspec {spec}"
 function! s:bundle.hooks.on_source(bundle)
   " RSpec.vim mappings
   map <Leader>t :call RunCurrentSpecFile()<CR>
