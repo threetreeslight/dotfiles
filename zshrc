@@ -115,6 +115,9 @@ export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 # curl wripper
 . resty
 
+# docker
+eval "$(docker-machine env default)"
+
 #
 # develop
 #
