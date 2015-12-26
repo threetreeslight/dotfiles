@@ -141,3 +141,15 @@ fi
 # if [ -d $HOME/zsh/antigen ]; then
 #   antigen update
 # fi
+
+#
+# git-secret
+#
+git_secret_path=$HOME/src/github.com/awslabs/git-secrets
+if [ -d $git_secret_path ]; then
+  echo "[WARN] Exist git-secrets"
+else
+  echo "[INFO] install git-securets"
+  ghq get awslabs/git-secrets
+  cd $git_secret_path && make install
+fi
