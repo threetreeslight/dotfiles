@@ -130,3 +130,9 @@ source ~/.zsh.env
 
 export NVM_DIR="/Users/ae06710/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/ae06710/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/ae06710/google-cloud-sdk/completion.zsh.inc'

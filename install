@@ -6,6 +6,8 @@
 DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global gitattributes tigrc gemrc ptignore)
 DOT_DIRECTORIES=(vim bundle git_template)
 
+NEED_RESTART=0
+
 for file in ${DOT_FILES[@]}
 do
   if [ -e $HOME/.$file ]; then
@@ -13,6 +15,7 @@ do
   else
     ln -s $HOME/dotfiles/$file $HOME/.$file
     echo "[INFO] $file symlinked."
+    NEED_RESTART=1
   fi
 done
 
@@ -22,6 +25,7 @@ do
     echo "[WARN] .$directory directory is existed."
   else
     ln -s $HOME/dotfiles/$directory $HOME/.$directory
+    NEED_RESTART=1
     echo "[INFO] $directory symlinked."
   fi
 done
@@ -29,10 +33,11 @@ done
 #
 # symlink diff-highlight
 #
-if [ -L /usr/bin/diff-highlight ]; then
+if [ -L /usr/local/bin/diff-highlight ]; then
   echo "[WARN] Symlinked diff-highlight"
 else
   find /opt/boxen -name diff-highlight | awk 'NR == 2 {print "sudo ln -s",$0,"/usr/local/bin/"}'
+  NEED_RESTART=1
   echo "[INFO] diff-highlight symlinked."
 fi
 
@@ -43,6 +48,7 @@ if [ -d $HOME/src/github.com/motemen ]; then
   echo "[WARN] Exist ghq"
 else
   go get github.com/motemen/ghq
+  NEED_RESTART=1
   echo "[INFO] install ghq."
 fi
 
@@ -56,6 +62,7 @@ else
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
   echo "[INFO] installing node...."
   nvm install v4.2.2
+  NEED_RESTART=1
 fi
 
 
@@ -63,6 +70,7 @@ if [ -d $HOME/src/github.com/motemen ]; then
   echo "[WARN] Exist ghq"
 else
   go get github.com/motemen/ghq
+  NEED_RESTART=1
   echo "[INFO] install ghq."
 fi
 
@@ -76,6 +84,7 @@ else
   echo "[INFO] Copy xcode themes"
   mkdir -p ~/Library/Developer/Xcode/UserData/FontAndColorThemes/
   ln -s ${HOME}/dotfiles/themes/apple-xcode4-solarized/Solarized\ -\ Ae06710.dvtcolortheme ${XCODE_HOME}
+  NEED_RESTART=1
 fi
 
 #
@@ -88,6 +97,7 @@ if [ -e "${SUBLIME_PREFERENCE_FILE}" ]; then
 else
   echo "[INFO] Symlink Sublime_text preferences"
   ln -s ${HOME}/dotfiles/sublime_text_3/Preferences.sublime-settings "${SUBLIME_HOME}/"
+  NEED_RESTART=1
 fi
 
 #
@@ -102,6 +112,7 @@ do
     echo "[WARN] $package is already installed"
   else
     pip install $package
+    NEED_RESTART=1
     echo "[INFO] install $package"
   fi
 done
@@ -152,4 +163,21 @@ else
   echo "[INFO] install git-securets"
   ghq get awslabs/git-secrets
   cd $git_secret_path && make install
+  NEED_RESTART=1
+fi
+
+#
+# google cloud sdk
+#
+if [ -d $HOME/google-cloud-sdk ]; then
+  echo "[WARN] Exist google cloud sdk"
+else
+  echo "[INFO] install google cloud sdk"
+  curl https://sdk.cloud.google.com | bash
+  NEED_RESTART=1
+fi
+
+
+if [ $NEED_RESTART -eq 1 ]; then
+  exec -l $SHELL
 fi
