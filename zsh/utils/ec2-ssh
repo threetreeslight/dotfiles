@@ -4,7 +4,7 @@
 #
 # get ec2's ip
 #
-function ec2-ip() {
+function ec2-public-ip() {
   if [[ $1 == "" ]]; then
     PERCOL=percol
   else
@@ -13,8 +13,18 @@ function ec2-ip() {
   instances | eval $PERCOL | awk '{ print $1 }'
 }
 
+function ec2-private-ip() {
+  if [[ $1 == "" ]]; then
+    PERCOL=percol
+  else
+    PERCOL="percol --query $1"
+  fi
+  instances | eval $PERCOL | awk '{ print $2 }'
+}
+
 function instances() {
   instances=( $(aws ec2 describe-instances \
+    --filters 'Name=instance-state-name,Values=running' \
     --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value[],PublicIpAddress,PrivateIpAddress]' \
     --output text) )
 
@@ -64,7 +74,7 @@ function ec2-scp() {
   if [[ $bucket == "" ]]; then usage_exit; return 0; fi
   if [[ $key == "" ]]; then usage_exit; return 0; fi
 
-  scp -P$port -i ~/.ssh/id_rsa $EC2_SSH_USER@$(ec2-ip $QUERY):$file $output
+  scp -P$port -i ~/.ssh/id_rsa $EC2_SSH_USER@$(ec2-public-ip $QUERY):$file $output
 }
 
 # ec2-ssh
@@ -101,7 +111,7 @@ function ec2-ssh() {
     done
 
     if [[ $RUN_FLG != 0 ]]; then
-      ssh $EC2_SSH_USER@$(ec2-ip $QUERY) -p2222 -i $KEY
+      ssh $EC2_SSH_USER@$(ec2-public-ip $QUERY) -p2222 -i $KEY
     fi
 }
 
@@ -139,7 +149,7 @@ function ec2-mosh() {
     done
 
     if [[ $RUN_FLG != 0 ]]; then
-      mosh $EC2_SSH_USER@$(ec2-ip $QUERY) --ssh="ssh -p 2222 -i $KEY"
+      mosh $EC2_SSH_USER@$(ec2-public-ip $QUERY) --ssh="ssh -p 2222 -i $KEY"
     fi
 }
 
