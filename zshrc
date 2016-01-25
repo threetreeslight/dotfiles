@@ -112,9 +112,6 @@ export REDISTOGO_URL=$BOXEN_REDIS_URL
 # Action Script
 export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 
-# curl wripper
-. resty
-
 # docker
 eval "$(docker-machine env default)"
 
@@ -125,7 +122,6 @@ source ~/dotfiles/zsh/zshrc.alias
 source ~/dotfiles/zsh/zshrc.language
 source ~/dotfiles/zsh/zshrc.percol
 source ~/.zsh.env
-
 
 
 export NVM_DIR="/Users/ae06710/.nvm"

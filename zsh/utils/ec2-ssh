@@ -153,3 +153,42 @@ function ec2-mosh() {
     fi
 }
 
+# ec2-cluster
+#
+# ssh login to ec2 servers
+# required tmux-cssh
+#
+function ec2-cluster() {
+    usage_exit() {
+        echo "Usage: [-u user] [-q query] [-k key]" 1>&2
+        return 0
+    }
+
+    QUERY=""
+    KEY=~/.ssh/id_rsa
+    EC2_SSH_USER=akiramiki
+    RUN_FLG=1
+
+    while getopts u:q:k:h OPT
+    do
+        case $OPT in
+            u)  EC2_SSH_USER=$OPTARG
+                ;;
+            q)  QUERY=$OPTARG
+                ;;
+            k)  KEY=$OPTARG
+                ;;
+            h)  usage_exit
+                return 0
+                ;;
+            \?) usage_exit
+                return 0
+                ;;
+        esac
+    done
+
+    HOSTS=$(ec2-public-ip $QUERY | sed "s/$/:2222/g" | tr "\n", " ")
+    if [[ $RUN_FLG != 0 ]]; then
+        sh -c "tmux-cssh -u $EC2_SSH_USER -c $KEY -sc $HOSTS"
+    fi
+}
