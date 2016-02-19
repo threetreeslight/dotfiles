@@ -189,6 +189,6 @@ function ec2-cluster() {
 
     HOSTS=$(ec2-public-ip $QUERY | sed "s/$/:2222/g" | tr "\n", " ")
     if [[ $RUN_FLG != 0 ]]; then
-        sh -c "tmux-cssh -u $EC2_SSH_USER -c $KEY -sc $HOSTS"
+        sh -c "tmux-cssh -u $EC2_SSH_USER -c $KEY -sc $HOSTS -sa -oStrictHostKeyChecking=no"
     fi
 }
