@@ -17,9 +17,9 @@ function ppgrep() {
 #
 function ppkill() {
   if [[ $1 =~ "^-" ]]; then
-    QUERY=""            # options only
+    QUERY=""
   else
-    QUERY=$1            # with a query
+    QUERY=$1
     [[ $# > 0 ]] && shift
   fi
   ppgrep $QUERY | xargs kill $*
