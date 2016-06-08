@@ -27,5 +27,6 @@ stellar.yaml
 # Office Temp Files
 ~$*
 
-# envrc
+# env
+.env
 .envrc
