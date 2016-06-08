@@ -230,7 +230,11 @@ function ec2-mosh() {
     done
 
     if [[ $RUN_FLG != 0 ]]; then
-      mosh $EC2_SSH_USER@$(ec2-public-ip -q $QUERY -c $EC2_PROFILE) --ssh="ssh -p 2222 -i $KEY"
+      if [[ $QUERY != "" ]]; then
+        mosh $EC2_SSH_USER@$(ec2-public-ip -q $QUERY -c $EC2_PROFILE) --ssh="ssh -p 2222 -i $KEY"
+      else
+        mosh $EC2_SSH_USER@$(ec2-public-ip -c $EC2_PROFILE) --ssh="ssh -p 2222 -i $KEY"
+      fi
     fi
 }
 
@@ -251,7 +255,7 @@ function ec2-cluster() {
     RUN_FLG=1
     EC2_PROFILE="default"
 
-    while getopts u:q:k:h OPT
+    while getopts u:q:c:k:h OPT
     do
         case $OPT in
             u)  EC2_SSH_USER=$OPTARG
