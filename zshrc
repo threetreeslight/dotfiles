@@ -118,6 +118,7 @@ eval "$(docker-machine env default)"
 #
 # develop
 #
+eval "$(direnv hook zsh)"
 source ~/dotfiles/zsh/zshrc.alias
 source ~/dotfiles/zsh/zshrc.language
 source ~/dotfiles/zsh/zshrc.percol
