@@ -1,44 +1,6 @@
 #!/bin/bash
 
-# ec2-ip
-#
-# get ec2's ip
-#
 function ec2-public-ip() {
-    usage_exit() {
-        echo "Usage: [-q query] [-c credential]" 1>&2
-        return 0
-    }
-
-    QUERY=""
-    EC2_PROFILE="default"
-
-    while getopts q:c:h OPT
-    do
-        case $OPT in
-            q)  QUERY=$OPTARG
-                ;;
-            c)  EC2_PROFILE=$OPTARG
-                ;;
-            h)  usage_exit
-                return 0
-                ;;
-            \?) usage_exit
-                return 0
-                ;;
-        esac
-    done
-
-    if [[ $QUERY == "" ]]; then
-      PERCOL=percol
-    else
-      PERCOL="percol --query $QUERY"
-    fi
-
-    ec2-instances -c $EC2_PROFILE | eval $PERCOL | awk '{ print $1 }'
-}
-
-function ec2-private-ip() {
     usage_exit() {
         echo "Usage: [-q query] [-c credential]" 1>&2
         return 0
@@ -72,6 +34,41 @@ function ec2-private-ip() {
     ec2-instances -c $EC2_PROFILE | eval $PERCOL | awk '{ print $2 }'
 }
 
+function ec2-private-ip() {
+    usage_exit() {
+        echo "Usage: [-q query] [-c credential]" 1>&2
+        return 0
+    }
+
+    QUERY=""
+    EC2_PROFILE="default"
+
+    while getopts q:c:h OPT
+    do
+        case $OPT in
+            q)  QUERY=$OPTARG
+                ;;
+            c)  EC2_PROFILE=$OPTARG
+                ;;
+            h)  usage_exit
+                return 0
+                ;;
+            \?) usage_exit
+                return 0
+                ;;
+        esac
+    done
+
+    if [[ $QUERY == "" ]]; then
+      PERCOL=percol
+    else
+      PERCOL="percol --query $QUERY"
+    fi
+
+    ec2-instances -c $EC2_PROFILE | eval $PERCOL | awk '{ print $3 }'
+}
+
+# Formatting [instance_name, public_ip, private_ip]
 function ec2-instances() {
     usage_exit() {
         echo "Usage: [-c credential]" 1>&2
@@ -94,17 +91,12 @@ function ec2-instances() {
         esac
     done
 
-    instances=( $(aws ec2 describe-instances \
+    aws ec2 describe-instances \
       --filters 'Name=instance-state-name,Values=running' \
       --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value[],PublicIpAddress,PrivateIpAddress]' \
-      --output text \
-      --profile $EC2_PROFILE) )
-
-    for i in `seq 1 ${#instances[@]}`; do
-      if [ `expr $i % 3` -eq 0 ]; then
-        echo ${instances[$i-2]} ${instances[$i-1]} ${instances[$i]}
-      fi
-    done
+      --output json \
+      --profile $EC2_PROFILE | \
+      jq -r 'sort_by(.[][]) | reverse | .[][] | [ (.[0][] // "null"), .[1], .[2] ] | @sh'
 }
 
 # ec2-scp
@@ -152,10 +144,7 @@ function ec2-scp() {
   scp -P$port -i ~/.ssh/id_rsa $EC2_SSH_USER@$(ec2-public-ip -q $QUERY -c $EC2_PROFILE):$file $output
 }
 
-# ec2-ssh
-#
 # ssh login to ec2 server
-#
 function ec2-ssh() {
     usage_exit() {
         echo "Usage: [-u user] [-q query] [-k key] [-c credential]" 1>&2
@@ -189,7 +178,11 @@ function ec2-ssh() {
     done
 
     if [[ $RUN_FLG != 0 ]]; then
-      ssh $EC2_SSH_USER@$(ec2-public-ip -q $QUERY -c $EC2_PROFILE) -p2222 -i $KEY
+      if [[ $QUERY != "" ]]; then
+        ssh $EC2_SSH_USER@$(ec2-public-ip -q $QUERY -c $EC2_PROFILE) -p2222 -i $KEY
+      else
+        ssh $EC2_SSH_USER@$(ec2-public-ip -c $EC2_PROFILE) -p2222 -i $KEY
+      fi
     fi
 }
 
@@ -275,7 +268,12 @@ function ec2-cluster() {
         esac
     done
 
-    HOSTS=$(ec2-public-ip -q $QUERY -c $EC2_PROFILE | sed "s/$/:2222/g" | tr "\n", " ")
+    if [[ $QUERY != "" ]]; then
+      HOSTS=$(ec2-public-ip -q $QUERY -c $EC2_PROFILE | sed "s/$/:2222/g" | tr "\n", " ")
+    else
+      HOSTS=$(ec2-public-ip -c $EC2_PROFILE | sed "s/$/:2222/g" | tr "\n", " ")
+    fi
+
     if [[ $RUN_FLG != 0 ]]; then
         sh -c "tmux-cssh -u $EC2_SSH_USER -c $KEY -sc $HOSTS -sa -oStrictHostKeyChecking=no"
     fi
