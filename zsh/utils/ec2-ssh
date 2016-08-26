@@ -96,7 +96,7 @@ function ec2-instances() {
       --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value[],PublicIpAddress,PrivateIpAddress]' \
       --output json \
       --profile $EC2_PROFILE | \
-      jq -r 'sort_by(.[][]) | reverse | .[][] | [ (.[0][] // "null"), .[1], .[2] ] | @sh'
+      jq -r -c 'sort_by(.[][]) | reverse | .[][] | [ (.[0][] // "null"), .[1], .[2] ] | join(" ")'
 }
 
 # ec2-scp
