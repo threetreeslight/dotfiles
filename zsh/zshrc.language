@@ -50,10 +50,10 @@ fi
 # fi
 
 # phantomenv
-GLOBAL_VERSION="1.9.2"
+GLOBAL_VERSION="2.1.1"
 if [[ -s $BOXEN_HOME/phantomenv/bin ]] ; then
   if [ $GLOBAL_VERSION != `phantomenv version` ];then
-    phantomenv global 1.9.2
+    phantomenv global $GLOBAL_VERSION
     echo "[INFO] set phantomjs-"$GLOBAL_VERSION
   else
     echo "[INFO] phantomjs-"$GLOBAL_VERSION
