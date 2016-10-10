@@ -1,0 +1,94 @@
+[[plugins]]
+repo = 'Shougo/unite.vim'
+hook_add = '''
+let g:unite_enable_start_insert=1 "start by insert mode
+
+" Ignore settings
+let ignore_sources = []
+for ignore_setting_file in ['./.gitignore', '$HOME/.gitignore_global']
+  if filereadable(ignore_setting_file)
+    for file in readfile(ignore_setting_file)
+      " コメント行と空行は追加しない
+      if file !~ "^#\\|^\s\*$"
+        call add(ignore_sources, file)
+      endif
+    endfor
+  endif
+endfor
+
+if isdirectory('./.git')
+  call add(ignore_sources, '.git')
+endif
+let ignore_sources = ignore_sources + ['.png', '.jpg', '.jpeg', '.svg', '.ico', '.mp4', '.webm']
+let ignore_pattern = escape(join(ignore_sources, '|'), './|')
+call unite#custom#source('file_rec', 'ignore_pattern', ignore_pattern)
+call unite#custom#source('grep', 'ignore_pattern', ignore_pattern)
+
+" use grep by ack
+if executable('ack')
+  let g:unite_source_grep_command = 'ack'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_grep_encoding = 'utf-8'
+endif
+
+" when only open unite, active key mappings
+augroup vimrc
+  autocmd FileType unite call s:unite_my_settings()
+augroup END
+function! s:unite_my_settings()
+  " Quite Unite by :q
+  au FileType unite nnoremap <silent> <buffer> <C-j><C-j> :q<CR>
+  au FileType unite inoremap <silent> <buffer> <C-j><C-j> <ESC>:q<CR>
+
+  " split open
+  nnoremap <silent><buffer><expr> s unite#smart_map('s', unite#do_action('split'))
+  inoremap <silent><buffer><expr> s unite#smart_map('s', unite#do_action('split'))
+  " vslipt open
+  nnoremap <silent><buffer><expr> v unite#smart_map('v', unite#do_action('vsplit'))
+  inoremap <silent><buffer><expr> v unite#smart_map('v', unite#do_action('vsplit'))
+  " open as vimfiler
+  nnoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
+  inoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
+endfunction
+
+" recent access file list
+noremap <C-U><C-U> :Unite file_rec<CR>
+" file list
+noremap <C-U><C-D> :Unite file<CR>
+" file buffer list
+noremap <C-U><C-B> :Unite buffer<CR>
+'''
+
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+depends = ['Shougo/unite.vim']
+hook_add = '''
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+
+noremap <C-U><C-F> :VimFilerExplorer<CR>
+
+" atometic open Vimfilerexplorer
+let file_name = expand("%")
+if has('vim_starting') && file_name == ""
+  autocmd VimEnter * VimFilerExplorer ./
+endif
+'''
+
+[[plugins]]
+repo = 'tsukkee/unite-tag'
+depends = ['Shougo/unite.vim']
+hook_add = '''
+" If you want to unite-tag instead of |<C-]>|, try to write below in your vimrc.
+autocmd BufEnter *
+\   if empty(&buftype)
+\|      nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
+\|  endif
+" Use Unite jump insted of |<C-t>| back ctag's
+autocmd BufEnter *
+\   if empty(&buftype)
+\|      nnoremap <buffer> <C-t> :<C-u>Unite jump<CR>
+\|  endif
+'''

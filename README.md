@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-ae06710's dotfiles setting
+threetreeslight's dotfiles setting
 
 require
 -------
@@ -10,18 +10,7 @@ require
 * go
 * rbenv (option)
 * nodenv (option)
-* phpenv (option)
 * phantomenv (option)
-* mysql (option)
-* redis (option)
-
-libraries
-
-* z
-* percol
-* j
-* resty
-* mergepbx
 
 Getting Started
 ---------------
@@ -29,7 +18,7 @@ Getting Started
 Clone git submodules
 
 ```bash
-$ ghq get ae06710/dotfiles
+$ ghq get threetreeslight/dotfiles
 $ git submodule init
 $ git submodule update
 ```
@@ -52,29 +41,6 @@ Installing
 
 ```bash
 $ ./install_local
-```
-
-Mysql setting
-
-```bash
-$ unset TMPDIR
-# $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-$ mysql.server start
-$ mysql -u root
-> show databases;
-> set password for root@localhost=password('root');
-> exit
-$ mysql -u root -p
-```
-
-Daemonize redis
-
-```bash
-$ vim /opt/boxen/config/redis/redis.conf
-daemonize yes
-
-$ brew info redis
-=> Show how to set launchctl
 ```
 
 Usage
@@ -123,7 +89,6 @@ Text Rendering: draw bold text in bright colors | false
 VirtualBox
 
 - download from <http://www.modern.ie>
-  - ie8 win7 or winXP
   - ie9 win7
 - NAT
 - Bridge network
@@ -133,17 +98,6 @@ Skype
 Key             | Attr
 ---             | ---
 privacy setting | no histroy
-
-```
-## composer global install
-#
-# we cant install via boxen
-# because mac default php has not php.ini
-#
-$ sudo mkdir -p /usr/local/bin
-$ sudo curl -sS https://getcomposer.org/installer | sudo php
-$ sudo chmod a+x composer.phar
-```
 
 ## tmux
 
@@ -185,13 +139,6 @@ tc : create new tab
 tx : close current tab
 tn : move to next tab
 tp : move to previous tab
-```
-
-VimShell
-
-```
-:VimShell : open shell window
-Ctrl + l  : open vimshell history
 ```
 
 Unite
@@ -281,10 +228,4 @@ $ git-all-use
 * `ctrl + u` : Reset Command
 * `cd -` : back to old current directory
 * `cd -<TAB>` : select back directory on histroy
-
-## Reference
-
-- [脱初心者を目指すなら知っておきたい便利なVimコマンド25選](http://qiita.com/jnchito/items/57ffda5712636a9a1e62)
-- [vimでキーマッピングする際に考えたほうがいいこと](http://deris.hatenablog.jp/entry/2013/05/02/192415)
-
 

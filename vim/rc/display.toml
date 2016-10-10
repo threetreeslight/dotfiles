@@ -1,0 +1,20 @@
+# solarizedcolor schema
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'
+hook_add = '''
+  call dein#source('altercation/vim-colors-solarized')
+  colorscheme solarized
+  if !has('gui_running')
+    set t_Co=256
+    set background=dark
+  endif
+'''
+
+# powerlineline
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+        \ 'colorscheme': 'solarized'
+        \ }
+'''

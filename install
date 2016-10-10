@@ -3,7 +3,7 @@
 #
 # symlink dot files and directories
 #
-DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global gitattributes tigrc gemrc ptignore)
+DOT_FILES=(vimrc tmux.conf zshrc zshenv gitconfig gitignore_global gitattributes tigrc gemrc)
 DOT_DIRECTORIES=(vim bundle git_template)
 
 NEED_RESTART=0

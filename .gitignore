@@ -1,9 +1,2 @@
-# vim
-vim/bundle
-out
-
-# pit
-.pit
-
-# tmux
 *.log
+
