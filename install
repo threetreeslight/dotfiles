@@ -65,17 +65,8 @@ else
   NEED_RESTART=1
 fi
 
-
-if [ -d $HOME/src/github.com/motemen ]; then
-  echo "[WARN] Exist ghq"
-else
-  go get github.com/motemen/ghq
-  NEED_RESTART=1
-  echo "[INFO] install ghq."
-fi
-
 #
-# xcode 6
+# xcode
 #
 XCODE_HOME=${HOME}/Library/Developer/Xcode/UserData/FontAndColorThemes
 if [ -L ${XCODE_HOME}/Solarized\ -\ Ae06710.dvtcolortheme ]; then
@@ -103,29 +94,6 @@ do
     echo "[INFO] install $package"
   fi
 done
-
-#
-# memcached
-#
-if [ -e ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist ]; then
-  echo "[WARN] Already symlinked memcached plist"
-else
-  echo "[INFO] Symlink memcached plist to launchAgent"
-  ln -sfv /opt/boxen/homebrew/opt/memcached/*.plist ~/Library/LaunchAgents
-fi
-
-#
-# git-secret
-#
-git_secret_path=$HOME/src/github.com/awslabs/git-secrets
-if [ -d $git_secret_path ]; then
-  echo "[WARN] Exist git-secrets"
-else
-  echo "[INFO] install git-securets"
-  ghq get awslabs/git-secrets
-  cd $git_secret_path && make install
-  NEED_RESTART=1
-fi
 
 #
 # google cloud sdk
