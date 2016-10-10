@@ -118,7 +118,7 @@ export PATH=$PATH:/Applications/flex_sdk_4.6/bin
 eval "$(direnv hook zsh)"
 source ~/dotfiles/zsh/zshrc.alias
 source ~/dotfiles/zsh/zshrc.language
-source ~/dotfiles/zsh/zshrc.percol
+source ~/dotfiles/zsh/zshrc.peco
 source ~/.zsh.env
 
 

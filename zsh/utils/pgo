@@ -6,12 +6,12 @@
 #
 function pgb () {
   if [[ $1 == "" ]]; then
-    PERCOL=percol
+    PECO=peco
   else
-    PERCOL="percol --query $1"
+    PECO="peco --query $1"
   fi
   git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads | \
-      perl -pne 's{^refs/heads/}{}' | eval $PERCOL
+      perl -pne 's{^refs/heads/}{}' | eval $PECO
 }
 
 # pgu
@@ -37,13 +37,13 @@ function pgu () {
 #
 function pgo () {
   if [[ $1 == "" ]]; then
-    PERCOL=percol
+    PECO=peco
   else
-    PERCOL="percol --query $1"
+    PECO="peco --query $1"
   fi
 
   local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
-      perl -pne 's{^refs/(remotes)/}{}' | eval $PERCOL )
+      perl -pne 's{^refs/(remotes)/}{}' | eval $PECO )
   if [ -n "$selected_branch" ]; then
       git checkout -t ${selected_branch}
   fi

@@ -5,11 +5,11 @@
 #
 function ppgrep() {
   if [[ $1 == "" ]]; then
-    PERCOL=percol
+    PECO=peco
   else
-    PERCOL="percol --query $1"
+    PECO="peco --query $1"
   fi
-  ps aux | eval $PERCOL | awk '{ print $2 }'
+  ps aux | eval $PECO | awk '{ print $2 }'
 }
 
 # ppkill

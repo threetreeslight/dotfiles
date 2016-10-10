@@ -81,7 +81,7 @@ fi
 #
 # Python
 #
-packages=(percol awscli)
+packages=(awscli)
 
 for package in ${packages[@]}
 do

@@ -27,20 +27,20 @@ function s3ls() {
   done
 
   if [[ $query == "" ]]; then
-    PERCOL=percol
+    PECO=peco
   else
-    PERCOL="percol --query $query"
+    PECO="peco --query $query"
   fi
 
   if [[ $bucket == "" ]]; then
-    aws s3 ls | eval $PERCOL | awk '{ print $3 }'
+    aws s3 ls | eval $PECO | awk '{ print $3 }'
   else
     aws s3api list-objects \
       --bucket $bucket \
       $(echo $prefix) \
       --query 'Contents[].{Key: Key}' \
       --max-items 30 | \
-      eval $PERCOL
+      eval $PECO
   fi
 }
 

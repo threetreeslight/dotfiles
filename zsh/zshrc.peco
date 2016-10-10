@@ -2,7 +2,7 @@
 
 function exists { which $1 &> /dev/null }
 
-if exists percol; then
+if exists peco; then
   source ~/dotfiles/zsh/utils/gcd
   source ~/dotfiles/zsh/utils/phistory
   source ~/dotfiles/zsh/utils/ec2-ssh

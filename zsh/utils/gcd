@@ -6,10 +6,10 @@
 #
 function gcd() {
   if [[ $1 == "" ]]; then
-    PERCOL=percol
+    PECO=peco
   else
-    PERCOL="percol --query $1"
+    PECO="peco --query $1"
   fi
-  cd $(ghq list --full-path | eval $PERCOL)
+  cd $(ghq list --full-path | eval $PECO)
 }
 

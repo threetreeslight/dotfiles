@@ -26,12 +26,12 @@ function ec2-public-ip() {
     done
 
     if [[ $QUERY == "" ]]; then
-      PERCOL=percol
+      PECO=peco
     else
-      PERCOL="percol --query $QUERY"
+      PECO="peco --query $QUERY"
     fi
 
-    ec2-instances -c $EC2_PROFILE | eval $PERCOL | awk '{ print $2 }'
+    ec2-instances -c $EC2_PROFILE | eval $PECO | awk '{ print $2 }'
 }
 
 function ec2-private-ip() {
@@ -60,12 +60,12 @@ function ec2-private-ip() {
     done
 
     if [[ $QUERY == "" ]]; then
-      PERCOL=percol
+      PECO=peco
     else
-      PERCOL="percol --query $QUERY"
+      PECO="peco --query $QUERY"
     fi
 
-    ec2-instances -c $EC2_PROFILE | eval $PERCOL | awk '{ print $3 }'
+    ec2-instances -c $EC2_PROFILE | eval $PECO | awk '{ print $3 }'
 }
 
 # Formatting [instance_name, public_ip, private_ip]
