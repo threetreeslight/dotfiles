@@ -4,6 +4,3 @@
 [submodule "zsh/dircolors-solarized"]
 	path = zsh/dircolors-solarized
 	url = git@github.com:seebi/dircolors-solarized.git
-[submodule "zsh/antigen"]
-	path = zsh/antigen
-	url = git@github.com:zsh-users/antigen.git

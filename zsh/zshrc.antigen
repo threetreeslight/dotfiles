@@ -1,7 +1,0 @@
-# antigen
-if [[ -f $HOME/dotfiles/.zsh/antigen/antigen.zsh ]]; then
-  source $HOME/dotfiles/.zsh/antigen/antigen.zsh
-
-  antigen bundle zsh-users/zsh-syntax-highlighting
-  antigen apply
-fi
