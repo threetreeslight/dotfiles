@@ -13,3 +13,14 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 '''
+
+[[plugins]]
+repo = 'Shougo/junkfile.vim'
+hook_add = '''
+call dein#add('Shougo/junkfile.vim')
+
+let g:junkfile#directory = $HOME . '/Dropbox/note'
+noremap ,j :Unite junkfile/new junkfile -start-insert<CR>
+'''
+
+
