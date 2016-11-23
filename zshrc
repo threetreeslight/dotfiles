@@ -1,7 +1,3 @@
-#
-# zshrc
-#
-
 # Boxen
 source /opt/boxen/env.sh
 
@@ -89,47 +85,23 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 autoload colors; colors
 
-# tmux
-export EDITOR='vim'
-# source ~/.bin/tmuxinator.zsh
-
-# git
-export GIT_EDITOR="/usr/bin/vim"
-eval "$(hub alias -s)"
-
 # z
 . `brew --prefix`/etc/profile.d/z.sh
 function precmd () {
   z --add "$(pwd -P)"
 }
 
-# redis for hubot
-export REDISTOGO_URL=$BOXEN_REDIS_URL
-
-# Action Script
-export PATH=$PATH:/Applications/flex_sdk_4.6/bin
-
 #
 # develop
 #
 eval "$(direnv hook zsh)"
 source ~/dotfiles/zsh/zshrc.alias
+source ~/dotfiles/zsh/zshrc.tmux
+source ~/dotfiles/zsh/zshrc.git
+source ~/dotfiles/zsh/zshrc.editor
 source ~/dotfiles/zsh/zshrc.language
 source ~/dotfiles/zsh/zshrc.peco
+source ~/dotfiles/zsh/zshrc.docker
+source ~/dotfiles/zsh/zshrc.google
+source ~/dotfiles/zsh/zshrc.hubot
 source ~/.zsh.env
-
-
-export NVM_DIR="/Users/ae06710/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# The next line updates PATH for the Google Cloud SDK.
-source $HOME/google-cloud-sdk/path.zsh.inc
-
-# The next line enables shell command completion for gcloud.
-source $HOME/google-cloud-sdk/completion.zsh.inc
-
-# docker
-export DOCKER_HOST=tcp://192.168.99.100:2376
-export DOCKER_CERT_PATH=/Users/ae06710/.docker/machine/machines/dinghy
-export DOCKER_TLS_VERIFY=1
-export DOCKER_MACHINE_NAME=dinghy

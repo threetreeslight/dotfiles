@@ -1,4 +1,3 @@
-# common alias
 alias ll='ls -laG'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -8,11 +7,14 @@ alias df='df -h'
 alias vi='/usr/bin/vim'
 alias tree='tree -NC'
 
-# git
-alias g='git'
-alias gg='git grep -H --heading --break'
+if [[ -x `which colordiff` ]]; then
+  alias diff='colordiff -u'
+else
+  alias diff='diff -u'
+fi
+
+# less
+export LESS='-R'
 
 # ruby
 alias be='bundle exec'
-
-

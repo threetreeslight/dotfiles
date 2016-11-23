@@ -1,0 +1,4 @@
+alias vi='/usr/bin/vim'
+
+export NVM_DIR="/Users/ae06710/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

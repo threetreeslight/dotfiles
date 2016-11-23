@@ -1,0 +1,5 @@
+alias g='git'
+alias gg='git grep -H --heading --break'
+
+export GIT_EDITOR="/usr/bin/vim"
+eval "$(hub alias -s)"
