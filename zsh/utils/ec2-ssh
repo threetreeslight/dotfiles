@@ -147,20 +147,22 @@ function ec2-scp() {
 # ssh login to ec2 server
 function ec2-ssh() {
     usage_exit() {
-        echo "Usage: [-u user] [-q query] [-k key] [-c credential]" 1>&2
+        echo "Usage: [-u user] [-p port] [-q query] [-k key] [-c credential]" 1>&2
         return 0
     }
 
     QUERY=""
     KEY=~/.ssh/id_rsa
-    EC2_SSH_USER=akiramiki
-    RUN_FLG=1
+    EC2_SSH_USER=$USER
+    PORT=22
     EC2_PROFILE="default"
 
-    while getopts u:q:k:c:h OPT
+    while getopts u:p:q:k:c:h OPT
     do
         case $OPT in
             u)  EC2_SSH_USER=$OPTARG
+                ;;
+            p)  PORT=$OPTARG
                 ;;
             q)  QUERY=$OPTARG
                 ;;
@@ -177,13 +179,13 @@ function ec2-ssh() {
         esac
     done
 
-    if [[ $RUN_FLG != 0 ]]; then
-      if [[ $QUERY != "" ]]; then
-        ssh $EC2_SSH_USER@$(ec2-public-ip -q $QUERY -c $EC2_PROFILE) -p2222 -i $KEY
-      else
-        ssh $EC2_SSH_USER@$(ec2-public-ip -c $EC2_PROFILE) -p2222 -i $KEY
-      fi
+    if [[ $QUERY != "" ]]; then
+      HOST=$(ec2-public-ip -q $QUERY -c $EC2_PROFILE)
+    else
+      HOST=$(ec2-public-ip -c $EC2_PROFILE)
     fi
+
+    ssh $EC2_SSH_USER@$HOST -p $PORT -i $KEY
 }
 
 # ec2-mosh
