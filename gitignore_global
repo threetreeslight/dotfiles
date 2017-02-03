@@ -17,7 +17,7 @@ thumbs.db
 
 # sublime
 *.sublime-project
-*.sublime-workspacep
+*.sublime-workspace
 
 # ctag
 tags
