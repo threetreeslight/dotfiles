@@ -1,0 +1,13 @@
+alias ll='ls -laG'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias du='du -h'
+alias df='df -h'
+alias tree='tree -NC'
+
+# less
+export LESS='-R'
+
+# ruby
+alias be='bundle exec'
