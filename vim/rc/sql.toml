@@ -1,0 +1,3 @@
+[[plugins]]
+repo = 'SQLUtilities'
+on_ft = 'sql'

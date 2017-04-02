@@ -31,6 +31,7 @@ if dein#load_state(s:dein_dir)
   " call dein#load_toml(g:rc_dir . '/complete.toml', {'lazy': 0})
   call dein#load_toml(g:rc_dir . '/syntax.toml', {'lazy': 1})
   call dein#load_toml(g:rc_dir . '/ruby.toml', {'lazy': 1}) " Need fix it
+  call dein#load_toml(g:rc_dir . '/sql.toml', {'lazy': 1})
 
   " Required:
   call dein#end()
