@@ -1,53 +1,39 @@
-dotfiles
-========
+# dotfiles
 
 threetreeslight's dotfiles setting
 
-require
--------
+# Getting Started
 
-* boxen
-* go
-* rbenv (option)
-* nodenv (option)
-* phantomenv (option)
-
-Getting Started
----------------
-
-Clone git submodules
+Install Xcode and Accept licence & install command line tools
 
 ```bash
-$ ghq get threetreeslight/dotfiles
-$ git submodule init
-$ git submodule update
+sudo xcodebuild -license
+xcode-select --install
 ```
 
-Symlink any dot files to own home directory
+Install
 
 ```bash
-$ ./install
+curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/install | bash
 ```
 
-Install local settings
-----------------------
-
-require
-
-* Boxen installed
-* Dropbox contents loaded
-
-Installing
+# Othre usage
 
 ```bash
-$ ./install_local
+# install mitamae
+bin/setup
+
+# cook
+bin/mitamae local -y nodes/darwin.yml roles/darwin.rb
 ```
 
-Usage
------
+Load local settings
 
-* AWS setting file located (`$HOME/Dropbox/dev/.ec2`) in Dropbox
+- Dropbox contents loaded
 
+```bash
+$HOME/dotfiles/bin/install_local
+```
 
 Application Settings
 --------------------

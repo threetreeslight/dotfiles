@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DOTFILES_PATH=$HOME/dotfiles
+
+git clone https://github.com/threetreeslight/dotfiles.git $DOTFILES_PATH
+cd $DOTFILES_PATH
+git submodule update --init
+
+bin/setup
+bin/mitamae local -y nodes/darwin.yml roles/darwin.rb
