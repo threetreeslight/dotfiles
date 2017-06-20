@@ -1,10 +1,16 @@
 #!/bin/sh
 
-DOTFILES_PATH=$HOME/dotfiles
+DOTFILE_REPO_PATH=$HOME/dotfiles
 
-git clone https://github.com/threetreeslight/dotfiles.git $DOTFILES_PATH
-cd $DOTFILES_PATH
+git clone https://github.com/threetreeslight/dotfiles.git $DOTFILE_REPO_PATH
+cd $DOTFILE_REPO_PATH
 git submodule update --init
 
 bin/setup
 bin/mitamae local -y nodes/darwin.yml roles/darwin.rb
+
+# Homebrew does not allow sudo.
+case "$(uname)" in
+  "Darwin")  bin/mitamae local -y nodes/darwin.yml roles/darwin.rb ;;
+  *) sudo -E bin/mitamae local lib/recipe.rb ;;
+esac
