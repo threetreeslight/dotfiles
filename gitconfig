@@ -14,7 +14,7 @@
 [grep]
   lineNumber = true
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = /opt/boxen/config/git/gitignore
   attributesfile = ~/.gitattributes
 
 [pager]

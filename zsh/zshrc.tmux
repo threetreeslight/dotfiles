@@ -10,6 +10,8 @@ function ptmux_switch_session() {
   zle -R -c
 }
 
+function exists { which $1 &> /dev/null }
+
 if exists peco; then
   # register shell function to zsh widget
   zle -N ptmux_switch_session
