@@ -4,3 +4,4 @@
 end
 
 dotfile '.tmux.conf'
+dotfile '.tmuxinator'

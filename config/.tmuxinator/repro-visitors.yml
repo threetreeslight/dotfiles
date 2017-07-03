@@ -1,0 +1,10 @@
+name: repro-visitors
+root: ~/src/github.com/reproio/repro-visitors
+windows:
+  - editor:
+      vim
+  - console:
+      layout:
+      panes:
+        -
+        -

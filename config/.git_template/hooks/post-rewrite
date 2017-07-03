@@ -1,5 +1,2 @@
 #!/bin/sh
-# case "$1" in
-#   rebase) exec .git/hooks/ctags ;;
-# esac
-
+.git/hooks/ctags >/dev/null 2>&1 &

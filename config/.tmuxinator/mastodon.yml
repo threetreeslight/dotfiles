@@ -1,0 +1,10 @@
+name: mastodon
+root: ~/src/github.com/threetreeslight/mastodon
+windows:
+  - editor:
+      vim
+  - console:
+      layout:
+      panes:
+          -
+          -
