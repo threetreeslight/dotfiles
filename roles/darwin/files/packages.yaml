@@ -1,0 +1,36 @@
+---
+- ack
+- awscli
+- coreutils # change mac command to like GNU Linux
+- ctags
+- direnv
+- docker
+- docker-compose
+- docker-machine
+- findutils
+- go
+- gnu-tar
+- gzip
+- heroku
+- hugo
+- htop
+- iproute2mac # ip command
+- jid # json interactive filter
+- jq # json perser pipeline
+- libidn # encode/decode utf-8 domain
+- mobile-shell
+- mycli
+- openssl
+- packer
+- peco # interactive filter
+- percona-toolkit
+- pgcli
+- putty
+- python
+- readline # use for ruby compile
+- sshrc
+- terraform
+- tig
+- tree
+- watch
+- wget

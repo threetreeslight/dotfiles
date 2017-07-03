@@ -1,6 +1,6 @@
 [submodule "themes/solarized"]
 	path = themes/solarized
 	url = git@github.com:altercation/solarized.git
-[submodule "zsh/dircolors-solarized"]
-	path = zsh/dircolors-solarized
+[submodule "config/.zsh/dircolors-solarized"]
+	path = config/.zsh/dircolors-solarized
 	url = git@github.com:seebi/dircolors-solarized.git

@@ -1,5 +1,5 @@
-# Boxen
-source /opt/boxen/env.sh
+# initialize boxen
+source ~/.zsh/zshrc.boxen
 
 #
 # Color definition
@@ -21,7 +21,7 @@ export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 
 # set prompt
-source $HOME/dotfiles/zsh/zshrc.prompt
+source $HOME/.zsh/zshrc.prompt
 
 setopt nobeep     # no beep sound
 setopt auto_cd    # auto change directory
@@ -85,23 +85,17 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 autoload colors; colors
 
-# z
-. `brew --prefix`/etc/profile.d/z.sh
-function precmd () {
-  z --add "$(pwd -P)"
-}
-
-#
 # develop
-#
-eval "$(direnv hook zsh)"
-source ~/dotfiles/zsh/zshrc.alias
-source ~/dotfiles/zsh/zshrc.tmux
-source ~/dotfiles/zsh/zshrc.git
-source ~/dotfiles/zsh/zshrc.editor
-source ~/dotfiles/zsh/zshrc.language
-source ~/dotfiles/zsh/zshrc.peco
-source ~/dotfiles/zsh/zshrc.docker
-source ~/dotfiles/zsh/zshrc.google
-source ~/dotfiles/zsh/zshrc.hubot
-source ~/.zsh.env
+source ~/.zsh/zshrc.alias
+source ~/.zsh/zshrc.direnv
+source ~/.zsh/zshrc.dinghy
+source ~/.zsh/zshrc.editor
+source ~/.zsh/zshrc.hubot
+source ~/.zsh/zshrc.git
+source ~/.zsh/zshrc.go
+source ~/.zsh/zshrc.google
+source ~/.zsh/zshrc.nvm
+source ~/.zsh/zshrc.peco
+source ~/.zsh/zshrc.rbenv
+source ~/.zsh/zshrc.tmux
+# source ~/.zsh.env

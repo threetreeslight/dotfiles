@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function exists { which $1 &> /dev/null }
+
+if exists peco; then
+  source ~/.zsh/utils/gcd
+  source ~/.zsh/utils/phistory
+  source ~/.zsh/utils/ec2-ssh
+  source ~/.zsh/utils/s3get
+  source ~/.zsh/utils/pgo
+  source ~/.zsh/utils/ppkill
+fi
+
