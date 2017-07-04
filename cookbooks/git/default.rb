@@ -1,7 +1,8 @@
-# git-secret : detect secret file on git hook
-# hub : github cli
-%w( git git-secrets git-now hub ).each do |n|
-end
+package 'git'
+package 'git-lfs'
+package 'git-secrets' # detect secret file on git hook
+package 'git-now'
+package 'hub' # github cli
 
 %w( .gitconfig .gitignore_global .gitattributes .git_template ).each do |n|
   dotfile n
