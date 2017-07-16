@@ -1,3 +1,4 @@
 ---
 :preferences:
-  :proxy_disabled: false
+  :proxy_disabled: true
+  :fsevents_disabled: false
