@@ -163,8 +163,7 @@ highlight JpSpace cterm=underline ctermfg=Blue guifg=Blue
 match JpSpace /　/
 
 " negative screen bell
-set t_vb=
-set novisualbell
+set vb t_vb=
 
 " colorscheme
 syntax enable
