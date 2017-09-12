@@ -1,6 +1,9 @@
 #!/bin/bash
 
 export EDITOR='vim'
+# https://github.com/jonas/tig/issues/292
+# https://github.com/ddollar/tmux/blob/master/FAQ
+[ -n "$TMUX" ] && export TERM=screen-256color
 
 # switch session
 function ptmux_switch_session() {
