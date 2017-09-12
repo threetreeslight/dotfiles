@@ -1,9 +1,7 @@
 - alfred
 - amethyst
 # - android-studio # TODO: detect installed or not
-- atom
 - avg-antivirus
-- caffeine
 - chefdk
 - dash
 - dropbox
@@ -14,6 +12,7 @@
 - flux
 # - ios-console
 - iterm2
+- keepingyouawake
 - karabiner-elements
 - lastpass
 - postman
@@ -21,4 +20,4 @@
 # - simpholders
 - slack
 # - virtualbox # TODO: detect installed or not
-- wmail
+- wavebox
