@@ -27,7 +27,9 @@
 - pgcli
 - putty
 - python
+- rbenv
 - readline # use for ruby compile
+- ruby-build
 - sshrc
 - terraform
 - tig

@@ -9,14 +9,9 @@ package 'hub' # github cli
 end
 
 execute 'symlink diff-highlight' do
+  not_if 'test -L /usr/local/bin/diff-highlight && echo true'
   command <<-CMD
-if [ -L /usr/local/bin/diff-highlight ]; then
-  echo "[WARN] Symlinked diff-highlight"
-else
-  find /opt/boxen -name diff-highlight | awk 'NR == 2 {print "sudo ln -s",$0,"/usr/local/bin/"}'
-  REQUIRE_RESTART=1
-  echo "[INFO] diff-highlight symlinked."
-fi
+  find `brew --prefix` -name diff-highlight | awk 'NR == 2 { print $0 }' | xargs -I{} sudo ln -s {} /usr/local/bin/
 CMD
 end
 

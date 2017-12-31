@@ -1,6 +1,3 @@
-# initialize boxen
-source ~/.zsh/zshrc.boxen
-
 #
 # Color definition
 #
