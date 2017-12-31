@@ -14,7 +14,6 @@
 [grep]
   lineNumber = true
 [core]
-  excludesfile = /opt/boxen/config/git/gitignore
   attributesfile = ~/.gitattributes
 
 [pager]
@@ -24,9 +23,6 @@
 
 [include]
   path = .gitconfig.local
-
-[credential]
-  helper = /opt/boxen/bin/boxen-git-credential
 
 [hub]
   protocol = https
