@@ -1,0 +1,9 @@
+# ~/.tmuxinator/repro-pusher.yml
+
+name: repro-pusher
+root: ~/src/github.com/reproio/repro.pusher
+
+windows:
+  - editor:
+  - runner:
+

@@ -1,0 +1,9 @@
+name: repro-demo-android
+root: ~/src/github.com/reproio/ReproDemoAndroid
+
+windows:
+  - editor:
+      layout:
+      panes:
+        - vim
+        -

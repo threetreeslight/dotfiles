@@ -1,0 +1,10 @@
+name: refine-intercom
+root: ~/src/github.com/threetreeslight/refine-intercom
+
+windows:
+  - editor: vim
+  - server:
+      layout:
+      panes:
+        -
+        -

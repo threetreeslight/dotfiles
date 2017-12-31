@@ -1,0 +1,9 @@
+name: repro-demo-ios
+root: ~/src/github.com/reproio/ReproDemoiOS
+
+windows:
+  - editor:
+      layout:
+      panes:
+        - vim
+        -
