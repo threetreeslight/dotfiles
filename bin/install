@@ -10,7 +10,7 @@ cd $DOTFILE_REPO_PATH
 echo "Update submodules # TODO remove submodule"
 git submodule update --init
 
-bin/install-mitamae
+bin/setup
 
 # Homebrew does not allow sudo.
 case "$(uname)" in
