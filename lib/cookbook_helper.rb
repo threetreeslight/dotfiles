@@ -1,3 +1,7 @@
+# Some implementation refered from k0kubun/dotfiles
+# https://github.com/k0kubun/dotfiles/blob/master/cookbooks/functions/default.rb
+# Authored by k0kubun
+
 define :dotfile, source: nil do
   source = params[:source] || params[:name]
   link File.join(ENV['HOME'], params[:name]) do

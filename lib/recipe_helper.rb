@@ -1,3 +1,7 @@
+# Some implementation refered from k0kubun/dotfiles
+# https://github.com/k0kubun/dotfiles/blob/master/lib/recipe_helper.rb
+# Authored by k0kubun
+
 MItamae::RecipeContext.class_eval do
   def include_cookbook(name)
     root_dir = File.expand_path('../..', __FILE__)
