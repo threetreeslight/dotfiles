@@ -15,12 +15,13 @@
 - hugo
 - htop
 - iproute2mac # ip command
-- jid # json interactive filter
+- jid # json inremental digger
 - jq # json perser pipeline
 - libidn # encode/decode utf-8 domain
-- mobile-shell
+# - mobile-shell
 - mycli
 - openssl
+- p7zip # to un7zip chronium os image
 - packer
 - peco # interactive filter
 - percona-toolkit
