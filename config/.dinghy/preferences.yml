@@ -1,4 +1,8 @@
 ---
 :preferences:
   :proxy_disabled: true
+  :dns_disabled: true
   :fsevents_disabled: false
+  :memory: 4096
+  :cpus: 2
+  :disc: 80000
