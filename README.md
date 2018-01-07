@@ -17,25 +17,21 @@ Install
 curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/install | bash
 ```
 
-# Othre usage
+# Othre Usage
+
+install mitamae
 
 ```bash
-# install mitamae
 bin/setup
+```
 
-# cook
+cook
+
+```bash
 bin/mitamae local -y nodes/darwin.yml roles/darwin.rb
 ```
 
-Load local settings
-
-- Dropbox contents loaded
-
-```bash
-$HOME/dotfiles/bin/install_local
-```
-
-# Application Settings
+# Settings
 
 common
 - [tmux](docs/tmux.md)
