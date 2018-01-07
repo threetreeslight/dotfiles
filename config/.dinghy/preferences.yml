@@ -6,3 +6,4 @@
   :memory: 4096
   :cpus: 2
   :disc: 80000
+  :unfs_disabled: false
