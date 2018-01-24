@@ -18,6 +18,7 @@
 - jid # json inremental digger
 - jq # json perser pipeline
 - libidn # encode/decode utf-8 domain
+- lzop
 # - mobile-shell
 - mycli
 - mruby
@@ -33,6 +34,7 @@
 - rbenv
 - readline # use for ruby compile
 - ruby-build
+- snzip
 - sshrc
 - terraform
 - tig
