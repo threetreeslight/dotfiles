@@ -20,4 +20,9 @@
 # - simpholders
 - slack
 # - virtualbox # TODO: detect installed or not
+- unity
+- unity-standard-assets
+- unity-ios-support-for-editor
+- unity-android-support-for-editor
+- unity-monodevelop
 - wavebox
