@@ -20,6 +20,8 @@
 - libidn # encode/decode utf-8 domain
 # - mobile-shell
 - mycli
+- mruby
+- mruby-cli
 - openssl
 - p7zip # to un7zip chronium os image
 - packer
