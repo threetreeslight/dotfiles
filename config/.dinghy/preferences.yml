@@ -1,3 +1,4 @@
+---
 preferences:
   proxy_disabled: true
   dns_disabled: true
@@ -8,3 +9,8 @@ preferences:
     disk: 40000
     memory: 4096
     provider: virtualbox
+:preferences:
+  :unfs_disabled: false
+  :proxy_disabled: false
+  :dns_disabled: false
+  :fsevents_disabled: false
