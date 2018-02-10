@@ -1,56 +1,59 @@
 [color]
-	ui = true
+  ui = true
 [alias]
-	co = checkout
-	st = status --short --branch
-	br = branch
-	ci = commit
-	pr = pull-request
-	lo = log --graph --decorate --oneline
-	show = !tig show --pretty=fuller
-	branch-root = merge-base master HEAD
-	review = !tig --reverse -w $(git branch-root)..HEAD
-	delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+  br = branch
+  branch-root = merge-base master HEAD
+  ci = commit
+  co = checkout
+  delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+  lo = log --graph --decorate --oneline
+  pr = pull-request
+  review = !tig --reverse -w $(git branch-root)..HEAD
+  show = !tig show --pretty=fuller
+  st = status --short --branch
 [grep]
-	lineNumber = true
+  lineNumber = true
 [core]
-	attributesfile = $HOME/.gitattributes
-	excludesfile = $HOME/.gitignore_global
+  attributesfile = $HOME/.gitattributes
+  excludesfile = $HOME/.gitignore_global
+
+[remote "origin"]
+  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 
 [pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
 
 [include]
-	path = .gitconfig.local
+  path = .gitconfig.local
 
 [hub]
-	protocol = https
+  protocol = https
 
 [tig "bind"]
-	main = B @hub browse -- commit/%(commit)
-	diff = B @hub browse -- commit/%(commit)
-	tree = B @hub browse -- tree/%(commit)/%(directory)
-	blob = B @hub browse -- tree/%(commit)/%(file)
+  main = B @hub browse -- commit/%(commit)
+  diff = B @hub browse -- commit/%(commit)
+  tree = B @hub browse -- tree/%(commit)/%(directory)
+  blob = B @hub browse -- tree/%(commit)/%(file)
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 [ghq]
-	root = /Users/ae06710/src
+  root = /Users/ae06710/src
 [diff "sheetjs"]
-	textconv = j
+  textconv = j
 
 # driver for merging XCode project files
 [merge "mergepbx"]
-	name = XCode project files merger
-	driver = mergepbx %O %A %B
+  name = XCode project files merger
+  driver = mergepbx %O %A %B
 
 [init]
-	templatedir = ~/.git_template
+  templatedir = ~/.git_template
 [secrets]
-	providers = git secrets --aws-provider
-	patterns = [A-Z0-9]{20}
-	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
-	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+  providers = git secrets --aws-provider
+  patterns = [A-Z0-9]{20}
+  patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+  patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
 [merge]
-	ff = false
+  ff = false
