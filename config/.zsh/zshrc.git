@@ -1,5 +1,11 @@
+#!/bin/bash
+
 alias g='git'
-alias gg='git grep -H --heading --break'
 
 export GIT_EDITOR="/usr/bin/vim"
+
 eval "$(hub alias -s)"
+
+function gsed-all () {
+  git grep -l $1 | xargs sed -i '' -e s/$1/$2/g
+}
