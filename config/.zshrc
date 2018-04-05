@@ -68,14 +68,11 @@ zstyle ':completion:*' group-name ''
 # coloring
 case "${OSTYPE}" in
   freebsd*|darwin*)
-    if [ -f $HOME/dotfiles/zsh/zshrc.mac ]; then
-      source $HOME/dotfiles/zsh/zshrc.mac
-    fi
+    source $HOME/.zsh/zshrc.mac
+    source $HOME/.zsh/zshrc.brew
     ;;
   linux*)
-    if [ -f $HOME/dotfiles/zsh/zshrc.linux ]; then
-      source $HOME/dotfiles/zsh/zshrc.linux
-    fi
+    source $HOME/.zsh/zshrc.linux
   ;;
 esac
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

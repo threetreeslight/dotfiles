@@ -6,6 +6,30 @@ export GIT_EDITOR="/usr/bin/vim"
 
 eval "$(hub alias -s)"
 
-function gsed-all () {
-  git grep -l $1 | xargs sed -i '' -e s/$1/$2/g
+function ggsed() {
+    usage_exit() {
+        echo "Usage: [-q regexp query] [-r replace sentence] [-p target path]" 1>&2
+        return 0
+    }
+
+    while getopts qrp:h OPT
+    do
+        case $OPT in
+            q)  query=$OPTARG
+                ;;
+            r)  sentence=$OPTARG
+                ;;
+            p)  path=$OPTARG
+                ;;
+            h)  usage_exit
+                return 0
+                ;;
+            \?) usage_exit
+                return 0
+                ;;
+        esac
+    done
+
+
+    git grep -l $query $path | xargs sed -i '' -e s/$query/$sentence/g
 }

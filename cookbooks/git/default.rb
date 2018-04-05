@@ -27,9 +27,10 @@ end
 
 # diff highlight
 # https://github.com/git/git/tree/master/contrib/diff-highlight
-execute 'symlink diff-highlight' do
-  not_if 'test -L /usr/local/bin/diff-highlight && echo true'
+execute 'update diff-highlight symlink' do
+  # when update git, the symlink path will chage. so we run always diff-highlight symlinks.
   command <<-CMD
-  find `brew --prefix` -name diff-highlight | awk 'NR == 2 { print $0 }' | xargs -I{} sudo ln -s {} /usr/local/bin/
+  rm /usr/local/bin/diff-highlight
+  find `brew --prefix` -type f -name diff-highlight | awk 'NR == 1 { print $0 }' | xargs -I{} sudo ln -s {} /usr/local/bin/
 CMD
 end

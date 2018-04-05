@@ -16,7 +16,7 @@ define :brew_tap do
   end
 end
 
-# execute 'brew update and cleanup' do
-#   command 'brew update && brew cleanup'
-#   only_if 'hash brew 2>/dev/null'
-# end
+execute 'brew update and cleanup' do
+  command 'brew update && brew cleanup'
+  only_if 'hash brew 2>/dev/null'
+end
