@@ -15,8 +15,8 @@
 [grep]
   lineNumber = true
 [core]
-  attributesfile = $HOME/.gitattributes
-  excludesfile = $HOME/.gitignore_global
+  attributesfile = /Users/ae06710/.gitattributes
+  excludesfile = /Users/ae06710/.gitignore_global
 
 [remote "origin"]
   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
