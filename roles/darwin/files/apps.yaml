@@ -1,7 +1,7 @@
 - apache-directory-studio
 - alfred
 - amethyst
-# - android-studio # TODO: detect installed or not
+- android-studio
 - avg-antivirus
 - chefdk
 - dash
@@ -20,7 +20,7 @@
 - sequel-pro
 # - simpholders
 - slack
-# - virtualbox # TODO: detect installed or not
+- virtualbox
 - unity
 - unity-standard-assets
 - unity-ios-support-for-editor
