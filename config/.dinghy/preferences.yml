@@ -1,16 +1,11 @@
 ---
-preferences:
-  proxy_disabled: true
-  dns_disabled: true
-  fsevents_disabled: false
-  unfs_disabled: false
-  create:
+:preferences:
+  :proxy_disabled: true
+  :dns_disabled: true
+  :create:
     cpus: 2
     disk: 40000
     memory: 4096
     provider: virtualbox
-:preferences:
   :unfs_disabled: false
-  :proxy_disabled: false
-  :dns_disabled: false
   :fsevents_disabled: false
