@@ -1,0 +1,4 @@
+[submodule "plugins/itamae-plugin-resource-npm"]
+	path = plugins/itamae-plugin-resource-npm
+	url = https://github.com/threetreeslight/itamae-plugin-resource-npm
+	branch = support-mitamae
