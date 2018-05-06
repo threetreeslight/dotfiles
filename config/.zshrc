@@ -88,7 +88,6 @@ source ~/.zsh/zshrc.hubot
 source ~/.zsh/zshrc.git
 source ~/.zsh/zshrc.go
 source ~/.zsh/zshrc.google
-source ~/.zsh/zshrc.nvm
 source ~/.zsh/zshrc.peco
 source ~/.zsh/zshrc.rbenv
 source ~/.zsh/zshrc.tmux
