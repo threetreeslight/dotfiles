@@ -13,7 +13,6 @@ include_cookbook 'homebrew'
 # on-demand cookbook
 include_cookbook 'android', 'darwin'
 include_cookbook 'bundler'
-include_cookbook 'dinghy'
 include_cookbook 'git'
 include_cookbook 'tmux'
 include_cookbook 'vim'

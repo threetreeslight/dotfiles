@@ -1,1 +1,0 @@
-eval $(dinghy env)

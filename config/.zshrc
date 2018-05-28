@@ -82,7 +82,6 @@ autoload colors; colors
 # develop
 source ~/.zsh/zshrc.alias
 source ~/.zsh/zshrc.direnv
-source ~/.zsh/zshrc.dinghy
 source ~/.zsh/zshrc.editor
 source ~/.zsh/zshrc.hubot
 source ~/.zsh/zshrc.git
