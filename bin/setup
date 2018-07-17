@@ -5,9 +5,9 @@ set -e
 # https://github.com/k0kubun/dotfiles/blob/master/bin/setup
 # Authored by k0kubun
 
-mitamae_version="1.5.6"
-mitamae_linux_sha256="5fcfe0b5f13075f01befdcd4b211987cd7ad5905950c684d77c2030f04b52b09"
-mitamae_darwin_sha256="03159e73f0e44a05ca684471bbf2429f75528dc13a52fca33238707625d4b603"
+mitamae_version="1.6.2"
+mitamae_linux_sha256="047cc776f2b0b555c7a6d90c32c7c581529bfc1a5db48ddb3090ee79d55ce3f3"
+mitamae_darwin_sha256="fea7204eb8c160c2282721f7276c29cf74556b6ff835404fa40ca5c4b4d99d1b"
 
 mitamae_cache="mitamae-${mitamae_version}"
 if ! [ -f "bin/${mitamae_cache}" ]; then
