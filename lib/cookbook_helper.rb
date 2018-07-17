@@ -18,20 +18,31 @@ define :github_binary, version: nil, repository: nil, archive: nil, binary_path:
 
   if archive.end_with?('.zip')
     extract = "unzip -o"
+    has_ext = true
   elsif archive.end_with?('.tar.gz')
     extract = "tar xvzf"
+    has_ext = true
   else
-    raise "unexpected ext archive: #{archive}"
+    has_ext = false
   end
 
   execute "curl -fSL -o /tmp/#{archive} #{url}" do
     not_if "test -f #{bin_path}"
   end
-  execute "#{extract} /tmp/#{archive}" do
-    not_if "test -f #{bin_path}"
-    cwd "/tmp"
+
+  if has_ext
+    execute "#{extract} /tmp/#{archive}" do
+      not_if "test -f #{bin_path}"
+      cwd "/tmp"
+    end
+  else
+    execute "mv /tmp/#{archive} /tmp/#{cmd}" do
+      not_if "test -f #{bin_path}"
+      cwd "/tmp"
+    end
   end
-  execute "mv /tmp/#{params[:binary_path] || cmd} #{bin_path} && chmod +x #{path}" do
+
+  execute "mv /tmp/#{params[:binary_path] || cmd} #{bin_path} && chmod +x #{bin_path}" do
     not_if "test -f #{bin_path}"
   end
 end
