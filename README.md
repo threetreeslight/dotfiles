@@ -8,13 +8,15 @@ Install Xcode and Accept licence & install command line tools
 
 ```bash
 sudo xcodebuild -license
+> press agree
+
 xcode-select --install
 ```
 
 Install
 
 ```bash
-curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/install | bash
+curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/master/bin/install | bash
 ```
 
 # Othre Usage
