@@ -3,30 +3,27 @@
 - amethyst
 # - android-studio
 - avg-antivirus
-- chefdk
 - dash
-# - docker
+- docker
 - dropbox
 - google-chrome
 - google-japanese-ime
 - gyazo
-- flux
 # - ios-console
 - iterm2
 - jasper
 - keepingyouawake
 - karabiner-elements
-- lastpass
 - mysqlworkbench
 - postman
 - sequel-pro
-# - simpholders
 - slack
+# - simpholders
 - virtualbox
 - unity
 - unity-standard-assets
 - unity-ios-support-for-editor
 - unity-android-support-for-editor
-- unity-monodevelop
+# - unity-monodevelop
 - zoomus
 - wavebox

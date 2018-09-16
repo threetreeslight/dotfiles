@@ -59,3 +59,5 @@ VirtualBox
   - [ ] complement setting
   - [ ] modify ctag setting
   - [ ] split vimrc setting
+- ruby
+  - [ ] automate install latest ruby and install global gems

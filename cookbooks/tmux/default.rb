@@ -10,5 +10,5 @@ end
 
 dotfile '.tmux.conf'
 
-gem_package 'tmuxinator'
+# gem_package 'tmuxinator'
 dotfile '.tmuxinator'
