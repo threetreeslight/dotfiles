@@ -1,0 +1,8 @@
+# powerlineline
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+        \ 'colorscheme': 'default'
+        \ }
+'''
