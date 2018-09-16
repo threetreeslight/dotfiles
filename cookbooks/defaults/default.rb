@@ -19,13 +19,13 @@ execute 'restart-shell' do
   action :nothing
 end
 
-lltsv_archive = case node[:platform]
-                when 'darwin'
-                  'lltsv_darwin_amd64'
-                end
-
-github_binary "lltsv" do
-  version "v0.6.1"
-  repository "sonots/lltsv"
-  archive lltsv_archive
-end
+# lltsv_archive = case node[:platform]
+#                 when 'darwin'
+#                   'lltsv_darwin_amd64'
+#                 end
+# 
+# github_binary "lltsv" do
+#   version "v0.6.1"
+#   repository "sonots/lltsv"
+#   archive lltsv_archive
+# end

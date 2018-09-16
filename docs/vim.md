@@ -26,13 +26,16 @@ tp : move to previous tab
 
 Unite
 
-* `<C-U><C-U>` : buffer file
+* `<C-U><C-U>` : file/rec
 * `<C-U><C-R>` : file
 * `<C-U><C-D>` : dir
 * `<C-U><C-F>` : exploer
 * `<C-]>`      : ctags jump
 * `<C-t>`      : jump history
 
+Filer
+
+- E: edit file with split
 
 git
 

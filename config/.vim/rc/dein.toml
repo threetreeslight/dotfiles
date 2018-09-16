@@ -1,7 +1,0 @@
-# Required:
-[[plugins]]
-repo = 'Shougo/dein.vim'
-
-# Optional
-[[plugins]]
-repo = 'tpope/vim-dispatch'

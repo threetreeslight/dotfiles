@@ -1,22 +1,12 @@
 [[plugins]]
-repo = 'basyura/unite-rails'
-depends = ['Shougo/unite.vim']
-on_ft = 'ruby'
-hook_add = '''
-  noremap <C-H>a :Unite file:app<CR>
-  noremap <C-H>s :Unite file:spec<CR>
-  " noremap <C-H>c :Unite file_rec:config<CR>
-'''
-
-[[plugins]]
 repo = 'thoughtbot/vim-rspec'
 depends = ['tpope/vim-dispatch']
 hook_add = '''
-let g:rspec_command = "Dispatch rspec {spec}"
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+  let g:rspec_command = "Dispatch rspec {spec}"
+  map <Leader>t :call RunCurrentSpecFile()<CR>
+  map <Leader>s :call RunNearestSpec()<CR>
+  map <Leader>l :call RunLastSpec()<CR>
+  map <Leader>a :call RunAllSpecs()<CR>
 '''
 
 

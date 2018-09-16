@@ -50,3 +50,12 @@ VirtualBox
 - NAT
 - Bridge network
 
+# TODO
+
+- vim
+  - [ ] automate dein installation
+  - [ ] modify syntax highlight
+  - [ ] Highlight FullWidthSpace cleary
+  - [ ] complement setting
+  - [ ] modify ctag setting
+  - [ ] split vimrc setting
