@@ -15,8 +15,7 @@
 [grep]
   lineNumber = true
 [core]
-  attributesfile = /Users/ae06710/.gitattributes
-  excludesfile = /Users/ae06710/.gitignore_global
+  attributesfile = /Users/threetreeslight/.gitattributes
 
 [remote "origin"]
   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
@@ -40,7 +39,7 @@
 [branch]
   autosetuprebase = always
 [ghq]
-  root = /Users/ae06710/src
+  root = /Users/threetreeslight/src
 [diff "sheetjs"]
   textconv = j
 
