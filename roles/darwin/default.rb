@@ -19,5 +19,6 @@ include_cookbook 'vim'
 include_cookbook 'xcode'
 include_cookbook 'node'
 include_cookbook 'credentials'
+include_cookbook 'zsh'
 
 include_cookbook 'defaults'
