@@ -193,8 +193,10 @@ set wildmenu "Better command-line completion
 "-------------------------
 " utility functions
 "-------------------------
+" echomsg string("Register Utility Functions")
 function! s:TrimTailSpace()
   let l:save_cursor = getpos(".")
   silent! execute ':s/\s\+$//'
   call setpos('.', l:save_cursor)
 endfunction
+command! -range=% TrimTailSpace call <SID>TrimTailSpace()
