@@ -76,12 +76,8 @@ hook_add = '''
   let g:vimfiler_safe_mode_by_default = 0
 
   noremap <C-U><C-F> :VimFilerExplorer<CR>
+'''
 
-  " " atometic open Vimfilerexplorer
-  " let file_name = expand("%")
-  " if has('vim_starting') && file_name == ""
-  "   autocmd VimEnter * VimFilerExplorer ./
-  " endif
 [[plugins]]
 repo = 'Shougo/junkfile.vim'
 depends = ['Shougo/unite.vim']
