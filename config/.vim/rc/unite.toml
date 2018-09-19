@@ -85,6 +85,18 @@ hook_add = '''
   " if has('vim_starting') && file_name == ""
   "   autocmd VimEnter * VimFilerExplorer ./
   " endif
+[[plugins]]
+repo = 'Shougo/junkfile.vim'
+depends = ['Shougo/unite.vim']
+hook_add = '''
+  let g:junkfile#directory = expand('$HOME/Dropbox/notes')
+  noremap ,j :Unite junkfile/new junkfile -start-insert<CR>
+'''
+
+hook_post_source = '''
+  let g:junkfile#directory = $HOME . '/Dropbox/notes'
+  " noremap <C-u>j :Unite junkfile/new junkfile -start-insert<CR>
+  " noremap ,j :Unite junkfile/new junkfile -start-insert<CR>
 '''
 
 # [[plugins]]
