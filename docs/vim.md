@@ -81,7 +81,6 @@ rspec
 
 other usage
 
-* `<C-J>` : escape insert mode
 * `<Esc><Esc>` : escape highlight
 * `<C-t>` : trim white space
 * `:Codic <args>` saerch variable words
