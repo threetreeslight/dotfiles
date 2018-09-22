@@ -83,10 +83,11 @@ autoload colors; colors
 source ~/.zsh/zshrc.alias
 source ~/.zsh/zshrc.direnv
 source ~/.zsh/zshrc.editor
-source ~/.zsh/zshrc.hubot
 source ~/.zsh/zshrc.git
 source ~/.zsh/zshrc.go
 source ~/.zsh/zshrc.google
+source ~/.zsh/zshrc.hubot
+source ~/.zsh/zshrc.k8s
 source ~/.zsh/zshrc.peco
 source ~/.zsh/zshrc.rbenv
 source ~/.zsh/zshrc.tmux
