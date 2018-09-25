@@ -38,10 +38,12 @@
 - rbenv
 - readline # use for ruby compile
 - ruby-build
+- rclone
 - snzip
 - sshrc
 - terraform
 - tig
 - tree
+- translate-shell
 - watch
 - wget
