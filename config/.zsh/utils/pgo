@@ -42,7 +42,7 @@ function pgo () {
     PECO="peco --query $1"
   fi
 
-  local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes | \
+  local selected_branch=$(git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes refs/tags | \
       perl -pne 's{^refs/(remotes)/}{}' | eval $PECO )
   if [ -n "$selected_branch" ]; then
       git checkout -t ${selected_branch}
