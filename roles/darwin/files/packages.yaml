@@ -21,6 +21,7 @@
 - iproute2mac # ip command
 - jid # json inremental digger
 - jq # json perser pipeline
+- kubectx
 - libidn # encode/decode utf-8 domain
 - lzop
 # - mobile-shell
