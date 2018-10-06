@@ -12,6 +12,7 @@
 - docker-credential-helper
 - docker-machine
 - findutils
+  fzf
 - go
 - gnu-tar
 - gzip

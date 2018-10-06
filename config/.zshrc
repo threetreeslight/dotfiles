@@ -83,6 +83,7 @@ autoload colors; colors
 source ~/.zsh/zshrc.alias
 source ~/.zsh/zshrc.direnv
 source ~/.zsh/zshrc.editor
+[ -f ~/.fzf.zsh ] && source ~/.zsh/zshrc.fzf
 source ~/.zsh/zshrc.git
 source ~/.zsh/zshrc.go
 source ~/.zsh/zshrc.google
