@@ -7,10 +7,6 @@
 - cask
 - ctags
 - direnv
-- docker
-- docker-compose
-- docker-credential-helper
-- docker-machine
 - findutils
   fzf
 - go
