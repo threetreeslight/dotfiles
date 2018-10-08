@@ -8,7 +8,7 @@
 - ctags
 - direnv
 - findutils
-  fzf
+- fzf
 - go
 - gnu-tar
 - gzip
