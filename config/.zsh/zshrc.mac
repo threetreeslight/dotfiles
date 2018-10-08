@@ -5,9 +5,6 @@
 ## Completion
 #
 
-# colors
-eval $(gdircolors $HOME/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark)
-
 # less
 export LESSOPEN="| /opt/boxen/homebrew/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
