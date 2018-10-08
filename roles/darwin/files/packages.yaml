@@ -38,6 +38,7 @@
 - ruby-build
 - rclone
 - snzip
+- source-highlight
 - sshrc
 - terraform
 - tig
