@@ -23,9 +23,12 @@ git_config_dir = "#{ENV['HOME']}/.config/git"
 git_config_ignore_path = "#{git_config_dir}/ignore"
 directory git_config_dir
 
+# except ignore which included `bin` OR `scripts` dir
+ignore_files = Dir.glob(File.join(github_gitignore_dir, "Global/*.gitignore")).select { |f| !/(VirtualEnv|Eclipse|FlexBuilder)/.match(f)  }
+
 execute 'Generate global ignore setting' do
   command <<-EOF
-    cat #{github_gitignore_dir}/Global/* > #{git_config_ignore_path}
+    cat #{ignore_files.join(" ")} > #{git_config_ignore_path}
   EOF
 end
 
