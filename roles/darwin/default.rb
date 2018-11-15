@@ -13,6 +13,7 @@ include_cookbook 'homebrew'
 # on-demand cookbook
 include_cookbook 'android', 'darwin'
 include_cookbook 'bundler'
+include_cookbook 'font', 'darwin'
 include_cookbook 'git'
 include_cookbook 'docker'
 include_cookbook 'dotnet', 'darwin'
