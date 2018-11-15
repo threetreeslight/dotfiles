@@ -13,3 +13,6 @@ hook_add = '''
   " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
   nmap <Leader>a <Plug>(EasyAlign)
 '''
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
