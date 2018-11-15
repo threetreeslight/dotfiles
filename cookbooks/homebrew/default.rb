@@ -20,3 +20,16 @@ execute 'brew update and cleanup' do
   command 'brew update && brew cleanup'
   only_if 'hash brew 2>/dev/null'
 end
+
+package "cask"
+define :brew_cask do
+  name = params[:name]
+  unless name
+    raise "argument does not exist"
+  end
+
+  execute "install #{name}" do
+      command "brew cask install #{name}"
+      not_if "brew cask list | grep -q #{name}"
+  end
+end

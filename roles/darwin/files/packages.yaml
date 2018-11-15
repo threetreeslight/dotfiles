@@ -5,7 +5,6 @@
 - certbot
 - colordiff
 - coreutils # change mac command to like GNU Linux
-- cask
 - ctags
 - direnv
 - findutils

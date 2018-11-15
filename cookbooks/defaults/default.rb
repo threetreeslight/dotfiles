@@ -3,10 +3,7 @@ node[:packages].each do |p|
 end
 
 node[:apps].each do |app|
-  execute "install #{app}" do
-    command "brew cask install #{app}"
-    not_if "brew cask list | grep -q #{app}"
-  end
+  brew_cask app
 end
 
 # other
