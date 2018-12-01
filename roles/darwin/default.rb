@@ -9,20 +9,24 @@ node.reverse_merge!(
 
 # initialize package manager
 include_cookbook 'homebrew'
+include_cookbook 'git'
 
 # on-demand cookbook
+
+
 include_cookbook 'android', 'darwin'
 include_cookbook 'bundler'
-include_cookbook 'font', 'darwin'
-include_cookbook 'git'
+include_cookbook 'credentials'
 include_cookbook 'docker'
 include_cookbook 'dotnet', 'darwin'
+include_cookbook 'font', 'darwin'
+include_cookbook 'go'
+include_cookbook 'slack' # depend on go
+include_cookbook 'node'
 include_cookbook 'ruby'
 include_cookbook 'tmux'
 include_cookbook 'vim'
 include_cookbook 'xcode'
-include_cookbook 'node'
-include_cookbook 'credentials'
 include_cookbook 'zsh'
 
 include_cookbook 'defaults'
