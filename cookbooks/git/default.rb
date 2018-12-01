@@ -24,7 +24,9 @@ git_config_ignore_path = "#{git_config_dir}/ignore"
 directory git_config_dir
 
 # except ignore which included `bin` OR `scripts` dir
-ignore_files = Dir.glob(File.join(github_gitignore_dir, "Global/*.gitignore")).select { |f| !/(VirtualEnv|Eclipse|FlexBuilder)/.match(f)  }
+ignore_files = Dir.glob(File.join(github_gitignore_dir, "Global/*.gitignore")).select do |f|
+  !/(Eclipse|FlexBuilder|Images|ModelSim|VirtualEnv)/.match(f)
+end
 
 execute 'Generate global ignore setting' do
   command <<-EOF
