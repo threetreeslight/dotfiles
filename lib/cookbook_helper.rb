@@ -10,6 +10,27 @@ define :dotfile, source: nil do
   end
 end
 
+define :dotconfig, source: nil do
+  source = params[:source] || params[:name]
+
+  dotconfig_path = "#{ENV['HOME']}/.config"
+  directory dotconfig_path
+
+  link File.join(dotconfig_path, params[:name]) do
+    to File.expand_path("files/.config/#{source}", __FILE__)
+    user node[:user]
+  end
+end
+
+# it depend on cookbook/go/default.rb
+define :ghq do
+  repo = params[:name]
+
+  execute "ghq get #{repo}" do
+    not_if "test -d #{ENV['HOME']}/src/github.com/#{repo}"
+  end
+end
+
 define :github_binary, version: nil, repository: nil, archive: nil, binary_path: nil do
   cmd = params[:name]
   bin_path = "#{ENV['HOME']}/bin/#{cmd}"
