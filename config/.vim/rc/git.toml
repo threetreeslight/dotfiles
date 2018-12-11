@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'tpope/vim-rhubarb'
+
+[[plugins]]
 repo = 'tpope/vim-fugitive'
 hook_add = '''
   nnoremap <silent> <Space>gb :Gblame<CR>
