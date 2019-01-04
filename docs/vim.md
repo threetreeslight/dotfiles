@@ -17,19 +17,21 @@ q?
 
 Tab
 
-```
-tc : create new tab
-tx : close current tab
-tn : move to next tab
-tp : move to previous tab
+```vim
+
+tc "create new tab
+tx "close current tab
+tn "move to next tab
+tp "move to previous tab
+:tabonely "close without current tab
 ```
 
 Unite
 
-* `<C-U><C-U>` : file/rec
-* `<C-U><C-R>` : file
-* `<C-U><C-D>` : dir
-* `<C-U><C-F>` : exploer
+* `<C-u><C-u>` : file/rec
+* `<C-u><C-d>` : dir
+* `<C-u><C-t>` : vim tag
+* `<C-u><C-f>` : exploer
 * `<C-]>`      : ctags jump
 * `<C-t>`      : jump history
 

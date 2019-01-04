@@ -2,7 +2,7 @@
 repo = 'Shougo/denite.nvim'
 hook_add = '''
   " file
-  nnoremap <C-u><C-u> :Denite file/rec<CR>
+  nnoremap <C-u><C-u> :Denite -matchers='matcher/regexp' file/rec<CR>
   " current file and dir
   nnoremap <C-u><C-d> :Denite file<CR>
   " file buffer list
@@ -52,14 +52,15 @@ hook_add = '''
   " echomsg string(join(ignore_sources, ','))
 
   if executable('ag')
-    " use ag on file/rec
-    call denite#custom#var('file/rec', 'command', [ 'ag', '--follow', '--nocolor', '--nogroup', '-g', '' ])
+    let ag_command_args = [ 'ag', '--recurse', '--follow', '--nocolor', '--hidden', '--group', '-g', '' ]
+    call denite#custom#var('file/rec', 'command', ag_command_args)
+    call denite#custom#var('file', 'command', ag_command_args)
 
     " Ag command on grep source
     call denite#custom#var('grep', 'command', ['ag'])
     call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
     call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', [])
+    call denite#custom#var('grep', 'pattern_opt', [''])
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
   endif
