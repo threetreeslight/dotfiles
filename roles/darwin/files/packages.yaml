@@ -1,6 +1,7 @@
 ---
-- asciinema
 - ag
+- asciinema
+- autossh
 - awscli
 - certbot
 - colordiff
