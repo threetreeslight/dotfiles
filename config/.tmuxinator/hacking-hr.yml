@@ -1,0 +1,9 @@
+name: hacking-hr
+root: ~/src/github.com/hacking-hr/hacking-hr
+
+windows:
+  - editor:
+      layout:
+      panes:
+        - vim
+        -

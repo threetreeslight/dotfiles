@@ -1,0 +1,9 @@
+name: shinjuku-mokumoku
+root: ~/src/github.com/shinjuku-mokumoku/shinjuku-mokumoku
+
+windows:
+  - editor:
+      layout:
+      panes:
+        - vim
+        -

@@ -1,0 +1,9 @@
+name: repro-tech
+root: ~/src/github.com/reproio/repro-tech-meetup
+
+windows:
+  - editor:
+      layout:
+      panes:
+        - vim
+        -
