@@ -17,6 +17,8 @@ Install
 
 ```bash
 curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/master/bin/install | bash
+# OR
+./bin/install
 ```
 
 # Othre Usage
@@ -64,3 +66,5 @@ VirtualBox
   - [ ] modify filetype detection
 - ruby
   - [ ] automate install latest ruby and install global gems
+- zsh
+  - [ ] k8s complation load is too slow. set preset. and update when provisioning

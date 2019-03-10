@@ -19,6 +19,7 @@
 - jid # json inremental digger
 - jq # json perser pipeline
 - kubectx
+- kubeval
 - libidn # encode/decode utf-8 domain
 - lzop
 # - mobile-shell
@@ -33,7 +34,7 @@
 - python
 - readline # use for ruby compile
 - rclone
-- snzip
+- snzip #zip&unzip snappy format
 - source-highlight
 - sshrc
 - terraform
