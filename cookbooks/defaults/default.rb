@@ -2,6 +2,7 @@ node[:packages].each do |p|
   package p
 end
 
+brew_tap "devhubapp/devhub"
 node[:apps].each do |app|
   brew_cask app
 end
