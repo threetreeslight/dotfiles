@@ -2,7 +2,7 @@
   package pkg
 end
 
-ruby_version = '2.5.3'
+ruby_version = '2.6.3'
 execute "Install ruby #{ruby_version}" do
   command <<-EOC
     rbenv install #{ruby_version}
