@@ -1,0 +1,18 @@
+name: slides
+root: ~/src/github.com/threetreeslight/slides
+
+windows:
+  - slides:
+      root: ~/src/github.com/threetreeslight/slides
+      layout: main-horizontal
+      panes:
+        - vim
+        - 
+        - 
+  - private-slides:
+      root: ~/src/github.com/threetreeslight/private-slides
+      layout: main-horizontal
+      panes:
+        - vim
+        - 
+        - 

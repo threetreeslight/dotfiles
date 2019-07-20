@@ -1,0 +1,11 @@
+name: shinjuku-rb
+root: ~/src/github.com/shinjukurb/meetups
+
+windows:
+  - editor:
+      root: ~/src/github.com/shinjukurb/meetups
+      layout: main-horizontal
+      panes:
+        - vim
+        -
+        -
