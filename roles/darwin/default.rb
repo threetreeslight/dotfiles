@@ -12,8 +12,7 @@ include_cookbook 'homebrew'
 include_cookbook 'git'
 
 # on-demand cookbook
-
-
+include_cookbook 'os', 'darwin'
 include_cookbook 'android', 'darwin'
 include_cookbook 'bundler'
 include_cookbook 'credentials'
