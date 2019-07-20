@@ -3,7 +3,7 @@
 - asciinema
 - autossh
 - awscli
-- certbot
+- circleci
 - colordiff
 - coreutils # change mac command to like GNU Linux
 - ctags
@@ -13,9 +13,9 @@
 - gnu-tar
 - gzip
 - heroku
-- hugo
 - htop
 - iproute2mac # ip command
+- imagemagick
 - jid # json inremental digger
 - jq # json perser pipeline
 - kubectx
@@ -24,6 +24,7 @@
 - lzop
 # - mobile-shell
 - mycli
+- mitmproxy
 - openssl
 - p7zip # to un7zip chronium os image
 - packer
@@ -33,6 +34,7 @@
 - putty
 - python
 - readline # use for ruby compile
+- redis
 - rclone
 - snzip #zip&unzip snappy format
 - source-highlight
