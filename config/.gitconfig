@@ -18,7 +18,8 @@
   attributesfile = /Users/threetreeslight/.gitattributes
 
 [remote "origin"]
-  fetch = +refs/tags/*:refs/tags/*;refs/pull/*/head:refs/remotes/origin/pr/*
+  # fetch = +refs/heads/*:refs/tags/*
+  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 
 [pager]
   log = diff-highlight | less
