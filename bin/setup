@@ -5,10 +5,10 @@ set -e
 # https://github.com/k0kubun/dotfiles/blob/master/bin/setup
 # Authored by k0kubun
 
-mitamae_version="1.12.8"
-mitamae_linux_sha256="047cc776f2b0b555c7a6d90c32c7c581529bfc1a5db48ddb3090ee79d55ce3f3"
-mitamae_x86_64_darwin_sha256="fea7204eb8c160c2282721f7276c29cf74556b6ff835404fa40ca5c4b4d99d1b"
-mitamae_aarch64_darwin_sha256="6b0a3ae660aba38c7e5ae59f0425ca2aa11e9404fdaa9ed04d2141d9dea90c08"
+mitamae_version="1.14.4"
+mitamae_linux_sha256="a4b80eb74e796b453916dfff739c3eaa8d3d794244a0805a423b22292afa7165"
+mitamae_x86_64_darwin_sha256="e55073f6da72d08ea2289431b5ed7951689bda7151a2a479c409b84454770de3"
+mitamae_aarch64_darwin_sha256="db5b2d3ac75e444dfb12aaa1b1074cc820f234b1071bfa08d7328b26d9bcde0f"
 
 mitamae_cache="mitamae-${mitamae_version}"
 if ! [ -f "bin/${mitamae_cache}" ]; then
@@ -40,7 +40,7 @@ if ! [ -f "bin/${mitamae_cache}" ]; then
       ;;
   esac
 
-  curl -o "bin/${mitamae_bin}.tar.gz" -fL "https://github.com/k0kubun/mitamae/releases/download/v${mitamae_version}/${mitamae_bin}.tar.gz"
+  curl -o "bin/${mitamae_bin}.tar.gz" -fL "https://github.com/itamae-kitchen/mitamae/releases/download/v${mitamae_version}/${mitamae_bin}.tar.gz"
   sha256="$(/usr/bin/openssl dgst -sha256 "bin/${mitamae_bin}.tar.gz" | cut -d" " -f2)"
   if [ "$mitamae_sha256" != "$sha256" ]; then
     echo "checksum verification failed!\nexpected: ${mitamae_sha256}\n  actual: ${sha256}"
