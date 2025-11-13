@@ -1,14 +1,28 @@
 #
 # Color definition
 #
-local DEFAULT=$'%{^[[m%}'$
-local RED=$'%{^[[1;31m%}'$
-local GREEN=$'%{^[[1;32m%}'$
-local YELLOW=$'%{^[[1;33m%}'$
-local BLUE=$'%{^[[1;34m%}'$
-local PURPLE=$'%{^[[1;35m%}'$
-local LIGHT_BLUE=$'%{^[[1;36m%}'$
-local WHITE=$'%{^[[1;37m%}'$
+typeset -g DEFAULT=$'%{^[[m%}'$
+typeset -g RED=$'%{^[[1;31m%}'$
+typeset -g GREEN=$'%{^[[1;32m%}'$
+typeset -g YELLOW=$'%{^[[1;33m%}'$
+typeset -g BLUE=$'%{^[[1;34m%}'$
+typeset -g PURPLE=$'%{^[[1;35m%}'$
+typeset -g LIGHT_BLUE=$'%{^[[1;36m%}'$
+typeset -g WHITE=$'%{^[[1;37m%}'$
+
+#
+# Helpers
+#
+zsh_source_if_exists() {
+  local file=$1
+  [[ -r $file ]] && source $file
+}
+
+zsh_source_if_command() {
+  local cmd=$1
+  local file=$2
+  command -v $cmd >/dev/null 2>&1 && zsh_source_if_exists $file
+}
 
 #
 # Default shell configuration
@@ -18,7 +32,7 @@ export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 
 # set prompt
-source $HOME/.zsh/zshrc.prompt
+zsh_source_if_exists $HOME/.zsh/zshrc.prompt
 
 setopt nobeep     # no beep sound
 setopt auto_cd    # auto change directory
@@ -51,7 +65,9 @@ bindkey "^N" history-beginning-search-forward-end
 #
 
 # zsh-completions( have to write compinit before )
-fpath=(`brew --prefix`/share/zsh-completions $fpath)
+if command -v brew >/dev/null 2>&1; then
+  fpath=($(brew --prefix)/share/zsh-completions $fpath)
+fi
 
 autoload -U compinit && compinit
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
@@ -68,11 +84,11 @@ zstyle ':completion:*' group-name ''
 # coloring
 case "${OSTYPE}" in
   freebsd*|darwin*)
-    source $HOME/.zsh/zshrc.mac
-    source $HOME/.zsh/zshrc.brew
+    zsh_source_if_exists $HOME/.zsh/zshrc.mac
+    zsh_source_if_exists $HOME/.zsh/zshrc.brew
     ;;
   linux*)
-    source $HOME/.zsh/zshrc.linux
+    zsh_source_if_exists $HOME/.zsh/zshrc.linux
   ;;
 esac
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -80,18 +96,11 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 autoload colors; colors
 
 # develop
-source ~/.zsh/zshrc.alias
-source ~/.zsh/zshrc.direnv
-source ~/.zsh/zshrc.editor
-[ -f ~/.fzf.zsh ] && source ~/.zsh/zshrc.fzf
-source ~/.zsh/zshrc.git
-source ~/.zsh/zshrc.go
-source ~/.zsh/zshrc.google
-source ~/.zsh/zshrc.hubot
-source ~/.zsh/zshrc.k8s
-source ~/.zsh/zshrc.nvm
-source ~/.zsh/zshrc.peco
-source ~/.zsh/zshrc.rbenv
-source ~/.zsh/zshrc.tmux
-# source ~/.zsh.env
-source ~/.config/op/plugins.sh
+zsh_source_if_exists $HOME/.zsh/zshrc.alias
+zsh_source_if_exists $HOME/.zsh/zshrc.editor
+[ -f $HOME/.fzf.zsh ] && zsh_source_if_exists $HOME/.zsh/zshrc.fzf
+zsh_source_if_exists $HOME/.zsh/zshrc.git
+zsh_source_if_exists $HOME/.zsh/zshrc.go
+zsh_source_if_command peco $HOME/.zsh/zshrc.peco
+zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
+zsh_source_if_exists $HOME/.config/op/plugins.sh
