@@ -1,11 +1,10 @@
 ---
 - awscli
-# - coreutils # change mac command to like GNU Linux
+- coreutils # change mac command to like GNU Linux
 # - ctags
 # - direnv
 - peco # interactive filter
 - putty
-- python
 - rclone
 - tig
 - tree

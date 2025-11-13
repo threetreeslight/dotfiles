@@ -6,5 +6,5 @@ define :dotfile_credential, source: nil, target: nil do
   end
 end
 
-dotfile_credential '.gitconfig.local'
-dotfile_credential '.papertrail.yml'
+# dotfile_credential '.gitconfig.local'
+# dotfile_credential '.papertrail.yml'

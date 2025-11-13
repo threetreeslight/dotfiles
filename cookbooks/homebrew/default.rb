@@ -1,7 +1,7 @@
-execute 'install homebrew' do
-  command 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-  not_if 'hash brew 2>/dev/null'
-end
+# execute 'install homebrew' do
+#   command '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
+#   not_if 'hash brew 4>/dev/null'
+# end
 
 define :brew_tap do
   name = params[:name]
@@ -21,7 +21,6 @@ execute 'brew update and cleanup' do
   only_if 'hash brew 2>/dev/null'
 end
 
-package "cask"
 define :brew_cask do
   name = params[:name]
   unless name
@@ -29,7 +28,7 @@ define :brew_cask do
   end
 
   execute "install #{name}" do
-      command "brew cask install #{name}"
-      not_if "brew cask list | grep -q #{name}"
+      command "brew install --cask #{name}"
+      not_if "brew list --cask | grep -q #{name}"
   end
 end

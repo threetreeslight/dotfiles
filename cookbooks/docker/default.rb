@@ -2,7 +2,6 @@
   docker
   docker-compose
   docker-credential-helper
-  docker-machine
 ).each do |pkg|
   package pkg
 end
