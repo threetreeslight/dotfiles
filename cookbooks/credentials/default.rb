@@ -3,6 +3,7 @@ define :dotfile_credential, source: nil, target: nil do
   link File.join(ENV['HOME'], params[:name]) do
     to File.join(ENV['HOME'], "/Dropbox/dev/dotfiles/#{source}")
     user node[:user]
+    force true
   end
 end
 
