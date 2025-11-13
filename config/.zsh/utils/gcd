@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
-# gcd
-#
-# change directory to ghq managed repository
-#
-function gcd() {
-  if [[ $1 == "" ]]; then
-    PECO=peco
-  else
-    PECO="peco --query $1"
-  fi
-  cd $(ghq list --full-path | eval $PECO)
-}
+# change directory to a ghq managed repository via peco
+if command -v ghq >/dev/null 2>&1 && command -v peco >/dev/null 2>&1; then
+  gcd() {
+    local selection
+    if [[ -n $1 ]]; then
+      selection=$(ghq list --full-path | peco --query "$1")
+    else
+      selection=$(ghq list --full-path | peco)
+    fi
 
+    [[ -n $selection ]] && cd "$selection"
+  }
+fi

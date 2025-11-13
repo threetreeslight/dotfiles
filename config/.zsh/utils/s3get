@@ -1,84 +1,70 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 # s3ls
 #
-function s3ls() {
-  usage_exit() {
-    echo "Usage: [-b bucket] [-p prefix] [-q query]" 1>&2
-  }
+if command -v aws >/dev/null 2>&1 && command -v peco >/dev/null 2>&1; then
+  s3ls() {
+    local bucket=""
+    local prefix=""
+    local query=""
 
-  bucket=""
-  prefix=""
-  query=""
-
-  while getopts b:p:q:h OPT
-  do
-    case $OPT in
-      b)  bucket=$OPTARG
-          ;;
-      p)  prefix="--prefix $OPTARG"
-          ;;
-      q)  query=$OPTARG
-          ;;
-      h)  usage_exit
+    while getopts b:p:q:h OPT; do
+      case $OPT in
+        b) bucket=$OPTARG ;;
+        p) prefix=$OPTARG ;;
+        q) query=$OPTARG ;;
+        h)
+          echo "Usage: [-b bucket] [-p prefix] [-q query]" 1>&2
           return 0
           ;;
-    esac
-  done
+      esac
+    done
 
-  if [[ $query == "" ]]; then
-    PECO=peco
-  else
-    PECO="peco --query $query"
-  fi
+    if [[ -z $bucket ]]; then
+      if [[ -n $query ]]; then
+        aws s3 ls | peco --query "$query" | awk '{ print $3 }'
+      else
+        aws s3 ls | peco | awk '{ print $3 }'
+      fi
+    else
+      local args=("--bucket" "$bucket" "--query" "Contents[].{Key: Key}" "--max-items" "30")
+      [[ -n $prefix ]] && args+=("--prefix" "$prefix")
 
-  if [[ $bucket == "" ]]; then
-    aws s3 ls | eval $PECO | awk '{ print $3 }'
-  else
-    aws s3api list-objects \
-      --bucket $bucket \
-      $(echo $prefix) \
-      --query 'Contents[].{Key: Key}' \
-      --max-items 30 | \
-      eval $PECO
-  fi
-}
+      if [[ -n $query ]]; then
+        aws s3api list-objects "${args[@]}" | peco --query "$query"
+      else
+        aws s3api list-objects "${args[@]}" | peco
+      fi
+    fi
+  }
 
 # s3get
 #
-function s3get() {
-  usage_exit() {
-    echo "Usage: [-b bucket] [-k key] [-q query]" 1>&2
-    echo "s3get -b bucket -k \`s3ls -b bucket -p prefix\`" 1>&2
-  }
+  s3get() {
+    local bucket=""
+    local key=""
 
-  bucket=""
-  key=""
-  query=""
-  output=""
-
-  while getopts b:k:h OPT
-  do
-    case $OPT in
-      b)  bucket=$OPTARG
-          ;;
-      k)  key=$OPTARG
-          ;;
-      q)  query=$OPTARG
-          ;;
-      h)  usage_exit
+    while getopts b:k:h OPT; do
+      case $OPT in
+        b) bucket=$OPTARG ;;
+        k) key=$OPTARG ;;
+        h)
+          echo "Usage: [-b bucket] [-k key]" 1>&2
+          echo "s3get -b bucket -k \`s3ls -b bucket -p prefix\`" 1>&2
           return 0
           ;;
-    esac
-  done
+      esac
+    done
 
+    if [[ -z $bucket || -z $key ]]; then
+      echo "Usage: [-b bucket] [-k key]" 1>&2
+      return 1
+    fi
 
-  if [[ $bucket == "" ]]; then usage_exit; return 0; fi
-  if [ -z $key ]; then usage_exit; return 0; fi
-
-  aws s3api get-object \
-    --bucket $bucket \
-    --key $key \
-    $(echo $key | awk -F/ '{print $NF}')
-}
+    aws s3api get-object \
+      --bucket "$bucket" \
+      --key "$key" \
+      "${key##*/}"
+  }
+fi
 

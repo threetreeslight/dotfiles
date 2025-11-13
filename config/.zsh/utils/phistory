@@ -1,16 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 # zsh history search
-function phistory() {
-    local tac
-    exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+if command -v peco >/dev/null 2>&1; then
+  phistory() {
+    local tac_cmd
 
-    # show command history
-    BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
-    CURSOR=$#BUFFER # move cursor
-    zle -R -c # refresh
-}
+    if command -v gtac >/dev/null 2>&1; then
+      tac_cmd=gtac
+    elif command -v tac >/dev/null 2>&1; then
+      tac_cmd=tac
+    else
+      tac_cmd='tail -r'
+    fi
 
-# register shell function to widget
-zle -N phistory
+    BUFFER=$(fc -l -n 1 | $tac_cmd | peco --query "$LBUFFER")
+    CURSOR=${#BUFFER}
+    zle -R -c
+  }
 
-bindkey '^R' phistory
+  zle -N phistory
+  bindkey '^R' phistory
+fi
