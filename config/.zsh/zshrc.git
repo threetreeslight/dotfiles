@@ -4,8 +4,6 @@ alias g='git'
 
 export GIT_EDITOR="/usr/bin/vim"
 
-eval "$(hub alias -s)"
-
 function ggsed() {
     usage_exit() {
         echo "Usage: [-q regexp query] [-r replace sentence] [-p target path]" 1>&2
