@@ -94,3 +94,4 @@ source ~/.zsh/zshrc.peco
 source ~/.zsh/zshrc.rbenv
 source ~/.zsh/zshrc.tmux
 # source ~/.zsh.env
+source ~/.config/op/plugins.sh

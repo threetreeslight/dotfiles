@@ -1,8 +1,10 @@
 ---
+- 1password-cli
 - awscli
 - coreutils # change mac command to like GNU Linux
 # - ctags
 # - direnv
+- gh
 - peco # interactive filter
 - putty
 - rclone
