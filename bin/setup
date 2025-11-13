@@ -5,23 +5,37 @@ set -e
 # https://github.com/k0kubun/dotfiles/blob/master/bin/setup
 # Authored by k0kubun
 
-mitamae_version="1.6.2"
+mitamae_version="1.12.8"
 mitamae_linux_sha256="047cc776f2b0b555c7a6d90c32c7c581529bfc1a5db48ddb3090ee79d55ce3f3"
-mitamae_darwin_sha256="fea7204eb8c160c2282721f7276c29cf74556b6ff835404fa40ca5c4b4d99d1b"
+mitamae_x86_64_darwin_sha256="fea7204eb8c160c2282721f7276c29cf74556b6ff835404fa40ca5c4b4d99d1b"
+mitamae_aarch64_darwin_sha256="6b0a3ae660aba38c7e5ae59f0425ca2aa11e9404fdaa9ed04d2141d9dea90c08"
 
 mitamae_cache="mitamae-${mitamae_version}"
 if ! [ -f "bin/${mitamae_cache}" ]; then
-  case "$(uname)" in
+  case "$(uname -s)" in
     "Linux")
       mitamae_bin="mitamae-x86_64-linux"
       mitamae_sha256="$mitamae_linux_sha256"
       ;;
     "Darwin")
-      mitamae_bin="mitamae-x86_64-darwin"
-      mitamae_sha256="$mitamae_darwin_sha256"
+      case "$(uname -m)" in
+        "x86_64")
+          mitamae_bin="mitamae-x86_64-darwin"
+          mitamae_sha256="$mitamae_x86_64_darwin_sha256"
+          ;;
+        "arm64")
+          mitamae_bin="mitamae-aarch64-darwin"
+          mitamae_sha256="$mitamae_aarch64_darwin_sha256"
+          ;;
+        *)
+          echo "unexpected uname -m: $(uname -m)"
+          exit 1
+          ;;
+      esac
       ;;
+
     *)
-      echo "unexpected uname: $(uname)"
+      echo "unexpected uname -s: $(uname -s)"
       exit 1
       ;;
   esac
