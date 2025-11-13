@@ -1,8 +1,6 @@
 package 'git'
 package 'git-lfs'
 package 'git-secrets' # detect secret file on git hook
-package 'git-now'
-package 'hub' # github cli
 
 %w( .gitconfig .gitattributes .git_template ).each do |n|
   dotfile n
@@ -39,7 +37,11 @@ end
 execute 'update diff-highlight symlink' do
   # when update git, the symlink path will chage. so we run always diff-highlight symlinks.
   command <<-CMD
-  rm /usr/local/bin/diff-highlight
-  find `brew --prefix` -type f -name diff-highlight | awk 'NR == 1 { print $0 }' | xargs -I{} sudo ln -s {} /usr/local/bin/
+  TARGET_PATH=$(find `brew --prefix` -type f -name diff-highlight | awk 'NR == 1 { print $0 }')
+  CURRENT_LINK=$(readlink /usr/local/bin/diff-highlight 2>/dev/null || echo "")
+  if [ "$CURRENT_LINK" != "$TARGET_PATH" ]; then
+    rm -f /usr/local/bin/diff-highlight
+    sudo ln -s "$TARGET_PATH" /usr/local/bin/
+  fi
 CMD
 end
