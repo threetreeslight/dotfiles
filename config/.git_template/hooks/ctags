@@ -1,38 +1,168 @@
-#!/bin/bash
-set -e
-PATH="$(brew --prefix)/bin:$PATH"
-git_dir="`git rev-parse --git-dir`"
-trap 'rm -f "$dir/$$.tags"' EXIT
+#!/usr/bin/env bash
+set -euo pipefail
 
-temp="$git_dir/$$.tags"
-git ls-files | ctags --tag-relative -L - -f"$temp" --languages=-javascript,sql
-mv "$temp" "$git_dir/tags"
+add_homebrew_to_path() {
+  local candidate
 
-if [ -e Gemfile.lock ]; then
-  ctags -f"$temp" -R `bundle show --paths`
-  mv "$temp" tags
+  for candidate in "${HOMEBREW_PREFIX:-}" "/opt/homebrew" "/usr/local"; do
+    if [ -n "$candidate" ] && [ -d "$candidate/bin" ] && [[ ":$PATH:" != *":$candidate/bin:"* ]]; then
+      PATH="$candidate/bin:$PATH"
+      return 0
+    fi
+  done
+
+  if command -v brew >/dev/null 2>&1; then
+    candidate="$(brew --prefix 2>/dev/null || true)"
+    if [ -n "$candidate" ] && [ -d "$candidate/bin" ] && [[ ":$PATH:" != *":$candidate/bin:"* ]]; then
+      PATH="$candidate/bin:$PATH"
+    fi
+  fi
+}
+
+file_mtime() {
+  local path="$1"
+  if command -v stat >/dev/null 2>&1; then
+    if stat -f %m "$path" >/dev/null 2>&1; then
+      stat -f %m "$path"
+      return 0
+    elif stat -c %Y "$path" >/dev/null 2>&1; then
+      stat -c %Y "$path"
+      return 0
+    fi
+  fi
+
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c 'import os, sys; print(int(os.stat(sys.argv[1]).st_mtime))' "$path"
+    return 0
+  fi
+
+  if command -v python >/dev/null 2>&1; then
+    python -c 'import os, sys; print(int(os.stat(sys.argv[1]).st_mtime))' "$path"
+    return 0
+  fi
+
+  if command -v perl >/dev/null 2>&1; then
+    perl -e 'print((stat shift)[9])' "$path"
+    return 0
+  fi
+
+  return 1
+}
+
+acquire_lock() {
+  local lock_dir="$1"
+  if mkdir "$lock_dir" 2>/dev/null; then
+    printf '%s' "$$" >"$lock_dir/pid"
+    return 0
+  fi
+
+  if [ -r "$lock_dir/pid" ]; then
+    local existing_pid
+    existing_pid="$(cat "$lock_dir/pid" 2>/dev/null || true)"
+    if [ -n "$existing_pid" ] && kill -0 "$existing_pid" 2>/dev/null; then
+      return 1
+    fi
+  fi
+
+  rm -rf "$lock_dir"
+  mkdir "$lock_dir" 2>/dev/null || return 1
+  printf '%s' "$$" >"$lock_dir/pid"
+  return 0
+}
+
+add_homebrew_to_path
+
+if ! command -v git >/dev/null 2>&1 || ! command -v ctags >/dev/null 2>&1; then
+  exit 0
 fi
 
-# $HOMEBREW_ROOT/bin/ctags -R \
-# --exclude=node_modules \
-# --exclude=spec \
-# --exclude=public \
-# --exclude=log \
-# --exclude=tmp \
-# --exclude=*.mp4 \
-# --exclude=*.webm \
-# --exclude=*.jpg \
-# --exclude=*.jpeg \
-# --exclude=*.png \
-# --exclude=*.gif \
-# --exclude=*.ico \
-# --exclude=*.svg \
-# --exclude=*.slim \
-# --exclude=*.haml \
-# --exclude=*.scss \
-# --exclude=*.sass \
-# --exclude=*.css \
-# --exclude=*.js \
-# --exclude=*.coffee \
-# -f .git/tags \
-# `pwd`
+git_dir="$(git rev-parse --git-dir)"
+repo_root="$(git rev-parse --show-toplevel)"
+lock_dir="$git_dir/ctags.lock"
+state_file="$git_dir/ctags.state"
+
+if ! acquire_lock "$lock_dir"; then
+  exit 0
+fi
+
+cleanup() {
+  if [ -n "${temp_repo_tags:-}" ]; then
+    rm -f "$temp_repo_tags"
+  fi
+  if [ -n "${temp_bundle_tags:-}" ]; then
+    rm -f "$temp_bundle_tags"
+  fi
+  rm -rf "$lock_dir"
+}
+trap cleanup EXIT
+
+cd "$repo_root"
+
+if ! current_head="$(git rev-parse HEAD 2>/dev/null)"; then
+  current_head=""
+fi
+current_gemfile_mtime=""
+if [ -f "Gemfile.lock" ]; then
+  if current_gemfile_mtime="$(file_mtime "Gemfile.lock" 2>/dev/null)"; then
+    :
+  else
+    current_gemfile_mtime=""
+  fi
+fi
+bundle_available="0"
+if command -v bundle >/dev/null 2>&1; then
+  bundle_available="1"
+fi
+
+last_head=""
+last_gemfile_mtime=""
+last_bundle_available=""
+if [ -r "$state_file" ]; then
+  while IFS='=' read -r key value; do
+    case "$key" in
+      HEAD) last_head="$value" ;;
+      GEMFILE_MTIME) last_gemfile_mtime="$value" ;;
+      BUNDLE_AVAILABLE) last_bundle_available="$value" ;;
+    esac
+  done <"$state_file"
+fi
+
+if [ "$current_head" = "$last_head" ] \
+  && [ "${current_gemfile_mtime:-}" = "${last_gemfile_mtime:-}" ] \
+  && [ "$bundle_available" = "${last_bundle_available:-0}" ]; then
+  exit 0
+fi
+
+temp_repo_tags="$(mktemp "$git_dir/tags.repo.XXXXXX")"
+git ls-files | ctags --tag-relative -L - -f"$temp_repo_tags" --languages=-javascript,sql
+mv "$temp_repo_tags" "$git_dir/tags"
+unset temp_repo_tags
+
+generated_bundle_mtime=""
+if [ -f "Gemfile.lock" ] && [ "$bundle_available" = "1" ]; then
+  bundle_paths=()
+  while IFS= read -r bundle_path; do
+    [ -n "$bundle_path" ] && bundle_paths+=("$bundle_path")
+  done < <(bundle show --paths 2>/dev/null || true)
+
+  if [ "${#bundle_paths[@]}" -gt 0 ]; then
+    temp_bundle_tags="$(mktemp "$repo_root/tags.bundle.XXXXXX")"
+    ctags -f"$temp_bundle_tags" -R "${bundle_paths[@]}"
+    mv "$temp_bundle_tags" "$repo_root/tags"
+    unset temp_bundle_tags
+    generated_bundle_mtime="$current_gemfile_mtime"
+    bundle_available="1"
+  else
+    generated_bundle_mtime="$current_gemfile_mtime"
+  fi
+elif [ -n "$current_gemfile_mtime" ]; then
+  generated_bundle_mtime="$current_gemfile_mtime"
+fi
+
+state_tmp="$(mktemp "$git_dir/ctags.state.XXXXXX")"
+{
+  printf 'HEAD=%s\n' "$current_head"
+  printf 'GEMFILE_MTIME=%s\n' "${generated_bundle_mtime:-}"
+  printf 'BUNDLE_AVAILABLE=%s\n' "$bundle_available"
+} >"$state_tmp"
+mv "$state_tmp" "$state_file"
