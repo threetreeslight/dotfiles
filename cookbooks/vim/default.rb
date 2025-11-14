@@ -1,5 +1,8 @@
-package 'vim'
+# Neovimパッケージ
+package 'neovim'
 
-%w( .vim .vimrc ).each do |n|
-  dotfile n
-end
+# Neovim設定ファイル
+dotconfig 'nvim'
+
+# .vimフォルダ（Neovimでも使用可能なftpluginなど）
+dotfile '.vim'

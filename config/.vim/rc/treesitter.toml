@@ -1,0 +1,10 @@
+# nvim-treesitter - 高度なシンタックスハイライト
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+depends = ['nvim-treesitter/nvim-treesitter-textobjects']
+
+# Tree-sitter textobjects
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter-textobjects'
+depends = ['nvim-treesitter/nvim-treesitter']
+

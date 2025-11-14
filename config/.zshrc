@@ -31,76 +31,105 @@ zsh_source_if_command() {
 export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 
-# set prompt
-zsh_source_if_exists $HOME/.zsh/zshrc.prompt
+# Interactive-only configuration
+if [[ -o interactive ]]; then
+  # set prompt
+  zsh_source_if_exists $HOME/.zsh/zshrc.prompt
 
-setopt nobeep     # no beep sound
-setopt auto_cd    # auto change directory
-setopt auto_pushd # auto directory pushd that you can get dirs list by cd -[tab]
-setopt correct    # command correct edition before each completion attempt
-bindkey -v        # vim keybind
+  setopt nobeep     # no beep sound
+  setopt auto_cd    # auto change directory
+  setopt auto_pushd # auto directory pushd that you can get dirs list by cd -[tab]
+  setopt correct    # command correct edition before each completion attempt
+  bindkey -v        # vim keybind
 
-setopt auto_param_slash     # add autometicaly "/", when comple directory name
-setopt mark_dirs            # add autometicaly "/", deploying dir
-setopt list_types           # add file type mark like `ls -F`
-setopt interactive_comments # In command line cognition "#" as comment
+  setopt auto_param_slash     # add autometicaly "/", when comple directory name
+  setopt mark_dirs            # add autometicaly "/", deploying dir
+  setopt list_types           # add file type mark like `ls -F`
+  setopt interactive_comments # In command line cognition "#" as comment
 
-#
-# Command history configuration
-#
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt hist_ignore_dups # ignore duplication command history list
-setopt share_history    # share command history data
+  #
+  # Command history configuration
+  #
+  HISTFILE=~/.zsh_history
+  HISTSIZE=10000
+  SAVEHIST=10000
+  setopt hist_ignore_dups # ignore duplication command history list
+  setopt share_history    # share command history data
 
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
+  autoload history-search-end
+  zle -N history-beginning-search-backward-end history-search-end
+  zle -N history-beginning-search-forward-end history-search-end
+  bindkey "^P" history-beginning-search-backward-end
+  bindkey "^N" history-beginning-search-forward-end
 
-#
-# Completion
-#
+  #
+  # Completion
+  #
 
-# zsh-completions( have to write compinit before )
-if command -v brew >/dev/null 2>&1; then
-  fpath=($(brew --prefix)/share/zsh-completions $fpath)
+  # zsh-completions( have to write compinit before )
+  if command -v brew >/dev/null 2>&1; then
+    fpath=($(brew --prefix)/share/zsh-completions $fpath)
+  fi
+
+  autoload -U compinit compaudit
+
+  # Fix insecure completion directories
+  # zsh compinit warns about completion directories that are writable by group/others
+  # (security risk: malicious code could inject completions)
+  # This attempts to fix writable directories we own, then falls back to -u if needed
+  typeset -a insecure_dirs
+  insecure_dirs=(${(f)"$(compaudit 2>/dev/null)"})
+  if (( ${#insecure_dirs} )); then
+    # Try to fix directories we can write to (e.g., Homebrew-managed dirs)
+    for dir in $insecure_dirs; do
+      if [[ -d $dir && -w $dir ]]; then
+        chmod go-w $dir 2>/dev/null || true
+      fi
+    done
+
+    # Re-check: if still insecure (e.g., root-owned), use -u to suppress warning
+    insecure_dirs=(${(f)"$(compaudit 2>/dev/null)"})
+    if (( ${#insecure_dirs} )); then
+      compinit -u
+    else
+      compinit
+    fi
+  else
+    compinit
+  fi
+  zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                                 /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
+                                 /usr/local/git/bin
+
+  # hilight selected option
+  zstyle ':completion:*:default' menu select=2
+
+  # grouping options
+  zstyle ':completion:*' format '%B%d%b'
+  zstyle ':completion:*' group-name ''
+
+  # coloring
+  case "${OSTYPE}" in
+    freebsd*|darwin*)
+      zsh_source_if_exists $HOME/.zsh/zshrc.mac
+      zsh_source_if_exists $HOME/.zsh/zshrc.brew
+      ;;
+    linux*)
+      zsh_source_if_exists $HOME/.zsh/zshrc.linux
+    ;;
+  esac
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+  autoload colors; colors
+
+  # develop
+  zsh_source_if_exists $HOME/.zsh/zshrc.alias
+  zsh_source_if_exists $HOME/.zsh/zshrc.editor
+  [[ -f $HOME/.fzf.zsh ]] && zsh_source_if_exists $HOME/.zsh/zshrc.fzf
+  zsh_source_if_exists $HOME/.zsh/zshrc.git
+  zsh_source_if_exists $HOME/.zsh/zshrc.go
+  zsh_source_if_command peco $HOME/.zsh/zshrc.peco
+  zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
 fi
 
-autoload -U compinit && compinit
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                               /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
-                               /usr/local/git/bin
-
-# hilight selected option
-zstyle ':completion:*:default' menu select=2
-
-# grouping options
-zstyle ':completion:*' format '%B%d%b'
-zstyle ':completion:*' group-name ''
-
-# coloring
-case "${OSTYPE}" in
-  freebsd*|darwin*)
-    zsh_source_if_exists $HOME/.zsh/zshrc.mac
-    zsh_source_if_exists $HOME/.zsh/zshrc.brew
-    ;;
-  linux*)
-    zsh_source_if_exists $HOME/.zsh/zshrc.linux
-  ;;
-esac
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-autoload colors; colors
-
-# develop
-zsh_source_if_exists $HOME/.zsh/zshrc.alias
-zsh_source_if_exists $HOME/.zsh/zshrc.editor
-[ -f $HOME/.fzf.zsh ] && zsh_source_if_exists $HOME/.zsh/zshrc.fzf
-zsh_source_if_exists $HOME/.zsh/zshrc.git
-zsh_source_if_exists $HOME/.zsh/zshrc.go
-zsh_source_if_command peco $HOME/.zsh/zshrc.peco
-zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
 zsh_source_if_exists $HOME/.config/op/plugins.sh

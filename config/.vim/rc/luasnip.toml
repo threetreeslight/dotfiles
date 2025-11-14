@@ -1,0 +1,9 @@
+# LuaSnip - モダンなスニペットエンジン
+[[plugins]]
+repo = 'L3MON4D3/LuaSnip'
+depends = ['rafamadriz/friendly-snippets']
+
+# スニペットコレクション
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'
+

@@ -1,0 +1,30 @@
+# Neovim LSP設定
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+depends = ['hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline', 'hrsh7th/nvim-cmp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip']
+
+# 補完エンジン
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+depends = ['nvim-lua/plenary.nvim']
+
+# LSP補完ソース
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+
+# バッファ補完ソース
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+
+# パス補完ソース
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+
+# コマンドライン補完ソース
+[[plugins]]
+repo = 'hrsh7th/cmp-cmdline'
+
+# LuaSnip補完ソース
+[[plugins]]
+repo = 'saadparwaiz1/cmp_luasnip'
+

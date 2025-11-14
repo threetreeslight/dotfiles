@@ -1,0 +1,21 @@
+# Telescope.nvim - モダンなファジーファインダー
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+depends = ['nvim-lua/plenary.nvim']
+hook_add = '''
+  " ファイル検索
+  nnoremap <C-u><C-u> <cmd>Telescope find_files<cr>
+  " 現在ディレクトリのファイル
+  nnoremap <C-u><C-d> <cmd>Telescope find_files cwd=%:p:h<cr>
+  " バッファ一覧
+  nnoremap <C-u><C-b> <cmd>Telescope buffers<cr>
+  " grep検索
+  nnoremap <silent>/ <cmd>Telescope live_grep<cr>
+  " カーソル下の単語でgrep
+  nnoremap <silent>* <cmd>Telescope grep_string<cr>
+  " ファイルタイプ変更
+  nnoremap <silent>ft <cmd>Telescope filetypes<cr>
+  " タブ切り替え
+  nnoremap <C-u><C-t> <cmd>Telescope buffers<cr>
+'''
+
