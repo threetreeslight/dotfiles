@@ -1,21 +1,50 @@
 # zsh
 
+## コマンド
+
+### プロセス管理
+
 ```bash
-# Kill process with percol
-$ ppkill
+# プロセスをpecoで選択してkill
+$ ppkill [query]
 
-# Get PID with percol
-$ ppgrep
-
-# Git checkout
-$ git-use
-
-# Git checkout ( list include remote repo branches)
-$ git-all-use
+# プロセスのPIDをpecoで選択して取得
+$ ppgrep [query]
 ```
 
-* `ctrl + r` : search history with percol
-* `ctrl + u` : Reset Command
-* `cd -` : back to old current directory
-* `cd -<TAB>` : select back directory on histroy
+### Git操作
+
+```bash
+# ローカルブランチをpecoで選択してcheckout
+$ pgu [query]
+
+# リモートブランチも含めてpecoで選択してcheckout
+$ pgo [query]
+
+# ローカルブランチ一覧をpecoで表示
+$ pgb [query]
+```
+
+### ディレクトリ移動
+
+```bash
+# ghqで管理されているリポジトリに移動
+$ gcd [query]
+```
+
+### エイリアス
+
+```bash
+$ g          # git
+$ be         # bundle exec
+$ ll         # ls -laG
+$ vi         # /usr/bin/vim
+```
+
+## キーバインド
+
+* `ctrl + r` : コマンド履歴をpecoで検索
+* `ctrl + u` : コマンドラインをリセット
+* `cd -` : 前のディレクトリに戻る
+* `cd -<TAB>` : 履歴からディレクトリを選択
 

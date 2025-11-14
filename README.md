@@ -21,7 +21,7 @@ curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/master/bin/i
 ./bin/install
 ```
 
-# Othre Usage
+# Other Usage
 
 install mitamae
 
@@ -45,14 +45,6 @@ common
 
 osx
 - [osx](docs/osx.md)
-- [iterm2](docs/iterm2.md)
-
-VirtualBox
-
-- download from <http://www.modern.ie>
-  - ie9 win7
-- NAT
-- Bridge network
 
 # TODO
 
@@ -64,7 +56,3 @@ VirtualBox
   - [ ] modify ctag setting
   - [ ] split vimrc setting
   - [ ] modify filetype detection
-- ruby
-  - [ ] automate install latest ruby and install global gems
-- zsh
-  - [ ] k8s complation load is too slow. set preset. and update when provisioning
