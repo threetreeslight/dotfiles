@@ -4,3 +4,6 @@ bin/*
 !bin/install_local
 
 *.log
+
+# Neovim plugin lockfile (managed locally by lazy.nvim)
+config/.config/nvim/lazy-lock.json

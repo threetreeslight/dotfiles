@@ -192,19 +192,21 @@ terraform-ls --version
 ## 設定ファイル構成
 
 ```
-~/.config/nvim/init.vim          # Neovimエントリーポイント（lazy.nvimブートストラップ + Vimscript読み込み）
-  └─ lua/
-      ├── plugins/
-      │   └── init.lua           # プラグイン定義（lazy.nvimのspec）
-      └── config/
-          ├── lsp.lua            # LSP・補完設定
-          ├── telescope.lua      # Telescope設定
-          └── treesitter.lua     # Tree-sitter設定
-
-~/.vim/config/                   # 既存のVimscript設定
-  ├── options.vim                # 基本オプション設定
-  ├── keymaps.vim                # キーマッピング
-  └── autocmd.vim                # オートコマンド
+~/.config/nvim/
+  ├── init.vim                   # Neovimエントリーポイント（lazy.nvimブートストラップ + Vimscript読み込み）
+  ├── lua/
+  │   ├── plugins/
+  │   │   └── init.lua           # プラグイン定義（lazy.nvimのspec）
+  │   └── config/
+  │       ├── lsp.lua            # LSP・補完設定
+  │       ├── telescope.lua      # Telescope設定
+  │       └── treesitter.lua     # Tree-sitter設定
+  ├── vimscript/
+  │   ├── options.vim            # 基本オプション設定
+  │   ├── keymaps.vim            # キーマッピング
+  │   └── autocmd.vim            # オートコマンド
+  ├── ftplugin/                  # ファイルタイプ別設定
+  └── filetype.vim               # filetype検出
 ```
 
 ## 主要プラグイン
@@ -391,12 +393,12 @@ Tree-sitterでカバーできない言語（haml、slim、dosini）は従来の�
 
 ### キーマッピングの変更
 
-- 基本キーマップ: `~/.vim/config/keymaps.vim`
+- 基本キーマップ: `~/.config/nvim/vimscript/keymaps.vim`
 - LSP/補完周り: `~/.config/nvim/lua/config/lsp.lua` 内で設定
 
 ### オプション設定の変更
 
-`~/.vim/config/options.vim` を編集します。
+`~/.config/nvim/vimscript/options.vim` を編集します。
 
 ## トラブルシューティング
 

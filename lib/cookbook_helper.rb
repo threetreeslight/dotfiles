@@ -18,7 +18,7 @@ define :dotconfig, source: nil do
   directory dotconfig_path
 
   link File.join(dotconfig_path, params[:name]) do
-    to File.expand_path("files/.config/#{source}", __FILE__)
+    to File.expand_path("../../config/.config/#{source}", __FILE__)
     user node[:user]
     force true
   end
