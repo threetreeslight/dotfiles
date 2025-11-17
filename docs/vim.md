@@ -4,28 +4,207 @@
 
 この設定はNeovim専用で、モダンなプラグインとLSPサポートを活用した開発環境を提供します。
 
+## セットアップ手順
+
+> **注意**: Neovimのインストール、設定ファイルのデプロイ、vimコマンドのエイリアス設定は、mitamaeスクリプト（`bin/install` または `bin/mitamae local lib/recipe.rb`）で自動的に処理されます。
+
+### 1. プラグインのインストール
+
+#### lazy.nvimの自動インストール
+
+Neovimを初めて起動すると、`lazy.nvim` が自動的に `~/.local/share/nvim/lazy/lazy.nvim` へクローンされます（ `init.vim` でブートストラップ済み）。インターネット接続が必要です。
+
+#### プラグインの同期
+
+Neovim起動後、以下のコマンドでプラグインを同期／更新できます：
+
+```vim
+:Lazy sync
+```
+
+#### インストール確認
+
+```vim
+:Lazy health
+```
+
+**トラブルシューティング**: lazy.nvim 自体がインストールされていない場合は、手動でクローンしてください。
+
+```bash
+git clone https://github.com/folke/lazy.nvim ~/.local/share/nvim/lazy/lazy.nvim
+```
+
+#### インストール確認
+
+```vim
+:checkhealth
+```
+
+### 2. LSPサーバーのインストール
+
+各言語のLSPサーバーを個別にインストールする必要があります。
+
+#### Python (pyright)
+
+```bash
+npm install -g pyright
+```
+
+または
+
+```bash
+pip install pyright
+```
+
+#### TypeScript/JavaScript (tsserver)
+
+Node.jsに含まれています。Node.jsをインストールしてください：
+
+```bash
+# macOS
+brew install node
+
+# または nvm を使用
+nvm install node
+```
+
+#### Ruby (ruby_lsp)
+
+```bash
+gem install ruby-lsp
+```
+
+#### Go (gopls)
+
+```bash
+go install golang.org/x/tools/gopls@latest
+```
+
+または
+
+```bash
+# macOS
+brew install gopls
+```
+
+#### Terraform (terraform_ls)
+
+```bash
+# macOS
+brew install hashicorp/tap/terraform-ls
+```
+
+または、[公式リリース](https://github.com/hashicorp/terraform-ls/releases)からダウンロード
+
+#### HTML/CSS/JSON
+
+これらのLSPサーバーはNode.jsに含まれています。Node.jsをインストールしてください。
+
+### 3. Tree-sitterパーサーのインストール
+
+Tree-sitterパーサーは自動的にインストールされますが、手動でインストールすることもできます：
+
+```vim
+:TSInstall <language>
+```
+
+例：
+```vim
+:TSInstall python
+:TSInstall ruby
+:TSInstall javascript
+```
+
+すべてのパーサーをインストール：
+
+```vim
+:TSInstall all
+```
+
+### 4. オプションツール（推奨）
+
+Telescopeのパフォーマンス向上のため、以下のツールのインストールを推奨します：
+
+#### ripgrep (高速grep)
+
+```bash
+# macOS
+brew install ripgrep
+```
+
+#### fd (高速ファイル検索)
+
+```bash
+# macOS
+brew install fd
+```
+
+#### bat (シンタックスハイライト付きcat)
+
+```bash
+# macOS
+brew install bat
+```
+
+これらのツールがインストールされていると、Telescopeが自動的に使用します。
+
+### 5. 動作確認
+
+#### プラグインの確認
+
+Neovim起動後：
+
+```vim
+:Lazy health
+:checkhealth lsp
+:checkhealth treesitter
+```
+
+#### LSPサーバーの確認
+
+各LSPサーバーが正しくインストールされているか確認：
+
+```bash
+# Python
+pyright --version
+
+# TypeScript
+tsc --version
+
+# Ruby
+ruby-lsp --version
+
+# Go
+gopls version
+
+# Terraform
+terraform-ls --version
+```
+
+#### 動作テスト
+
+1. Neovimを起動（`vim` または `nvim`）
+2. 任意のファイルを開く
+3. LSPが動作しているか確認（`:LspInfo`）
+4. 補完が動作しているか確認（`<C-Space>`）
+5. Telescopeが動作しているか確認（`<C-u><C-u>`）
+
 ## 設定ファイル構成
 
 ```
-~/.config/nvim/init.vim          # Neovimエントリーポイント
-  └─ ~/.vim/config/
-      ├── options.vim            # 基本オプション設定
-      ├── plugins.vim            # プラグイン管理（dein）
-      ├── lsp.vim                # LSP・補完・Tree-sitter設定
-      ├── keymaps.vim            # キーマッピング
-      └── autocmd.vim            # オートコマンド
+~/.config/nvim/init.vim          # Neovimエントリーポイント（lazy.nvimブートストラップ + Vimscript読み込み）
+  └─ lua/
+      ├── plugins/
+      │   └── init.lua           # プラグイン定義（lazy.nvimのspec）
+      └── config/
+          ├── lsp.lua            # LSP・補完設定
+          ├── telescope.lua      # Telescope設定
+          └── treesitter.lua     # Tree-sitter設定
 
-~/.vim/rc/                       # プラグイン設定ファイル（TOML）
-  ├── lsp.toml                   # LSP・補完関連
-  ├── treesitter.toml            # Tree-sitter
-  ├── telescope.toml             # ファジーファインダー
-  ├── luasnip.toml               # スニペット
-  ├── powerline.toml             # ステータスライン
-  ├── git.toml                   # Git関連
-  ├── utility.toml               # ユーティリティ
-  ├── ruby.toml                  # Ruby/RSpec
-  ├── hashicorp.toml             # Terraform
-  └── syntax.toml                # シンタックス（Tree-sitter未対応言語）
+~/.vim/config/                   # 既存のVimscript設定
+  ├── options.vim                # 基本オプション設定
+  ├── keymaps.vim                # キーマッピング
+  └── autocmd.vim                # オートコマンド
 ```
 
 ## 主要プラグイン
@@ -208,12 +387,12 @@ Tree-sitterでカバーできない言語（haml、slim、dosini）は従来の�
 
 ### プラグインの追加
 
-`~/.vim/rc/` 配下に新しい `.toml` ファイルを作成し、`~/.vim/config/plugins.vim` で読み込むように設定します。
+`~/.config/nvim/lua/plugins/init.lua` にエントリを追加します。分割したい場合はサブモジュール（例: `lua/plugins/git.lua`）を用意し、`require` で読み込んでも構いません。
 
 ### キーマッピングの変更
 
 - 基本キーマップ: `~/.vim/config/keymaps.vim`
-- LSPキーマップ: `~/.vim/config/lsp.vim` のLuaコード内
+- LSP/補完周り: `~/.config/nvim/lua/config/lsp.lua` 内で設定
 
 ### オプション設定の変更
 
@@ -224,25 +403,146 @@ Tree-sitterでカバーできない言語（haml、slim、dosini）は従来の�
 ### プラグインがインストールされない
 
 ```vim
-:call dein#install()
+:Lazy sync
+```
+
+プラグインのクリーンアップ：
+
+```vim
+:Lazy clean
+```
+
+プラグインの状態確認：
+
+```vim
+:Lazy log
 ```
 
 ### LSPサーバーが起動しない
 
-各LSPサーバーがインストールされているか確認してください：
+#### 各LSPサーバーのインストール確認
 
 ```bash
-# 例: pyright
-npm install -g pyright
+# Python
+which pyright
+pyright --version
 
-# 例: ruby_lsp
-gem install ruby-lsp
+# TypeScript/JavaScript
+which tsserver
+node --version
+
+# Ruby
+which ruby-lsp
+ruby-lsp --version
+
+# Go
+which gopls
+gopls version
+
+# Terraform
+which terraform-ls
+terraform-ls --version
+```
+
+#### LSPサーバーの手動インストール
+
+各言語のセットアップ手順を参照してください。
+
+#### LSPの状態確認
+
+Neovim起動後：
+
+```vim
+:LspInfo    " 現在のバッファのLSP情報
+:LspLog     " LSPログを確認
 ```
 
 ### Tree-sitterが動作しない
+
+#### パーサーの再インストール
 
 ```vim
 :TSInstall <language>
 ```
 
 例: `:TSInstall python`
+
+#### Tree-sitterの状態確認
+
+```vim
+:TSInstallInfo    " インストール済みパーサー一覧
+:checkhealth treesitter
+```
+
+### Telescopeが動作しない
+
+#### 依存ツールの確認
+
+```bash
+# ripgrep
+which rg
+rg --version
+
+# fd
+which fd
+fd --version
+```
+
+これらのツールがインストールされていない場合、Telescopeは標準の検索機能を使用しますが、パフォーマンスが低下する可能性があります。
+
+### 補完が動作しない
+
+#### nvim-cmpの確認
+
+```vim
+:checkhealth cmp
+```
+
+#### LuaSnipの確認
+
+スニペットが展開されない場合：
+
+```vim
+:lua require('luasnip.loaders.from_vscode').lazy_load()
+```
+
+### エラーメッセージの確認
+
+Neovim起動時にエラーが表示される場合：
+
+```vim
+:messages    " エラーメッセージを確認
+```
+
+### 設定ファイルの再読み込み
+
+設定を変更した後、再読み込み：
+
+```vim
+:source ~/.config/nvim/init.vim
+```
+
+または、Neovimを再起動してください。
+
+### よくある問題
+
+#### "LSPサーバーが見つからない"
+
+各LSPサーバーがPATHに含まれているか確認：
+
+```bash
+echo $PATH
+which <lsp-server-name>
+```
+
+#### "Tree-sitterパーサーがインストールされない"
+
+Neovimのバージョンを確認（0.5以上が必要）：
+
+```bash
+nvim --version
+```
+
+#### パフォーマンスの問題
+
+大量のプラグインが読み込まれている場合、起動が遅くなる可能性があります。`lazy: 1` オプションで遅延読み込みを有効にしてください。
