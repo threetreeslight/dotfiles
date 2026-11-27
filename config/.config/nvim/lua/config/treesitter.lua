@@ -20,6 +20,8 @@ local parsers = {
   "rust",
   "scss",
   "sql",
+  "terraform",
+  "hcl",
   "toml",
   "typescript",
   "vim",

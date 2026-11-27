@@ -18,6 +18,8 @@ execute 'source ' . fnameescape(s:config_dir . '/keymaps.vim')
 execute 'source ' . fnameescape(s:config_dir . '/autocmd.vim')
 
 lua <<EOF
+require("config.filetype")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   -- Bootstrap lazy.nvim at the commit pinned in lazy-lock.json so the lock is

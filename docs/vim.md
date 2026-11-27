@@ -22,6 +22,7 @@ Telescope を速くするために、`ripgrep` と `fd` を入れておくのが
 │   ├── plugins/init.lua   プラグイン定義
 │   └── config/
 │       ├── lsp.lua        LSP・補完・ワークスペーストラスト
+│       ├── filetype.lua   ファイルタイプ判定の上書き
 │       ├── telescope.lua  Telescope
 │       └── treesitter.lua Tree-sitter
 ├── plugin/
@@ -90,7 +91,7 @@ prettier と rubocop は、プロジェクトの設定ファイル経由で任�
 | `j` / `k` | 表示行単位で移動 |
 | `v`（ビジュアル） | 行末まで選択 |
 
-括弧（`{` `[` `(`）は入力すると自動で閉じます。ヤンクは `clipboard=unnamedplus` でそのまま macOS のクリップボードに入ります。
+全角スペースは下線と背景色で目立たせています。括弧（`{` `[` `(`）は入力すると自動で閉じます。ヤンクは `clipboard=unnamedplus` でそのまま macOS のクリップボードに入ります。
 
 ### タブ
 
@@ -176,6 +177,15 @@ Claude Code など別のペインのツールがファイルを書き換える�
 - 読み込み直すと `Reloaded: <ファイル名>` と表示します
 
 cmux や Ghostty ではそのまま動きます。tmux の中で使う場合は `focus-events on`（`.tmux.conf` で設定済み）が必要です。
+
+## ファイルタイプ
+
+Neovim 標準の判定に加えて、`lua/config/filetype.lua` で次を上書きしています。
+
+| ファイル | ファイルタイプ | 理由 |
+|---|---|---|
+| `*.tf` | terraform | 標準では TinyFugue（`tf`）と判定され、terraformls が起動しないため |
+| `*.jbuilder` | ruby | 標準では判定されないため |
 
 ## カスタマイズ
 
