@@ -24,6 +24,8 @@ Telescope を速くするために、`ripgrep` と `fd` を入れておくのが
 │       ├── lsp.lua        LSP・補完・ワークスペーストラスト
 │       ├── telescope.lua  Telescope
 │       └── treesitter.lua Tree-sitter
+├── plugin/
+│   └── autoread.lua       外部で変更されたファイルの自動読み込み
 ├── vimscript/
 │   ├── options.vim        基本オプション
 │   ├── keymaps.vim        キーマップ・タブライン
@@ -164,6 +166,16 @@ prettier と rubocop は、プロジェクトの設定ファイル経由で任�
 | `sd{char}` | 囲み文字を削除 |
 | `sr{old}{new}` | 囲み文字を置換（例: `sr'"`） |
 | `:lua MiniTrailspace.trim()` | 行末の空白を削除 |
+
+## 外部での変更の自動読み込み
+
+Claude Code など別のペインのツールがファイルを書き換えると、自動で読み込み直します（`plugin/autoread.lua`）。
+
+- nvim に戻ったとき（フォーカス・バッファ移動）と、1 秒ごとに変更を確認します
+- 未保存の編集があるバッファは上書きせず、警告だけ出します
+- 読み込み直すと `Reloaded: <ファイル名>` と表示します
+
+cmux や Ghostty ではそのまま動きます。tmux の中で使う場合は `focus-events on`（`.tmux.conf` で設定済み）が必要です。
 
 ## カスタマイズ
 
