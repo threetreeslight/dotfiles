@@ -41,7 +41,8 @@ bin/mitamae local -n lib/recipe.rb   # dry-run（変更内容の確認だけ）
 | `git` | git, git-lfs, git-secrets | `~/.gitconfig`, `~/.git_template`, `~/.config/git/ignore`（生成） |
 | `os` (darwin) | Finder で隠しファイルを表示 | - |
 | `font` (darwin) | Source Code Pro | - |
-| `go` | go, [ghq](https://github.com/x-motemen/ghq) v1.8.0 | - |
+| `go` | go | - |
+| `ghq` | [ghq](https://github.com/x-motemen/ghq)（Homebrew。実行のたびに最新版へ更新） | - |
 | `ssh` | `~/.ssh`（0700）, `~/.ssh/config`（0600） | 1Password の IdentityAgent を追記 |
 | `tmux` | tmux | `~/.tmux.conf` |
 | `vim` | neovim, node（mason の LSP 用） | `~/.config/nvim` |
