@@ -76,7 +76,6 @@ local function setup_cmp()
 end
 
 local function setup_lsp()
-  local configs = require("lspconfig.configs")
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   local function on_attach(_, bufnr)
@@ -115,22 +114,12 @@ local function setup_lsp()
     "jsonls",
   }
 
-  local function setup_server(server)
-    local ok, _ = pcall(require, "lspconfig.configs." .. server)
-    if not ok or not configs[server] then
-      vim.notify(string.format("[lsp] server '%s' is not available", server), vim.log.levels.WARN)
-      return
-    end
-
-    configs[server].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-  end
-
-  for _, server in ipairs(servers) do
-    setup_server(server)
-  end
+  -- Nvim 0.11+: server definitions come from nvim-lspconfig's `lsp/` directory
+  vim.lsp.config("*", {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
+  vim.lsp.enable(servers)
 end
 
 function M.setup()
