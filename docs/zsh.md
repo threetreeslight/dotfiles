@@ -24,6 +24,9 @@ starship が入っていない場合は、`vcs_info` を使った同じレイア
 # ghq で管理しているリポジトリへ移動
 $ gcd [query]
 
+# GitHub org のリポジトリを選んで ghq get（Tab で複数選択）
+$ gget <org> [query]
+
 # ローカルブランチを選んで表示 / switch
 $ pgb [query]
 $ pgu [query]

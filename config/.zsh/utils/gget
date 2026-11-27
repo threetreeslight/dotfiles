@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+
+# pick repositories from a GitHub org via fzf and clone them with ghq
+# usage: gget <org> [query]
+if command -v ghq >/dev/null 2>&1 && command -v gh >/dev/null 2>&1; then
+  gget() {
+    local org=$1
+    if [[ -z $org ]]; then
+      print -u2 "usage: gget <org> [query]"
+      return 1
+    fi
+
+    local selection
+    selection=$(
+      gh repo list "$org" --limit 1000 --no-archived \
+        --json nameWithOwner,description \
+        -q '.[] | [.nameWithOwner, (.description // "")] | @tsv' \
+        | fzf -m --query "$2" --delimiter '\t' --with-nth 1,2 \
+        | cut -f1
+    )
+    [[ -z $selection ]] && return 0
+
+    local repo
+    for repo in ${(f)selection}; do
+      ghq get "git@github.com:${repo}.git" || return 1
+    done
+
+    # a single selection: jump into it
+    if [[ $(print -l ${(f)selection} | wc -l) -eq 1 ]]; then
+      cd "$(ghq list --full-path --exact "${selection#*/}" | head -n1)"
+    fi
+  }
+fi
