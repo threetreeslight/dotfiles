@@ -72,13 +72,3 @@ bin/mitamae local -n lib/recipe.rb   # dry-run
 | dotfile を追加する | `config/` に置き、cookbook で `dotfile '<名前>'` を呼ぶ |
 | `~/.config` 配下の設定を追加する | `config/.config/` に置き、`dotconfig '<名前>'` を呼ぶ |
 | 新しいツールの cookbook を作る | `cookbooks/<名前>/default.rb` を作り、`roles/darwin/default.rb` に `include_cookbook '<名前>'` を追加 |
-
-## TODO
-
-- vim
-  - [x] automate plugin installation (lazy.nvim)
-  - [ ] modify syntax highlight
-  - [ ] Highlight FullWidthSpace cleary
-  - [ ] complement setting
-  - [ ] split vimrc setting
-  - [ ] modify filetype detection
