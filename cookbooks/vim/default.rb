@@ -8,5 +8,9 @@ package 'node'
 # nvim-treesitter (main branch) が parser のビルドに使う
 package 'tree-sitter-cli'
 
+# Telescope: live_grep / grep_string は ripgrep 必須、find_files は fd があれば高速化
+package 'ripgrep'
+package 'fd'
+
 # Neovim設定ファイル
 dotconfig 'nvim'

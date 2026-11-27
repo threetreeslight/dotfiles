@@ -10,7 +10,7 @@ Neovim 本体、node（mason で LSP を入れるのに必要）、go（gopls �
 2. [mason.nvim](https://github.com/mason-org/mason.nvim) が LSP サーバーとフォーマッタを自動でインストールします（`:Mason` で状態を確認）
 3. Tree-sitter パーサーも自動でインストールされます（nvim-treesitter の main ブランチを使用。パーサーのビルドに tree-sitter CLI が必要で、これも cookbook で入ります）
 
-Telescope を速くするために、`ripgrep` と `fd` を入れておくのがおすすめです（`brew install ripgrep fd`）。
+Telescope 用の `ripgrep`（`/` の live grep と `*` に必須）と `fd`（ファイル検索の高速化）も cookbook で入ります。
 
 ## ファイル構成
 
