@@ -88,13 +88,14 @@ if [[ -o interactive ]]; then
       fi
     done
 
-    # Re-check: if still insecure (e.g., root-owned), use -u to suppress warning
+    # Re-check: if still insecure (e.g., owned by another user), drop those
+    # directories from fpath instead of loading them with `compinit -u`
     insecure_dirs=(${(f)"$(compaudit 2>/dev/null)"})
     if (( ${#insecure_dirs} )); then
-      compinit -u
-    else
-      compinit
+      print -u2 "[zshrc] skipping insecure completion dirs: ${insecure_dirs}"
+      fpath=(${fpath:|insecure_dirs})
     fi
+    compinit
   else
     compinit
   fi
