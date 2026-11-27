@@ -31,17 +31,3 @@ execute 'Generate global ignore setting' do
     cat #{ignore_files.join(" ")} > #{git_config_ignore_path}
   EOF
 end
-
-# diff highlight
-# https://github.com/git/git/tree/master/contrib/diff-highlight
-execute 'update diff-highlight symlink' do
-  # when update git, the symlink path will chage. so we run always diff-highlight symlinks.
-  command <<-CMD
-  TARGET_PATH=$(find `brew --prefix` -type f -name diff-highlight | awk 'NR == 1 { print $0 }')
-  CURRENT_LINK=$(readlink /usr/local/bin/diff-highlight 2>/dev/null || echo "")
-  if [ "$CURRENT_LINK" != "$TARGET_PATH" ]; then
-    rm -f /usr/local/bin/diff-highlight
-    sudo ln -s "$TARGET_PATH" /usr/local/bin/
-  fi
-CMD
-end

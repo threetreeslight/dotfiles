@@ -2,10 +2,12 @@
   ui = true
 [alias]
   br = branch
-  branch-root = merge-base master HEAD
+  # merge-base with the remote default branch (main / master)
+  branch-root = !git merge-base \"$(git default-branch)\" HEAD
+  default-branch = !git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null || (git show-ref --verify --quiet refs/heads/main && echo main) || echo master
   ci = commit
   co = checkout
-  delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+  delete-merged-branches = !git branch --merged | grep -vE '^\\*|^[+ ] (main|master)$' | xargs -I % git branch -d %
   g = grep -H --heading --break
   lo = log --graph --decorate --oneline
   pr = !gh pr create --fill
@@ -18,10 +20,15 @@
   # fetch = +refs/heads/*:refs/tags/*
   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 
-[pager]
-  log = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
+[core]
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  line-numbers = true
+[diff]
+  colorMoved = default
 
 [include]
   path = .gitconfig.local
@@ -38,6 +45,7 @@
 
 [init]
   templatedir = ~/.git_template
+  defaultBranch = main
 [secrets]
   providers = git secrets --aws-provider
   patterns = [A-Z0-9]{20}
@@ -45,6 +53,7 @@
   patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
 [merge]
   ff = false
+  conflictstyle = zdiff3
 [credential "https://github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
