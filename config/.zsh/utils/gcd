@@ -1,11 +1,13 @@
 #!/usr/bin/env zsh
 
 # change directory to a ghq managed repository via fzf
+# (candidates are shown relative to the ghq root)
 if command -v ghq >/dev/null 2>&1; then
   gcd() {
-    local selection
-    selection=$(ghq list --full-path | fzf --query "$1" --select-1 \
-      --preview 'ls -A {}')
-    [[ -n $selection ]] && cd "$selection"
+    local root selection
+    root=$(ghq root)
+    selection=$(ghq list | fzf --query "$1" --select-1 \
+      --preview "ls -A ${(q)root}/{}")
+    [[ -n $selection ]] && cd "$root/$selection"
   }
 fi

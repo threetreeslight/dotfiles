@@ -2,5 +2,6 @@
 source <(fzf --zsh)
 
 source ~/.zsh/utils/gcd
+source ~/.zsh/utils/gget
 source ~/.zsh/utils/pgo
 source ~/.zsh/utils/ppkill
