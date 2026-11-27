@@ -1,4 +1,4 @@
-directory "$HOME/.ssh" do
+directory "#{ENV['HOME']}/.ssh" do
   user node[:user]
   mode '0700'
 end
@@ -21,6 +21,6 @@ Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 CONF
 EOS
-  not_if %q(grep -Fx 'IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"' "$HOME/.ssh/config" 2>/dev/null)
+  # match anywhere in the line (the appended line is indented)
+  not_if %q(grep -qF 'IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"' "$HOME/.ssh/config" 2>/dev/null)
 end
-
