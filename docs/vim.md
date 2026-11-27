@@ -205,8 +205,7 @@ terraform-ls --version
   │   ├── options.vim            # 基本オプション設定
   │   ├── keymaps.vim            # キーマッピング
   │   └── autocmd.vim            # オートコマンド
-  ├── ftplugin/                  # ファイルタイプ別設定
-  └── filetype.vim               # filetype検出
+  └── ftplugin/                  # ファイルタイプ別設定
 ```
 
 ## 主要プラグイン

@@ -116,9 +116,6 @@ if [[ -o interactive ]]; then
       zsh_source_if_exists $HOME/.zsh/zshrc.mac
       zsh_source_if_exists $HOME/.zsh/zshrc.brew
       ;;
-    linux*)
-      zsh_source_if_exists $HOME/.zsh/zshrc.linux
-    ;;
   esac
   zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
@@ -127,7 +124,6 @@ if [[ -o interactive ]]; then
   # develop
   zsh_source_if_exists $HOME/.zsh/zshrc.alias
   zsh_source_if_exists $HOME/.zsh/zshrc.editor
-  [[ -f $HOME/.fzf.zsh ]] && zsh_source_if_exists $HOME/.zsh/zshrc.fzf
   zsh_source_if_exists $HOME/.zsh/zshrc.git
   zsh_source_if_exists $HOME/.zsh/zshrc.go
   zsh_source_if_command peco $HOME/.zsh/zshrc.peco

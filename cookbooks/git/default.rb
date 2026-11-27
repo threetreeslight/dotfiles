@@ -2,7 +2,7 @@ package 'git'
 package 'git-lfs'
 package 'git-secrets' # detect secret file on git hook
 
-%w( .gitconfig .gitattributes .git_template ).each do |n|
+%w( .gitconfig .git_template ).each do |n|
   dotfile n
 end
 
