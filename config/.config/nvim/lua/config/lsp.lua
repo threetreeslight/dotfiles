@@ -80,7 +80,7 @@ end
 -- go toolchain). Only start them inside trusted directories; use :LspTrust to
 -- trust the current project.
 local trust_file = vim.fn.stdpath("state") .. "/lsp_trusted_dirs"
-local default_trusted = { "~/dotfiles", "~/src/github.com/threetreeslight" }
+local default_trusted = { "~/src/github.com/threetreeslight" }
 
 local function normalize(path)
   return vim.fs.normalize(vim.fn.resolve(vim.fn.expand(path)))

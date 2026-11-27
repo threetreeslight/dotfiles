@@ -1,9 +1,10 @@
 #!/bin/sh
 
-DOTFILE_REPO_PATH=$HOME/dotfiles
+DOTFILE_REPO_PATH=$HOME/src/github.com/threetreeslight/dotfiles
 
 if [ ! -d $DOTFILE_REPO_PATH ] ;then
-  git clone https://github.com/threetreeslight/dotfiles.git $DOTFILE_REPO_PATH
+  mkdir -p "$(dirname "$DOTFILE_REPO_PATH")"
+  git clone https://github.com/threetreeslight/dotfiles.git "$DOTFILE_REPO_PATH"
 fi
 cd $DOTFILE_REPO_PATH
 

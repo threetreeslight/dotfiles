@@ -6,7 +6,7 @@
 
 ```
 bin/install
-  ├─ ~/dotfiles がなければ clone
+  ├─ ~/src/github.com/threetreeslight/dotfiles がなければ clone
   ├─ bin/setup                     mitamae v1.14.4 を取得（SHA256 検証）し、bin/mitamae にリンク
   └─ bin/mitamae local lib/recipe.rb
        ├─ lib/recipe_helper.rb     include_cookbook / include_role を定義
