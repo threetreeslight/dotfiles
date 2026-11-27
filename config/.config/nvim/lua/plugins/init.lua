@@ -54,32 +54,50 @@ local spec = {
     end,
   },
   {
-    "hashivim/vim-terraform",
-    config = function()
-      vim.g.terraform_align = 1
-    end,
-  },
-  {
-    "thoughtbot/vim-rspec",
-    dependencies = { "tpope/vim-dispatch" },
-    config = function()
-      vim.g.rspec_command = "Dispatch rspec {spec}"
-      vim.keymap.set("n", "<Leader>t", ":call RunCurrentSpecFile()<CR>", { silent = true, desc = "RSpec file" })
-      vim.keymap.set("n", "<Leader>s", ":call RunNearestSpec()<CR>", { silent = true, desc = "RSpec nearest" })
-      vim.keymap.set("n", "<Leader>l", ":call RunLastSpec()<CR>", { silent = true, desc = "RSpec last" })
-      vim.keymap.set("n", "<Leader>a", ":call RunAllSpecs()<CR>", { silent = true, desc = "RSpec all" })
-    end,
-  },
-  {
     "junegunn/vim-easy-align",
     config = function()
       vim.keymap.set("x", "<Enter>", "<Plug>(EasyAlign)", { silent = true })
       vim.keymap.set("n", "<Leader>a", "<Plug>(EasyAlign)", { silent = true })
     end,
   },
-  { "vim-scripts/YankRing.vim" },
-  { "vim-scripts/surround.vim" },
-  { "bronson/vim-trailing-whitespace" },
+  { "echasnovski/mini.surround", version = false, config = true },
+  { "echasnovski/mini.trailspace", version = false, config = true },
+  {
+    "echasnovski/mini.pick",
+    version = false,
+    config = function()
+      require("mini.pick").setup()
+    end,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    config = function()
+      require("lspsaga").setup({})
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        format_on_save = function(bufnr)
+          local disable_ft = { "markdown" }
+          return {
+            timeout_ms = 500,
+            lsp_fallback = not vim.tbl_contains(disable_ft, vim.bo[bufnr].filetype),
+          }
+        end,
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "black" },
+          ruby = { "rubocop" },
+          javascript = { "prettier" },
+          typescript = { "prettier" },
+          json = { "prettier" },
+          yaml = { "prettier" },
+        },
+      })
+    end,
+  },
 }
 
 return spec
