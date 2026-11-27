@@ -1,5 +1,0 @@
-[[plugins]]
-repo = 'hashivim/vim-terraform.git'
-hook_add = '''
-  let g:terraform_align=1
-'''

@@ -14,9 +14,6 @@
   st = status --short --branch
 [grep]
   lineNumber = true
-[core]
-  attributesfile = /Users/threetreeslight/.gitattributes
-
 [remote "origin"]
   # fetch = +refs/heads/*:refs/tags/*
   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
@@ -37,14 +34,7 @@
 [branch]
   autosetuprebase = always
 [ghq]
-  root = /Users/threetreeslight/src
-[diff "sheetjs"]
-  textconv = j
-
-# driver for merging XCode project files
-[merge "mergepbx"]
-  name = XCode project files merger
-  driver = mergepbx %O %A %B
+  root = ~/src
 
 [init]
   templatedir = ~/.git_template
@@ -55,3 +45,9 @@
   patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
 [merge]
   ff = false
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

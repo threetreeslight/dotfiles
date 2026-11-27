@@ -49,10 +49,9 @@ osx
 # TODO
 
 - vim
-  - [ ] automate dein installation
+  - [x] automate plugin installation (lazy.nvim)
   - [ ] modify syntax highlight
   - [ ] Highlight FullWidthSpace cleary
   - [ ] complement setting
-  - [ ] modify ctag setting
   - [ ] split vimrc setting
   - [ ] modify filetype detection

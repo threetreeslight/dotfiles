@@ -7,7 +7,7 @@ node[:apps].each do |app|
 end
 
 # other
-%w( .tigrc .gemrc .sshrc ).each do |n|
+%w( .tigrc ).each do |n|
   dotfile n
 end
 

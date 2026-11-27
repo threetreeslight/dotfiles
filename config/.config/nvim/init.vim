@@ -11,11 +11,27 @@ if has('nvim')
   set termguicolors
 endif
 
-" 設定ファイルの読み込み
-" ~/.vim/config から設定を読み込む
-let s:config_dir = expand('~/.vim/config')
+" 設定ファイルの読み込み (~/.config/nvim/vimscript 配下)
+let s:config_dir = expand('~/.config/nvim/vimscript')
+execute 'source ' . fnameescape(s:config_dir . '/options.vim')
+execute 'source ' . fnameescape(s:config_dir . '/keymaps.vim')
+execute 'source ' . fnameescape(s:config_dir . '/autocmd.vim')
 
-execute 'source ' . s:config_dir . '/options.vim'
-execute 'source ' . s:config_dir . '/plugins.vim'
-execute 'source ' . s:config_dir . '/keymaps.vim'
-execute 'source ' . s:config_dir . '/autocmd.vim'
+lua <<EOF
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=v11.17.5", -- pinned; plugins are pinned via lazy-lock.json
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins", {
+  change_detection = { notify = false },
+})
+EOF

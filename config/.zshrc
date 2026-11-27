@@ -54,6 +54,7 @@ if [[ -o interactive ]]; then
   HISTSIZE=10000
   SAVEHIST=10000
   setopt hist_ignore_dups # ignore duplication command history list
+  setopt HIST_IGNORE_SPACE # [Security] 先頭に半角スペースを1つ入れて実行したコマンドを履歴に残さない
   setopt share_history    # share command history data
 
   autoload history-search-end
@@ -87,13 +88,14 @@ if [[ -o interactive ]]; then
       fi
     done
 
-    # Re-check: if still insecure (e.g., root-owned), use -u to suppress warning
+    # Re-check: if still insecure (e.g., owned by another user), drop those
+    # directories from fpath instead of loading them with `compinit -u`
     insecure_dirs=(${(f)"$(compaudit 2>/dev/null)"})
     if (( ${#insecure_dirs} )); then
-      compinit -u
-    else
-      compinit
+      print -u2 "[zshrc] skipping insecure completion dirs: ${insecure_dirs}"
+      fpath=(${fpath:|insecure_dirs})
     fi
+    compinit
   else
     compinit
   fi
@@ -114,9 +116,6 @@ if [[ -o interactive ]]; then
       zsh_source_if_exists $HOME/.zsh/zshrc.mac
       zsh_source_if_exists $HOME/.zsh/zshrc.brew
       ;;
-    linux*)
-      zsh_source_if_exists $HOME/.zsh/zshrc.linux
-    ;;
   esac
   zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
@@ -125,11 +124,12 @@ if [[ -o interactive ]]; then
   # develop
   zsh_source_if_exists $HOME/.zsh/zshrc.alias
   zsh_source_if_exists $HOME/.zsh/zshrc.editor
-  [[ -f $HOME/.fzf.zsh ]] && zsh_source_if_exists $HOME/.zsh/zshrc.fzf
   zsh_source_if_exists $HOME/.zsh/zshrc.git
   zsh_source_if_exists $HOME/.zsh/zshrc.go
   zsh_source_if_command peco $HOME/.zsh/zshrc.peco
   zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
 fi
 
-zsh_source_if_exists $HOME/.config/op/plugins.sh
+# zsh_source_if_exists $HOME/.config/op/plugins.sh
+
+export PATH=/opt/homebrew/opt/curl/bin:$HOME/.local/bin:$PATH

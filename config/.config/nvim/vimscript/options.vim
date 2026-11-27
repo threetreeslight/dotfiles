@@ -61,9 +61,6 @@ else
   set clipboard& clipboard+=unnamed
 endif
 
-" ctags設定
-set tags=./tags
-
 " ファイルタイプ設定
 filetype plugin indent on
 
