@@ -59,7 +59,7 @@ $ be         # bundle exec
 $ ll         # ls -laG
 $ vim / vi   # nvim
 $ rm/cp/mv   # -i 付き（確認あり）
-$ diff       # colordiff -u（なければ diff -u）
+$ diff       # delta（なければ diff -u）
 ```
 
 ## 履歴

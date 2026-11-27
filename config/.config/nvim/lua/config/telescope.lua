@@ -33,7 +33,6 @@ function M.setup()
   end, "Telescope live grep")
   map("*", builtin.grep_string, "Telescope grep word")
   map("ft", ":Telescope filetypes<CR>", "Telescope filetypes")
-  map("<C-u><C-t>", builtin.buffers, "Telescope buffers (tab)")
 end
 
 return M

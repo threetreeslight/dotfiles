@@ -12,6 +12,7 @@
     email = you@example.com
   ```
 
+- `user.useConfigOnly = true`：名前・メールアドレスが未設定ならコミットをエラーにする（OS のアカウント名とホスト名から勝手に作らせない。SSH 署名を GitHub で Verified にするにはメールアドレスの一致が必要）
 - `init.defaultBranch = main`
 - `branch.autosetuprebase = always`（pull は rebase）
 - `merge.ff = false`（merge 時は常にマージコミットを作る）、`merge.conflictstyle = zdiff3`
@@ -38,7 +39,6 @@
 | `git g` | 見出し付きの `git grep` |
 | `git pr` | `gh pr create --fill` |
 | `git review` | デフォルトブランチから分岐した後のコミットを tig で確認 |
-| `git show` | tig で表示 |
 | `git default-branch` | リモートのデフォルトブランチ（`origin/main` など。リモートがなければ `main` か `master`） |
 | `git branch-root` | デフォルトブランチとの merge-base |
 | `git delete-merged-branches` | マージ済みのローカルブランチを削除（`main` / `master` と現在のブランチは残す） |

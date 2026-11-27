@@ -1,3 +1,7 @@
+[user]
+  # fail instead of guessing name/email from the OS account and hostname
+  # (set user.name / user.email in ~/.gitconfig.local)
+  useConfigOnly = true
 [color]
   ui = true
 [alias]
@@ -12,7 +16,6 @@
   lo = log --graph --decorate --oneline
   pr = !gh pr create --fill
   review = !tig --reverse -w $(git branch-root)..HEAD
-  show = !tig show --pretty=fuller
   st = status --short --branch
 [grep]
   lineNumber = true
@@ -33,11 +36,6 @@
 [include]
   path = .gitconfig.local
 
-[tig "bind"]
-  main = B @gh browse -- commit/%(commit)
-  diff = B @gh browse -- commit/%(commit)
-  tree = B @gh browse -- tree/%(commit)/%(directory)
-  blob = B @gh browse -- tree/%(commit)/%(file)
 [branch]
   autosetuprebase = always
 [ghq]

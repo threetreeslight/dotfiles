@@ -110,4 +110,4 @@ if [[ -o interactive ]]; then
   zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
 fi
 
-export PATH=/opt/homebrew/opt/curl/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH

@@ -71,12 +71,3 @@ map <silent> [Tag]x :tabclose<CR>
 map <silent> [Tag]n :tabnext<CR>
 " previous tab
 map <silent> [Tag]p :tabprevious<CR>
-
-"-------------------------
-" クリップボード
-"-------------------------
-" Mac OS X クリップボード共有
-if has('mac')
-  vmap <C-c> :w !pbcopy<cr><cr>
-endif
-
