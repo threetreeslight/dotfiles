@@ -156,8 +156,8 @@ local function setup_lsp()
     map("n", "<space>ca", vim.lsp.buf.code_action, "Code action")
     map("n", "gr", vim.lsp.buf.references, "LSP references")
     map("n", "<space>e", vim.diagnostic.open_float, "Line diagnostics")
-    map("n", "[d", vim.diagnostic.goto_prev, "Prev diagnostic")
-    map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+    map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Prev diagnostic")
+    map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Next diagnostic")
     map("n", "<space>q", vim.diagnostic.setloclist, "Diagnostics to loclist")
   end
 

@@ -21,8 +21,12 @@ local spec = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false, -- does not support lazy-loading
     build = ":TSUpdate",
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
+    },
     config = function()
       require("config.treesitter").setup()
     end,
@@ -35,46 +39,25 @@ local spec = {
     end,
   },
   {
-    "itchyny/lightline.vim",
-    config = function()
-      vim.g.lightline = { colorscheme = "default" }
-    end,
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      options = { theme = "auto", icons_enabled = false },
+    },
   },
   {
     "tpope/vim-fugitive",
-    dependencies = { "tpope/vim-rhubarb" },
     config = function()
       local map = function(lhs, rhs, desc)
         vim.keymap.set("n", lhs, rhs, { silent = true, desc = desc })
       end
-      map("<Space>gb", ":Gblame<CR>", "Git blame")
-      map("<Space>gd", ":Gdiff<CR>", "Git diff")
-      map("<Space>gs", ":Gstatus<CR>", "Git status")
-      map("<Space>gc", ":Gcommit<CR>", "Git commit")
-    end,
-  },
-  {
-    "junegunn/vim-easy-align",
-    config = function()
-      vim.keymap.set("x", "<Enter>", "<Plug>(EasyAlign)", { silent = true })
-      vim.keymap.set("n", "<Leader>a", "<Plug>(EasyAlign)", { silent = true })
+      map("<Space>gb", ":Git blame<CR>", "Git blame")
+      map("<Space>gd", ":Gdiffsplit<CR>", "Git diff")
+      map("<Space>gs", ":Git<CR>", "Git status")
+      map("<Space>gc", ":Git commit<CR>", "Git commit")
     end,
   },
   { "echasnovski/mini.surround", version = false, config = true },
   { "echasnovski/mini.trailspace", version = false, config = true },
-  {
-    "echasnovski/mini.pick",
-    version = false,
-    config = function()
-      require("mini.pick").setup()
-    end,
-  },
-  {
-    "nvimdev/lspsaga.nvim",
-    config = function()
-      require("lspsaga").setup({})
-    end,
-  },
   {
     "stevearc/conform.nvim",
     dependencies = { "mason-org/mason.nvim" },
