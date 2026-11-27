@@ -1,0 +1,29 @@
+# https://starship.rs/config/
+# Layout: directory + git on the first line, prompt character on the second
+format = """
+$directory$git_branch$git_state$git_status$cmd_duration
+$character"""
+
+add_newline = false
+
+[directory]
+style = "yellow"
+truncation_length = 0
+truncate_to_repo = false
+
+[git_branch]
+format = "[$branch]($style) "
+style = "green"
+
+[git_status]
+format = "([$all_status$ahead_behind]($style) )"
+style = "red"
+
+[cmd_duration]
+min_time = 3_000
+format = "[$duration]($style)"
+
+[character]
+success_symbol = "[%](bold)"
+error_symbol = "[%](bold red)"
+vimcmd_symbol = "[:](bold green)"

@@ -1,18 +1,12 @@
-#!/bin/bash
-
-# switch session
-function ptmux_switch_session() {
-  # listing session name and switch client
-  tmux ls | cut -d: -f1 | peco | xargs tmux switch-client -t
-  # refresh
-  zle -R -c
+# Ctrl-T: switch tmux session via fzf (overrides fzf's file widget)
+ptmux_switch_session() {
+  local session
+  session=$(tmux list-sessions -F '#S' 2>/dev/null | fzf --height 40% --reverse)
+  [[ -n $session ]] && tmux switch-client -t "$session"
+  zle reset-prompt
 }
 
-function exists { which $1 &> /dev/null }
-
-if exists peco; then
-  # register shell function to zsh widget
+if command -v fzf >/dev/null 2>&1; then
   zle -N ptmux_switch_session
   bindkey '^T' ptmux_switch_session
 fi
-

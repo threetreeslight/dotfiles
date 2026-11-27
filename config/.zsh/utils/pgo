@@ -1,52 +1,37 @@
 #!/usr/bin/env zsh
 
-if command -v git >/dev/null 2>&1 && command -v peco >/dev/null 2>&1; then
-  pgb() {
-    local query=$1
-    if [[ -n $query ]]; then
-      git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads \
-        | perl -pne 's{^refs/heads/}{}' \
-        | peco --query "$query"
-    else
-      git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads \
-        | perl -pne 's{^refs/heads/}{}' \
-        | peco
-    fi
-  }
+# pick a local branch (sorted by last commit)
+pgb() {
+  git for-each-ref --format='%(refname:short)' --sort=-committerdate refs/heads \
+    | fzf --query "$1" --preview 'git log --oneline --graph --color=always -20 {}'
+}
 
-  pgu() {
-    local query=
-    local selected_branch=
+# checkout a local branch
+pgu() {
+  local query=
+  if [[ $1 != -* ]]; then
+    query=$1
+    [[ $# -gt 0 ]] && shift
+  fi
 
-    if [[ $1 =~ '^-' ]]; then
-      query=""
-    else
-      query=$1
-      [[ $# -gt 0 ]] && shift
-    fi
+  local branch
+  branch=$(pgb "$query")
+  [[ -n $branch ]] && git switch "$branch" "$@"
+}
 
-    selected_branch=$(pgb "$query")
-    [[ -n $selected_branch ]] && git checkout "$selected_branch" "$@"
-  }
+# checkout a branch including remotes (creates a tracking branch)
+pgo() {
+  local branch
+  branch=$(
+    git for-each-ref --format='%(refname:short)' --sort=-committerdate refs/heads refs/remotes \
+      | grep -v '/HEAD$' \
+      | fzf --query "$1" --preview 'git log --oneline --graph --color=always -20 {}'
+  )
+  [[ -z $branch ]] && return 0
 
-  pgo() {
-    local query=$1
-    local selected_branch
-
-    if [[ -n $query ]]; then
-      selected_branch=$(
-        git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes refs/tags \
-        | perl -pne 's{^refs/(remotes)/}{}' \
-        | peco --query "$query"
-      )
-    else
-      selected_branch=$(
-        git for-each-ref --format='%(refname)' --sort=-committerdate refs/heads refs/remotes refs/tags \
-        | perl -pne 's{^refs/(remotes)/}{}' \
-        | peco
-      )
-    fi
-
-    [[ -n $selected_branch ]] && git checkout -t "$selected_branch"
-  }
-fi
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git switch "$branch"
+  else
+    git switch --track "$branch"
+  fi
+}

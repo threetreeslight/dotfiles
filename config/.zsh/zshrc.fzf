@@ -1,0 +1,6 @@
+# fzf: key bindings (Ctrl-R: history, Alt-C: cd) and completion (**<TAB>)
+source <(fzf --zsh)
+
+source ~/.zsh/utils/gcd
+source ~/.zsh/utils/pgo
+source ~/.zsh/utils/ppkill

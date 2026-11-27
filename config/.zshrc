@@ -106,7 +106,7 @@ if [[ -o interactive ]]; then
   zsh_source_if_exists $HOME/.zsh/zshrc.editor
   zsh_source_if_exists $HOME/.zsh/zshrc.git
   zsh_source_if_exists $HOME/.zsh/zshrc.go
-  zsh_source_if_command peco $HOME/.zsh/zshrc.peco
+  zsh_source_if_command fzf $HOME/.zsh/zshrc.fzf
   zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
 fi
 

@@ -1,15 +1,11 @@
 #!/usr/bin/env zsh
 
-# change directory to a ghq managed repository via peco
-if command -v ghq >/dev/null 2>&1 && command -v peco >/dev/null 2>&1; then
+# change directory to a ghq managed repository via fzf
+if command -v ghq >/dev/null 2>&1; then
   gcd() {
     local selection
-    if [[ -n $1 ]]; then
-      selection=$(ghq list --full-path | peco --query "$1")
-    else
-      selection=$(ghq list --full-path | peco)
-    fi
-
+    selection=$(ghq list --full-path | fzf --query "$1" --select-1 \
+      --preview 'ls -A {}')
     [[ -n $selection ]] && cd "$selection"
   }
 fi
