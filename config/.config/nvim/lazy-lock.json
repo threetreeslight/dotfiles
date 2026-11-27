@@ -15,6 +15,7 @@
   "mini.trailspace": { "branch": "main", "commit": "50b96b876a3d599d7d61696ba947ac02f890ab74" },
   "nvim-cmp": { "branch": "main", "commit": "fe29aba4117227a6df637bc41e4b4fb4e98864a0" },
   "nvim-lspconfig": { "branch": "master", "commit": "76f4cafc49677a34dc8ad8142b773d78ab4a041e" },
+  "nvim-tree.lua": { "branch": "master", "commit": "d0b8d652d3a776a29b09f9c14f87717e455c52f6" },
   "nvim-treesitter": { "branch": "main", "commit": "52773f0d13a0c11d0c3ef33c14ab6ecc1c17148b" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },

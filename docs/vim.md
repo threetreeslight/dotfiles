@@ -10,7 +10,7 @@ Neovim 本体、node（mason で LSP を入れるのに必要）、go（gopls �
 2. [mason.nvim](https://github.com/mason-org/mason.nvim) が LSP サーバーとフォーマッタを自動でインストールします（`:Mason` で状態を確認）
 3. Tree-sitter パーサーも自動でインストールされます（nvim-treesitter の main ブランチを使用。パーサーのビルドに tree-sitter CLI が必要で、これも cookbook で入ります）
 
-Telescope を速くするために、`ripgrep` と `fd` を入れておくのがおすすめです（`brew install ripgrep fd`）。
+Telescope 用の `ripgrep`（`/` の live grep と `*` に必須）と `fd`（ファイル検索の高速化）も cookbook で入ります。
 
 ## ファイル構成
 
@@ -24,6 +24,7 @@ Telescope を速くするために、`ripgrep` と `fd` を入れておくのが
 │       ├── lsp.lua        LSP・補完・ワークスペーストラスト
 │       ├── filetype.lua   ファイルタイプ判定の上書き
 │       ├── telescope.lua  Telescope
+│       ├── filetree.lua   ファイルツリー（nvim-tree）
 │       └── treesitter.lua Tree-sitter
 ├── plugin/
 │   └── autoread.lua       外部で変更されたファイルの自動読み込み
@@ -114,6 +115,20 @@ prettier と rubocop は、プロジェクトの設定ファイル経由で任�
 | `<C-j>` / `<C-k>`（Telescope 内） | 候補を移動 |
 
 > `/` と `*` を Telescope に割り当てているため、Vim 標準のバッファ内検索は `?` か `:/pattern` を使ってください。
+
+### ファイルツリー（nvim-tree）
+
+| キー | 動作 |
+|---|---|
+| `<C-u><C-t>` | ツリーの表示 / 非表示 |
+| `<C-u><C-f>` | 今開いているファイルをツリー上で表示 |
+| `<CR>` / `o`（ツリー内） | ファイルを開く / フォルダを開閉 |
+| `<C-v>` / `<C-x>` / `<C-t>`（ツリー内） | 縦分割 / 横分割 / 新しいタブで開く |
+| `a` / `d` / `r`（ツリー内） | 作成（末尾 `/` でフォルダ） / 削除 / リネーム |
+| `H` / `I`（ツリー内） | ドットファイル / git 無視ファイルの表示切り替え |
+| `g?`（ツリー内） | キー一覧 |
+
+`nvim .` のようにディレクトリを開くとツリーが表示されます（netrw は無効にしています）。
 
 ### LSP
 

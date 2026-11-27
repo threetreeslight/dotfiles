@@ -49,7 +49,9 @@ end
 
 function M.setup()
   local ts = require("nvim-treesitter")
-  ts.setup()
+  -- Passing install_dir puts it on 'runtimepath'. lazy.nvim resets the rtp and
+  -- drops stdpath("data")/site, so without this the parsers are not found.
+  ts.setup({ install_dir = vim.fn.stdpath("data") .. "/site" })
   if #vim.api.nvim_list_uis() > 0 then
     ts.install(parsers) -- async; no-op for parsers already installed
   end
