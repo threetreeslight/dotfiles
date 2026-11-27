@@ -1,9 +1,8 @@
 ---
-- 1password-cli
-- awscli
 - coreutils # change mac command to like GNU Linux
-# - direnv
+- fzf # fuzzy finder (zsh utilities, Ctrl-R history search)
 - gh
-- peco # interactive filter
+- git-delta # git pager with syntax highlight
+- starship # shell prompt
 - tig
 - tree
