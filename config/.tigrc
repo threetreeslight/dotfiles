@@ -1,5 +1,12 @@
 # show commit ID in left of main view
 set main-view = id:width=12 date author commit-title:graph=yes,refs=yes
 
+# B: open in GitHub
+bind main    B @gh browse -- commit/%(commit)
+bind diff    B @gh browse -- commit/%(commit)
+bind tree    B @gh browse -- tree/%(commit)/%(directory)
+bind blob    B @gh browse -- tree/%(commit)/%(file)
+
+# R: interactive rebase from the selected commit
 bind main    R !git rebase -i %(commit)
 bind diff    R !git rebase -i %(commit)
