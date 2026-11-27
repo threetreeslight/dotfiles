@@ -114,6 +114,12 @@ local function setup_lsp()
     "jsonls",
   }
 
+  -- Install language servers via mason (:Mason to manage them)
+  require("mason-lspconfig").setup({
+    ensure_installed = servers,
+    automatic_enable = false, -- enabled explicitly below
+  })
+
   -- Nvim 0.11+: server definitions come from nvim-lspconfig's `lsp/` directory
   vim.lsp.config("*", {
     capabilities = capabilities,

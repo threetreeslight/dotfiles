@@ -2,6 +2,8 @@ local spec = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      { "mason-org/mason.nvim", config = true },
+      "mason-org/mason-lspconfig.nvim",
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
