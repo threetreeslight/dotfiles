@@ -1,5 +1,0 @@
-#
-# Dependency OSX
-#
-
-export PATH="/usr/local/sbin:$PATH"

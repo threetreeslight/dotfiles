@@ -1,6 +1,8 @@
 bin/*
 !bin/setup
 !bin/install
-!bin/install_local
 
 *.log
+mitamae
+mitamae-*
+.zcompdump*
