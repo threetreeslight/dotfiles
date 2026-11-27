@@ -19,7 +19,7 @@ threetreeslight's dotfiles setting
 ## インストール
 
 ```bash
-curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/master/bin/install | bash
+curl -o- https://raw.githubusercontent.com/threetreeslight/dotfiles/main/bin/install | bash
 # または、clone 済みなら
 ./bin/install
 ```
