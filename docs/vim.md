@@ -64,7 +64,7 @@ Telescope を速くするために、`ripgrep` と `fd` を入れておくのが
 
 ruby_lsp、ts_ls、gopls はプロジェクト内のコード（Gemfile、`node_modules/typescript`、go ツールチェーン）を実行するため、信頼したディレクトリでだけ起動します。
 
-- 最初から信頼済み: `~/dotfiles`、`~/src/github.com/threetreeslight`
+- 最初から信頼済み: `~/src/github.com/threetreeslight`（dotfiles 自体もここにあります）
 - それ以外のプロジェクトでは `:LspTrust` を実行すると信頼リストに追加されます（`~/.local/state/nvim/lsp_trusted_dirs`）
 
 ## フォーマット
