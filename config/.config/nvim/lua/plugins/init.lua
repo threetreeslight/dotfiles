@@ -56,6 +56,18 @@ local spec = {
       map("<Space>gc", ":Git commit<CR>", "Git commit")
     end,
   },
+  {
+    "nvim-tree/nvim-tree.lua",
+    lazy = false, -- needed to open the tree for `nvim <dir>`
+    init = function()
+      -- nvim-tree replaces netrw; disable it before it loads
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
+    config = function()
+      require("config.filetree").setup()
+    end,
+  },
   { "echasnovski/mini.surround", version = false, config = true },
   { "echasnovski/mini.trailspace", version = false, config = true },
   {
