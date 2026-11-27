@@ -15,7 +15,7 @@
 [grep]
   lineNumber = true
 [core]
-  attributesfile = /Users/threetreeslight/.gitattributes
+  attributesfile = ~/.gitattributes
 
 [remote "origin"]
   # fetch = +refs/heads/*:refs/tags/*
@@ -37,7 +37,7 @@
 [branch]
   autosetuprebase = always
 [ghq]
-  root = /Users/threetreeslight/src
+  root = ~/src
 [diff "sheetjs"]
   textconv = j
 
