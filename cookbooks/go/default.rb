@@ -1,6 +1,1 @@
 package 'go'
-
-execute 'ghq' do
-  not_if 'command -v ghq > /dev/null'
-  command 'go install github.com/x-motemen/ghq@v1.8.0'
-end

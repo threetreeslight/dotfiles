@@ -5,5 +5,8 @@ package 'neovim'
 # gopls 用の go は cookbooks/go で入れる
 package 'node'
 
+# nvim-treesitter (main branch) が parser のビルドに使う
+package 'tree-sitter-cli'
+
 # Neovim設定ファイル
 dotconfig 'nvim'

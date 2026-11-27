@@ -12,8 +12,5 @@ else
   alias diff='diff -u'
 fi
 
-# less
-export LESS='-R'
-
 # ruby
 alias be='bundle exec'

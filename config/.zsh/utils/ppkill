@@ -1,30 +1,21 @@
 #!/usr/bin/env zsh
 
-if command -v peco >/dev/null 2>&1; then
-  ppgrep() {
-    local query=$1
+# pick processes (multi-select with TAB) and print their PIDs
+ppgrep() {
+  ps aux | fzf --multi --header-lines=1 --query "$1" | awk '{ print $2 }'
+}
 
-    if [[ -n $query ]]; then
-      ps aux | peco --query "$query" | awk '{ print $2 }'
-    else
-      ps aux | peco | awk '{ print $2 }'
-    fi
-  }
+# pick processes and kill them: ppkill [query] [-SIGNAL]
+ppkill() {
+  local query=
+  if [[ $1 != -* ]]; then
+    query=$1
+    [[ $# -gt 0 ]] && shift
+  fi
 
-  ppkill() {
-    local query=
-    local pids=
+  local pids
+  pids=$(ppgrep "$query")
+  [[ -z $pids ]] && return 0
 
-    if [[ $1 =~ '^-' ]]; then
-      query=""
-    else
-      query=$1
-      [[ $# -gt 0 ]] && shift
-    fi
-
-    pids=$(ppgrep "$query")
-    [[ -z $pids ]] && return 0
-
-    xargs kill "$@" <<<"$pids"
-  }
-fi
+  xargs kill "$@" <<<"$pids"
+}

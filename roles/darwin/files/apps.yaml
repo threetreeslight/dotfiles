@@ -1,11 +1,12 @@
-# - 1password
-- alfred
-- amethyst
-- dash
+- 1password
+- 1password-cli
+- cmux
+- ghostty
 - google-chrome
+- google-gemini
 - google-japanese-ime
-- tabby
+- hotkeyclash
 - keepingyouawake
-- postman
+- omniwm
 - slack
 - zoom

@@ -1,549 +1,187 @@
-# Neovim設定ガイド
+# Neovim
 
-## 概要
+設定ファイル: `config/.config/nvim/`（`~/.config/nvim` にリンク）。Neovim 0.11 以降が前提です。
 
-この設定はNeovim専用で、モダンなプラグインとLSPサポートを活用した開発環境を提供します。
+## セットアップ
 
-## セットアップ手順
+Neovim 本体、node（mason で LSP を入れるのに必要）、go（gopls 用）、設定ファイルのリンクは `bin/mitamae local lib/recipe.rb` で用意されます。その後は Neovim を起動するだけです。
 
-> **注意**: Neovimのインストール、設定ファイルのデプロイ、vimコマンドのエイリアス設定は、mitamaeスクリプト（`bin/install` または `bin/mitamae local lib/recipe.rb`）で自動的に処理されます。
+1. 初回起動時に [lazy.nvim](https://github.com/folke/lazy.nvim) が `~/.local/share/nvim/lazy/` にクローンされ、プラグインが `lazy-lock.json` のコミットでインストールされます
+2. [mason.nvim](https://github.com/mason-org/mason.nvim) が LSP サーバーとフォーマッタを自動でインストールします（`:Mason` で状態を確認）
+3. Tree-sitter パーサーも自動でインストールされます（nvim-treesitter の main ブランチを使用。パーサーのビルドに tree-sitter CLI が必要で、これも cookbook で入ります）
 
-### 1. プラグインのインストール
+Telescope を速くするために、`ripgrep` と `fd` を入れておくのがおすすめです（`brew install ripgrep fd`）。
 
-#### lazy.nvimの自動インストール
-
-Neovimを初めて起動すると、`lazy.nvim` が自動的に `~/.local/share/nvim/lazy/lazy.nvim` へクローンされます（ `init.vim` でブートストラップ済み）。インターネット接続が必要です。
-
-#### プラグインの同期
-
-Neovim起動後、以下のコマンドでプラグインを同期／更新できます：
-
-```vim
-:Lazy sync
-```
-
-#### インストール確認
-
-```vim
-:Lazy health
-```
-
-**トラブルシューティング**: lazy.nvim 自体がインストールされていない場合は、手動でクローンしてください。
-
-```bash
-git clone https://github.com/folke/lazy.nvim ~/.local/share/nvim/lazy/lazy.nvim
-```
-
-#### インストール確認
-
-```vim
-:checkhealth
-```
-
-### 2. LSPサーバーのインストール
-
-各言語のLSPサーバーを個別にインストールする必要があります。
-
-#### Python (pyright)
-
-```bash
-npm install -g pyright
-```
-
-または
-
-```bash
-pip install pyright
-```
-
-#### TypeScript/JavaScript (tsserver)
-
-Node.jsに含まれています。Node.jsをインストールしてください：
-
-```bash
-# macOS
-brew install node
-
-# または nvm を使用
-nvm install node
-```
-
-#### Ruby (ruby_lsp)
-
-```bash
-gem install ruby-lsp
-```
-
-#### Go (gopls)
-
-```bash
-go install golang.org/x/tools/gopls@latest
-```
-
-または
-
-```bash
-# macOS
-brew install gopls
-```
-
-#### Terraform (terraform_ls)
-
-```bash
-# macOS
-brew install hashicorp/tap/terraform-ls
-```
-
-または、[公式リリース](https://github.com/hashicorp/terraform-ls/releases)からダウンロード
-
-#### HTML/CSS/JSON
-
-これらのLSPサーバーはNode.jsに含まれています。Node.jsをインストールしてください。
-
-### 3. Tree-sitterパーサーのインストール
-
-Tree-sitterパーサーは自動的にインストールされますが、手動でインストールすることもできます：
-
-```vim
-:TSInstall <language>
-```
-
-例：
-```vim
-:TSInstall python
-:TSInstall ruby
-:TSInstall javascript
-```
-
-すべてのパーサーをインストール：
-
-```vim
-:TSInstall all
-```
-
-### 4. オプションツール（推奨）
-
-Telescopeのパフォーマンス向上のため、以下のツールのインストールを推奨します：
-
-#### ripgrep (高速grep)
-
-```bash
-# macOS
-brew install ripgrep
-```
-
-#### fd (高速ファイル検索)
-
-```bash
-# macOS
-brew install fd
-```
-
-#### bat (シンタックスハイライト付きcat)
-
-```bash
-# macOS
-brew install bat
-```
-
-これらのツールがインストールされていると、Telescopeが自動的に使用します。
-
-### 5. 動作確認
-
-#### プラグインの確認
-
-Neovim起動後：
-
-```vim
-:Lazy health
-:checkhealth lsp
-:checkhealth treesitter
-```
-
-#### LSPサーバーの確認
-
-各LSPサーバーが正しくインストールされているか確認：
-
-```bash
-# Python
-pyright --version
-
-# TypeScript
-tsc --version
-
-# Ruby
-ruby-lsp --version
-
-# Go
-gopls version
-
-# Terraform
-terraform-ls --version
-```
-
-#### 動作テスト
-
-1. Neovimを起動（`vim` または `nvim`）
-2. 任意のファイルを開く
-3. LSPが動作しているか確認（`:LspInfo`）
-4. 補完が動作しているか確認（`<C-Space>`）
-5. Telescopeが動作しているか確認（`<C-u><C-u>`）
-
-## 設定ファイル構成
+## ファイル構成
 
 ```
 ~/.config/nvim/
-  ├── init.vim                   # Neovimエントリーポイント（lazy.nvimブートストラップ + Vimscript読み込み）
-  ├── lua/
-  │   ├── plugins/
-  │   │   └── init.lua           # プラグイン定義（lazy.nvimのspec）
-  │   └── config/
-  │       ├── lsp.lua            # LSP・補完設定
-  │       ├── telescope.lua      # Telescope設定
-  │       └── treesitter.lua     # Tree-sitter設定
-  ├── vimscript/
-  │   ├── options.vim            # 基本オプション設定
-  │   ├── keymaps.vim            # キーマッピング
-  │   └── autocmd.vim            # オートコマンド
-  └── ftplugin/                  # ファイルタイプ別設定
+├── init.vim               エントリーポイント（Vimscript 読み込み + lazy.nvim の起動）
+├── lazy-lock.json         プラグインのバージョン固定
+├── lua/
+│   ├── plugins/init.lua   プラグイン定義
+│   └── config/
+│       ├── lsp.lua        LSP・補完・ワークスペーストラスト
+│       ├── telescope.lua  Telescope
+│       └── treesitter.lua Tree-sitter
+├── vimscript/
+│   ├── options.vim        基本オプション
+│   ├── keymaps.vim        キーマップ・タブライン
+│   └── autocmd.vim        オートコマンド
+└── ftplugin/              ファイルタイプ別のインデント設定（html, python, ruby）
 ```
 
-## 主要プラグイン
+## プラグイン
 
-### コアプラグイン
-- **nvim-lspconfig**: LSPクライアント
-- **nvim-cmp**: 補完エンジン
-- **nvim-treesitter**: 高度なシンタックスハイライト
-- **Telescope.nvim**: ファジーファインダー
-- **LuaSnip**: スニペットエンジン
-- **lightline.vim**: ステータスライン
+| プラグイン | 役割 |
+|---|---|
+| nvim-lspconfig + mason.nvim + mason-lspconfig.nvim | LSP の設定とサーバーのインストール |
+| nvim-cmp（+ cmp-nvim-lsp / buffer / path / cmdline） | 補完 |
+| LuaSnip + friendly-snippets | スニペット |
+| nvim-treesitter + nvim-treesitter-textobjects | シンタックスハイライト、インデント、テキストオブジェクト |
+| telescope.nvim | ファジーファインダー |
+| conform.nvim | 保存時のフォーマット |
+| lualine.nvim | ステータスライン |
+| vim-fugitive | Git 操作 |
+| mini.surround | 囲み文字の操作 |
+| mini.trailspace | 行末の空白をハイライト |
 
-### その他のプラグイン
-- **vim-fugitive**: Git操作
-- **vim-rhubarb**: GitHub連携
-- **vim-terraform**: Terraformサポート
-- **vim-rspec**: RSpec実行
-- **vim-surround**: 囲み文字操作
-- **vim-easy-align**: テキスト整列
-- **YankRing.vim**: ヤンク履歴
+## LSP
 
-## 基本操作
+| 言語 | サーバー |
+|---|---|
+| Python | pyright |
+| TypeScript / JavaScript | ts_ls |
+| Ruby | ruby_lsp |
+| Go | gopls |
+| Terraform | terraformls |
+| HTML / CSS / JSON | html / cssls / jsonls |
 
-### 起動
-```bash
-vim    # Neovimが起動（エイリアス設定済み）
-vi     # Neovimが起動（エイリアス設定済み）
-nvim   # 直接起動
-```
+### ワークスペーストラスト
 
-### ペースト時の自動インデント無効化
-```vim
-:set paste
-" ペースト後
-:set nopaste
-```
+ruby_lsp、ts_ls、gopls はプロジェクト内のコード（Gemfile、`node_modules/typescript`、go ツールチェーン）を実行するため、信頼したディレクトリでだけ起動します。
 
-### コマンド履歴
-```vim
-q:  " コマンド履歴
-q/  " 検索履歴（前方）
-q?  " 検索履歴（後方）
-```
+- 最初から信頼済み: `~/dotfiles`、`~/src/github.com/threetreeslight`
+- それ以外のプロジェクトでは `:LspTrust` を実行すると信頼リストに追加されます（`~/.local/state/nvim/lsp_trusted_dirs`）
 
-## キーマッピング
+## フォーマット
 
-### 基本操作
+保存時に conform.nvim でフォーマットします。フォーマッタは mason がインストールします。
 
-| キー | 機能 |
-|------|------|
-| `<Esc><Esc>` | 検索ハイライト解除 |
-| `j` / `k` | 表示行単位で移動（折り返し対応） |
-| `v` (Visual) | 行末まで選択 |
+| ファイルタイプ | フォーマッタ |
+|---|---|
+| Lua | stylua |
+| Python | black |
+| JS / TS / JSON / CSS | biome |
+| YAML | yamlfmt |
+| その他 | LSP のフォーマット（Markdown は無効） |
 
-### タブ操作
+prettier と rubocop は、プロジェクトの設定ファイル経由で任意のコードを実行できるので使っていません。
 
-| キー | 機能 |
-|------|------|
-| `tc` | 新しいタブを作成 |
-| `tx` | 現在のタブを閉じる |
-| `tn` | 次のタブへ移動 |
-| `tp` | 前のタブへ移動 |
-| `:tabonly` | 現在のタブ以外を閉じる |
+## キーマップ
 
-### Telescope（ファジーファインダー）
+### 基本
 
-| キー | 機能 |
-|------|------|
-| `<C-u><C-u>` | ファイル検索（再帰的） |
-| `<C-u><C-d>` | 現在ディレクトリのファイル検索 |
-| `<C-u><C-b>` | バッファ一覧 |
-| `/` | ライブgrep検索 |
-| `*` | カーソル下の単語でgrep |
+| キー | 動作 |
+|---|---|
+| `<Esc><Esc>` | 検索ハイライトを消す |
+| `j` / `k` | 表示行単位で移動 |
+| `v`（ビジュアル） | 行末まで選択 |
+| `<C-c>`（ビジュアル） | 選択範囲をクリップボードへコピー |
+
+括弧（`{` `[` `(`）は入力すると自動で閉じます。
+
+### タブ
+
+| キー | 動作 |
+|---|---|
+| `tc` | 新しいタブ |
+| `tx` | タブを閉じる |
+| `tn` / `tp` | 次 / 前のタブ |
+
+### Telescope
+
+| キー | 動作 |
+|---|---|
+| `<C-u><C-u>` | ファイル検索 |
+| `<C-u><C-d>` | 現在のファイルのディレクトリでファイル検索 |
+| `<C-u><C-b>`、`<C-u><C-t>` | バッファ一覧 |
+| `/` | ライブ grep |
+| `*` | カーソル下の単語で grep |
 | `ft` | ファイルタイプ一覧 |
-| `<C-u><C-t>` | バッファ一覧（タブ切り替え） |
+| `<C-j>` / `<C-k>`（Telescope 内） | 候補を移動 |
 
-### LSP（Language Server Protocol）
+> `/` と `*` を Telescope に割り当てているため、Vim 標準のバッファ内検索は `?` か `:/pattern` を使ってください。
 
-| キー | 機能 |
-|------|------|
-| `gD` | 宣言へジャンプ |
-| `gd` | 定義へジャンプ |
-| `K` | ホバー情報表示 |
+### LSP
+
+| キー | 動作 |
+|---|---|
+| `gd` / `gD` | 定義 / 宣言へジャンプ |
 | `gi` | 実装へジャンプ |
-| `<C-k>` | シグネチャヘルプ |
-| `<space>rn` | リネーム |
-| `<space>ca` | コードアクション |
 | `gr` | 参照一覧 |
 | `<space>D` | 型定義へジャンプ |
-| `<space>e` | 診断情報をフロート表示 |
-| `[d` | 前の診断へ |
-| `]d` | 次の診断へ |
-| `<space>q` | 診断をロケーションリストに表示 |
+| `K` | ホバー |
+| `<C-k>`（ノーマル） | シグネチャヘルプ |
+| `<space>rn` | リネーム |
+| `<space>ca` | コードアクション |
+| `<space>e` | 診断をフロートで表示 |
+| `[d` / `]d` | 前 / 次の診断へ |
+| `<space>q` | 診断をロケーションリストへ |
+| `<space>wa` / `wr` / `wl` | ワークスペースフォルダの追加 / 削除 / 一覧 |
 
-### 補完（nvim-cmp）
+### 補完とスニペット
 
-| キー | 機能 |
-|------|------|
-| `<C-Space>` | 補完開始 |
-| `<Tab>` | 次の候補 / スニペット展開 |
-| `<S-Tab>` | 前の候補 / スニペット戻る |
-| `<C-b>` | ドキュメントを上にスクロール |
-| `<C-f>` | ドキュメントを下にスクロール |
-| `<CR>` | 選択して確定 |
-| `<C-e>` | 補完を閉じる |
+| キー | 動作 |
+|---|---|
+| `<C-Space>` | 補完を開く |
+| `<Tab>` / `<S-Tab>` | 次 / 前の候補、またはスニペットのジャンプ |
+| `<CR>` | 確定 |
+| `<C-e>` | 閉じる |
+| `<C-b>` / `<C-f>` | ドキュメントをスクロール |
+| `<C-k>` / `<C-j>`（挿入） | スニペットの次 / 前のジャンプポイント |
 
-### LuaSnip（スニペット）
+### テキストオブジェクト（Tree-sitter）
 
-| キー | 機能 |
-|------|------|
-| `<C-k>` | スニペット展開 / 次のジャンプポイントへ |
-| `<C-j>` | 前のジャンプポイントへ |
+| キー | 対象 |
+|---|---|
+| `af` / `if` | 関数（全体 / 内部） |
+| `ac` / `ic` | クラス（全体 / 内部） |
 
-### Tree-sitter Textobjects
+### Git（vim-fugitive）
 
-| キー | 機能 |
-|------|------|
-| `af` | 関数全体を選択（outer） |
-| `if` | 関数内部を選択（inner） |
-| `ac` | クラス全体を選択（outer） |
-| `ic` | クラス内部を選択（inner） |
+| キー / コマンド | 動作 |
+|---|---|
+| `<Space>gs` | `:Git`（ステータス） |
+| `<Space>gd` | `:Gdiffsplit` |
+| `<Space>gc` | `:Git commit` |
+| `<Space>gb` | `:Git blame` |
 
-### Git操作（vim-fugitive）
+### 編集
 
-| キー | 機能 |
-|------|------|
-| `<Space>gd` | git diff |
-| `<Space>gs` | git status |
-| `<Space>gc` | git commit |
-| `<Space>gb` | git blame |
-| `:Gbrowse` | GitHubで該当行を開く |
+| キー | 動作 |
+|---|---|
+| `sa{motion}{char}` | 囲み文字を追加（例: `saiw"`） |
+| `sd{char}` | 囲み文字を削除 |
+| `sr{old}{new}` | 囲み文字を置換（例: `sr'"`） |
+| `:lua MiniTrailspace.trim()` | 行末の空白を削除 |
 
-### ユーティリティ
+## カスタマイズ
 
-| キー | 機能 |
-|------|------|
-| `<C-c>` | クリップボードにコピー（Mac OS X） |
-| `<Enter>` (Visual) | EasyAlign開始 |
-| `<Leader>a` | EasyAlign開始 |
-| `cs'"` | 囲み文字を `'` から `"` に変更 |
-| `ds'` | 囲み文字 `'` を削除 |
-| `csw'` | 単語を `'` で囲む |
-| `:FixWhitespace` | 末尾の空白を削除 |
+| 変更したいもの | ファイル |
+|---|---|
+| プラグイン | `lua/plugins/init.lua` |
+| 基本キーマップ | `vimscript/keymaps.vim` |
+| LSP / 補完のキーマップ、LSP サーバー | `lua/config/lsp.lua` |
+| オプション | `vimscript/options.vim` |
 
-### RSpec（vim-rspec）
-
-| キー | 機能 |
-|------|------|
-| `<Leader>t` | 現在のspecファイルを実行 |
-| `<Leader>s` | 最も近いspecを実行 |
-| `<Leader>l` | 最後に実行したspecを実行 |
-| `<Leader>a` | すべてのspecを実行 |
-
-## LSPサーバー
-
-以下の言語でLSPが有効です：
-
-- **Python**: pyright
-- **TypeScript/JavaScript**: tsserver
-- **Ruby**: ruby_lsp
-- **Go**: gopls
-- **Terraform**: terraform_ls
-- **HTML**: html
-- **CSS**: cssls
-- **JSON**: jsonls
-
-各LSPサーバーは自動的にインストール・起動されます。
-
-## Tree-sitter
-
-以下の言語でTree-sitterが有効です：
-
-- bash, c, cpp, css, dockerfile, go, html, javascript
-- json, lua, make, markdown, python, ruby, rust, scss
-- sql, toml, typescript, vim, yaml
-
-Tree-sitterでカバーできない言語（haml、slim、dosini）は従来のシンタックスプラグインを使用します。
-
-## 設定のカスタマイズ
-
-### プラグインの追加
-
-`~/.config/nvim/lua/plugins/init.lua` にエントリを追加します。分割したい場合はサブモジュール（例: `lua/plugins/git.lua`）を用意し、`require` で読み込んでも構いません。
-
-### キーマッピングの変更
-
-- 基本キーマップ: `~/.config/nvim/vimscript/keymaps.vim`
-- LSP/補完周り: `~/.config/nvim/lua/config/lsp.lua` 内で設定
-
-### オプション設定の変更
-
-`~/.config/nvim/vimscript/options.vim` を編集します。
+プラグインを追加・更新したら、`:Lazy sync` で `lazy-lock.json` を更新してコミットします。
 
 ## トラブルシューティング
 
-### プラグインがインストールされない
-
-```vim
-:Lazy sync
-```
-
-プラグインのクリーンアップ：
-
-```vim
-:Lazy clean
-```
-
-プラグインの状態確認：
-
-```vim
-:Lazy log
-```
-
-### LSPサーバーが起動しない
-
-#### 各LSPサーバーのインストール確認
-
-```bash
-# Python
-which pyright
-pyright --version
-
-# TypeScript/JavaScript
-which tsserver
-node --version
-
-# Ruby
-which ruby-lsp
-ruby-lsp --version
-
-# Go
-which gopls
-gopls version
-
-# Terraform
-which terraform-ls
-terraform-ls --version
-```
-
-#### LSPサーバーの手動インストール
-
-各言語のセットアップ手順を参照してください。
-
-#### LSPの状態確認
-
-Neovim起動後：
-
-```vim
-:LspInfo    " 現在のバッファのLSP情報
-:LspLog     " LSPログを確認
-```
-
-### Tree-sitterが動作しない
-
-#### パーサーの再インストール
-
-```vim
-:TSInstall <language>
-```
-
-例: `:TSInstall python`
-
-#### Tree-sitterの状態確認
-
-```vim
-:TSInstallInfo    " インストール済みパーサー一覧
-:checkhealth treesitter
-```
-
-### Telescopeが動作しない
-
-#### 依存ツールの確認
-
-```bash
-# ripgrep
-which rg
-rg --version
-
-# fd
-which fd
-fd --version
-```
-
-これらのツールがインストールされていない場合、Telescopeは標準の検索機能を使用しますが、パフォーマンスが低下する可能性があります。
-
-### 補完が動作しない
-
-#### nvim-cmpの確認
-
-```vim
-:checkhealth cmp
-```
-
-#### LuaSnipの確認
-
-スニペットが展開されない場合：
-
-```vim
-:lua require('luasnip.loaders.from_vscode').lazy_load()
-```
-
-### エラーメッセージの確認
-
-Neovim起動時にエラーが表示される場合：
-
-```vim
-:messages    " エラーメッセージを確認
-```
-
-### 設定ファイルの再読み込み
-
-設定を変更した後、再読み込み：
-
-```vim
-:source ~/.config/nvim/init.vim
-```
-
-または、Neovimを再起動してください。
-
-### よくある問題
-
-#### "LSPサーバーが見つからない"
-
-各LSPサーバーがPATHに含まれているか確認：
-
-```bash
-echo $PATH
-which <lsp-server-name>
-```
-
-#### "Tree-sitterパーサーがインストールされない"
-
-Neovimのバージョンを確認（0.5以上が必要）：
-
-```bash
-nvim --version
-```
-
-#### パフォーマンスの問題
-
-大量のプラグインが読み込まれている場合、起動が遅くなる可能性があります。`lazy: 1` オプションで遅延読み込みを有効にしてください。
+| 症状 | 確認方法 |
+|---|---|
+| プラグインが入らない / 壊れた | `:Lazy`、`:Lazy restore`（lock どおりに戻す）、`:Lazy clean` |
+| LSP が起動しない | `:checkhealth vim.lsp`、`:Mason`、信頼済みディレクトリか確認（`:LspTrust`） |
+| Tree-sitter のハイライトがおかしい | `:TSUpdate`、`:checkhealth nvim-treesitter` |
+| 起動時にエラーが出る | `:messages`、`:checkhealth` |

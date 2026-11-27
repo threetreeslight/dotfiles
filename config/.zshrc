@@ -1,16 +1,4 @@
 #
-# Color definition
-#
-typeset -g DEFAULT=$'%{^[[m%}'$
-typeset -g RED=$'%{^[[1;31m%}'$
-typeset -g GREEN=$'%{^[[1;32m%}'$
-typeset -g YELLOW=$'%{^[[1;33m%}'$
-typeset -g BLUE=$'%{^[[1;34m%}'$
-typeset -g PURPLE=$'%{^[[1;35m%}'$
-typeset -g LIGHT_BLUE=$'%{^[[1;36m%}'$
-typeset -g WHITE=$'%{^[[1;37m%}'$
-
-#
 # Helpers
 #
 zsh_source_if_exists() {
@@ -99,9 +87,6 @@ if [[ -o interactive ]]; then
   else
     compinit
   fi
-  zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                                 /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
-                                 /usr/local/git/bin
 
   # hilight selected option
   zstyle ':completion:*:default' menu select=2
@@ -111,12 +96,7 @@ if [[ -o interactive ]]; then
   zstyle ':completion:*' group-name ''
 
   # coloring
-  case "${OSTYPE}" in
-    freebsd*|darwin*)
-      zsh_source_if_exists $HOME/.zsh/zshrc.mac
-      zsh_source_if_exists $HOME/.zsh/zshrc.brew
-      ;;
-  esac
+  export LESS='-R'
   zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
   autoload colors; colors
@@ -126,10 +106,8 @@ if [[ -o interactive ]]; then
   zsh_source_if_exists $HOME/.zsh/zshrc.editor
   zsh_source_if_exists $HOME/.zsh/zshrc.git
   zsh_source_if_exists $HOME/.zsh/zshrc.go
-  zsh_source_if_command peco $HOME/.zsh/zshrc.peco
+  zsh_source_if_command fzf $HOME/.zsh/zshrc.fzf
   zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
 fi
-
-# zsh_source_if_exists $HOME/.config/op/plugins.sh
 
 export PATH=/opt/homebrew/opt/curl/bin:$HOME/.local/bin:$PATH

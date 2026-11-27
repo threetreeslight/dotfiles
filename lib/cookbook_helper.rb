@@ -24,14 +24,12 @@ define :dotconfig, source: nil do
   end
 end
 
-# it depend on cookbook/go/default.rb
+# it depends on cookbooks/ghq/default.rb
 define :ghq do
   repo = params[:name]
-  go_bin_path = "#{ENV['HOME']}/go/bin"
-  ghq_path = "#{go_bin_path}/ghq"
 
   execute "ghq get #{repo}" do
     not_if "test -d #{ENV['HOME']}/src/github.com/#{repo}"
-    command "#{ghq_path} get #{repo}"
+    command "ghq get #{repo}"
   end
 end
