@@ -6,8 +6,9 @@ alias du='du -h'
 alias df='df -h'
 alias tree='tree -NC'
 
-if [[ -x `which colordiff` ]]; then
-  alias diff='colordiff -u'
+# delta also diffs plain files/directories: `diff a b`
+if command -v delta >/dev/null 2>&1; then
+  alias diff='delta'
 else
   alias diff='diff -u'
 fi
