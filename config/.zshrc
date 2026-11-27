@@ -54,6 +54,7 @@ if [[ -o interactive ]]; then
   HISTSIZE=10000
   SAVEHIST=10000
   setopt hist_ignore_dups # ignore duplication command history list
+  setopt HIST_IGNORE_SPACE # [Security] 先頭に半角スペースを1つ入れて実行したコマンドを履歴に残さない
   setopt share_history    # share command history data
 
   autoload history-search-end
@@ -132,4 +133,6 @@ if [[ -o interactive ]]; then
   zsh_source_if_command tmux $HOME/.zsh/zshrc.tmux
 fi
 
-zsh_source_if_exists $HOME/.config/op/plugins.sh
+# zsh_source_if_exists $HOME/.config/op/plugins.sh
+
+export PATH=/opt/homebrew/opt/curl/bin:$HOME/.local/bin:$PATH
