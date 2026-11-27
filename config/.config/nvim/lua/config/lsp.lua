@@ -75,6 +75,64 @@ local function setup_cmp()
   end, { silent = true, desc = "LuaSnip previous" })
 end
 
+-- [Security] Some servers execute code from the project itself (ruby_lsp
+-- evaluates the Gemfile, ts_ls loads node_modules/typescript, gopls runs the
+-- go toolchain). Only start them inside trusted directories; use :LspTrust to
+-- trust the current project.
+local trust_file = vim.fn.stdpath("state") .. "/lsp_trusted_dirs"
+local default_trusted = { "~/dotfiles", "~/src/github.com/threetreeslight" }
+
+local function normalize(path)
+  return vim.fs.normalize(vim.fn.resolve(vim.fn.expand(path)))
+end
+
+local function is_trusted(path)
+  local dirs = vim.deepcopy(default_trusted)
+  if vim.uv.fs_stat(trust_file) then
+    vim.list_extend(dirs, vim.fn.readfile(trust_file))
+  end
+  path = normalize(path)
+  for _, dir in ipairs(dirs) do
+    if dir ~= "" then
+      dir = normalize(dir)
+      if path == dir or vim.startswith(path, dir .. "/") then
+        return true
+      end
+    end
+  end
+  return false
+end
+
+local function setup_workspace_trust(server_names)
+  for _, name in ipairs(server_names) do
+    local default = vim.lsp.config[name] or {}
+    vim.lsp.config(name, {
+      root_dir = function(bufnr, on_dir)
+        local function on_trusted_dir(root)
+          if root and is_trusted(root) then
+            on_dir(root)
+          end
+        end
+        if type(default.root_dir) == "function" then
+          default.root_dir(bufnr, on_trusted_dir)
+        elseif type(default.root_dir) == "string" then
+          on_trusted_dir(default.root_dir)
+        else
+          on_trusted_dir(vim.fs.root(bufnr, default.root_markers or { ".git" }))
+        end
+      end,
+    })
+  end
+
+  vim.api.nvim_create_user_command("LspTrust", function()
+    local root = vim.fs.root(0, { ".git" }) or vim.fn.getcwd()
+    vim.fn.mkdir(vim.fn.fnamemodify(trust_file, ":h"), "p")
+    vim.fn.writefile({ root }, trust_file, "a")
+    vim.notify("[lsp] trusted: " .. root)
+    vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
+  end, { desc = "Trust the current project for LSP servers that run project code" })
+end
+
 local function setup_lsp()
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -125,6 +183,7 @@ local function setup_lsp()
     capabilities = capabilities,
     on_attach = on_attach,
   })
+  setup_workspace_trust({ "ruby_lsp", "ts_ls", "gopls" })
   vim.lsp.enable(servers)
 end
 
