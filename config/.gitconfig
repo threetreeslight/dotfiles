@@ -49,6 +49,12 @@
   patterns = [A-Z0-9]{20}
   patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
   patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+  patterns = gh[pousr]_[A-Za-z0-9]{36,}
+  patterns = github_pat_[A-Za-z0-9_]{50,}
+  patterns = xox[baprs]-[A-Za-z0-9-]{10,}
+  patterns = sk-[A-Za-z0-9_-]{20,}
+  patterns = -----BEGIN[[:space:]A-Z]*PRIVATE[[:space:]]KEY-----
+  patterns = (api[_-]?key|secret|token|passw(or)?d)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=_-]{16,}
 [merge]
   ff = false
   conflictstyle = zdiff3

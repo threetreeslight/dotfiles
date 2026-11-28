@@ -19,7 +19,7 @@
 - `origin` の fetch で GitHub の PR を `origin/pr/<番号>` として取得
 - GitHub の認証は `gh auth git-credential`
 - ghq のルートは `~/src`
-- グローバル ignore: [github/gitignore](https://github.com/github/gitignore) の `Global/*.gitignore` を結合して `~/.config/git/ignore` を生成
+- グローバル ignore: [github/gitignore](https://github.com/github/gitignore) の `Global/*.gitignore` を結合し、秘密情報の除外パターン（`cookbooks/git/files/ignore.secrets`）を末尾に足して `~/.config/git/ignore` を生成
 
 ## ページャー（delta）
 
@@ -49,5 +49,15 @@
 
 | フック | 内容 |
 |---|---|
-| `pre-commit` / `commit-msg` / `prepare-commit-msg` | git-secrets で AWS の認証情報などのコミットを防ぐ |
+| `pre-commit` / `commit-msg` / `prepare-commit-msg` | git-secrets で AWS・GitHub・Slack のトークン、秘密鍵などのコミットを防ぐ（パターンは `config/.gitconfig` の `[secrets]`） |
 | `pre-push` | `main` / `master` への force push と削除を防ぐ（`--no-verify` で回避可能） |
+
+## 認証情報を公開しないために
+
+このリポジトリは公開されています。
+
+- 秘密情報（トークン、秘密鍵、`.npmrc` / `.netrc` / `.aws/` / `gh` の `hosts.yml` など）は `config/` に置かない。1Password（`op`）などリポジトリ外で管理する
+- `.gitignore` に `.env*` / `*.pem` / `*.key` / `*.local` などを除外している
+- git-secrets のパターン（`config/.gitconfig` の `[secrets]`）に空白を直接書かない（`[[:space:]]` を使う）。git-secrets 1.3.0 は結合時に空白でパターンを分割するため、断片が誤検知や検知漏れの原因になる
+- 既存のリポジトリに git-secrets を入れるには、そのリポジトリで `git secrets --install` を実行する
+- GitHub の Secret scanning と Push protection を有効にしておく（Settings → Code security）

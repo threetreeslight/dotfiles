@@ -6,3 +6,19 @@ bin/*
 mitamae
 mitamae-*
 .zcompdump*
+
+# secrets / machine-local files (keep them out of the public repo)
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+.gitconfig.local
+.netrc
+.npmrc
+.aws/
+.config/gh/hosts.yml
+*.local

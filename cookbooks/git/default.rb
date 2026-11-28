@@ -26,8 +26,11 @@ ignore_files = Dir.glob(File.join(github_gitignore_dir, "Global/*.gitignore")).s
   !/(Eclipse|FlexBuilder|Images|Lazarus|ModelSim|SBT|VirtualEnv)/.match(f)
 end
 
+# secret / credential patterns that github's Global/* does not cover
+secrets_ignore_path = File.expand_path('../files/ignore.secrets', __FILE__)
+
 execute 'Generate global ignore setting' do
   command <<-EOF
-    cat #{ignore_files.join(" ")} > #{git_config_ignore_path}
+    cat #{ignore_files.join(" ")} #{secrets_ignore_path} > #{git_config_ignore_path}
   EOF
 end
