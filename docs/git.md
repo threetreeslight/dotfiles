@@ -58,5 +58,6 @@
 
 - 秘密情報（トークン、秘密鍵、`.npmrc` / `.netrc` / `.aws/` / `gh` の `hosts.yml` など）は `config/` に置かない。1Password（`op`）などリポジトリ外で管理する
 - `.gitignore` に `.env*` / `*.pem` / `*.key` / `*.local` などを除外している
+- git-secrets のパターン（`config/.gitconfig` の `[secrets]`）に空白を直接書かない（`[[:space:]]` を使う）。git-secrets 1.3.0 は結合時に空白でパターンを分割するため、断片が誤検知や検知漏れの原因になる
 - 既存のリポジトリに git-secrets を入れるには、そのリポジトリで `git secrets --install` を実行する
 - GitHub の Secret scanning と Push protection を有効にしておく（Settings → Code security）
