@@ -53,7 +53,7 @@
   patterns = github_pat_[A-Za-z0-9_]{50,}
   patterns = xox[baprs]-[A-Za-z0-9-]{10,}
   patterns = sk-[A-Za-z0-9_-]{20,}
-  patterns = -----BEGIN[ A-Z]*PRIVATE KEY-----
+  patterns = -----BEGIN[[:space:]A-Z]*PRIVATE[[:space:]]KEY-----
   patterns = (api[_-]?key|secret|token|passw(or)?d)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=_-]{16,}
 [merge]
   ff = false
