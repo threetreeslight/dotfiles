@@ -1,0 +1,2 @@
+# git-secrets false positive: the secret-detection pattern definition itself
+config/.gitconfig:.*patterns = -----BEGIN.*PRIVATE KEY-----
